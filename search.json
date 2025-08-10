@@ -2,9 +2,9 @@
   {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "page",
+    "title": "Aloha",
     "section": "",
-    "text": "This is a Quarto website.\nTo learn more about Quarto websites visit https://quarto.org/docs/websites."
+    "text": "Welcome to my personal page! I’m Sung Woo Bak, a recent graduate with a degree in Statistics.  Here, I’ll be sharing what I’ve learned throughout my journey in statistics and machine learning."
   },
   {
     "objectID": "note.html",
@@ -18,7 +18,7 @@
     "href": "projects/digit.html",
     "title": "Handwritten Digit Classification",
     "section": "",
-    "text": "This project covers image classification using Rank-k Approximation via Singular Value Decomposition (SVD). It demonstrates how extracting features from handwritten digit images can lead to effective and accurate classification, by reducing the dimensionality and focusing on important features.\n\nMNIST Handwritten Digit Data\nThe data used in this project is the MNIST handwritten digit image dataset, which is widely used for image classification tasks. For more detailed information, refer to the link provided below.\n\nhttps://www.tensorflow.org/datasets/catalog/mnist\n\n\n\n\nDownloading data from https://storage.googleapis.com/tensorflow/tf-keras-datasets/mnist.npz\n\n\n       0/11490434 ━━━━━━━━━━━━━━━━━━━━ 0s 0s/step\n\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\n  761856/11490434 ━━━━━━━━━━━━━━━━━━━━ 0s 0us/step\n\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\n 6299648/11490434 ━━━━━━━━━━━━━━━━━━━━ 0s 0us/step\n\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\n11490434/11490434 ━━━━━━━━━━━━━━━━━━━━ 0s 0us/step\n\n\n\n\n\n\n\n\n\n\n\nAbove are 16 sample images from the dataset. This dataset contains a total of 70,000 images, with 60,000 images used for the training set and 10,000 images for the test set.\n\n\nRank-k Approximation using SVD\nIn this project, Rank-k Approximation via Singular Value Decomposition (SVD) is used for classification method. This method extracts essential features and reduces dimensionality, improving efficiency. The SVD decomposition is as follows\n\\[\n\\text{Image Data} = U_k \\Sigma_k V_k^T\n\\]\nThis approach extracts essential information from the data, allowing each digit image to be represented in a reduced form. The focus is on the first k left singular vectors U, which capture the important features of the images. The k-th approximation is a linear combination of the vectors \\(u_1, u_2, \\dots, u_k\\), representing one element in their span.\n\\[\nA_k = \\sum_{i=1}^{k} \\alpha_i u_i\n\\]\nThe error between test images and the k-approximation is calculated using the Euclidean Norm, which measures the difference or distance between two data. The error is computed as\n\\[\n\\text{Error} = \\| \\text{Test Data Set} - \\text{k-Approximation} \\|_2\n\\]\nThe classification model predicts the digit by finding the smallest error, indicating the closest match between the test image and the k-approximation.\nThe goal is to find the optimal k that captures most of the data while keeping k as small as possible.\n\n\nResult\n\n\n\n\n\n\n\n\n\nThe above plot shows the classification rate for each value of k. For most cases, the classification rate is over 90% with k within 15, which demonstrates that dimension reduction was successful while capturing most of the data.\n\n\nConfusion Matrix\n\n\n\n\n\n\n\n\n\n0\n1\n2\n3\n4\n5\n6\n7\n8\n9\n\n\n\n\n0\n969.0\n0.0\n2.0\n0.0\n0.0\n0.0\n6.0\n1.0\n2.0\n0.0\n\n\n1\n0.0\n1130.0\n3.0\n1.0\n0.0\n0.0\n1.0\n0.0\n0.0\n0.0\n\n\n2\n17.0\n3.0\n962.0\n8.0\n4.0\n0.0\n2.0\n14.0\n22.0\n0.0\n\n\n3\n7.0\n1.0\n4.0\n941.0\n0.0\n23.0\n2.0\n8.0\n18.0\n6.0\n\n\n4\n1.0\n8.0\n1.0\n0.0\n957.0\n0.0\n4.0\n2.0\n2.0\n7.0\n\n\n5\n5.0\n2.0\n1.0\n18.0\n1.0\n837.0\n9.0\n1.0\n14.0\n4.0\n\n\n6\n9.0\n5.0\n0.0\n0.0\n3.0\n9.0\n930.0\n0.0\n2.0\n0.0\n\n\n7\n1.0\n15.0\n16.0\n1.0\n6.0\n0.0\n1.0\n956.0\n3.0\n29.0\n\n\n8\n7.0\n3.0\n6.0\n16.0\n5.0\n4.0\n3.0\n4.0\n911.0\n15.0\n\n\n9\n8.0\n8.0\n3.0\n6.0\n14.0\n6.0\n0.0\n12.0\n6.0\n946.0\n\n\n\n\n\n\n\nThe figure above shows the confusion matrix when k = 6, comparing the actual labels with the predicted labels. The distribution of results indicates that most predictions were correct.\nModified: Oct 18, 2024."
+    "text": "This project covers image classification using Rank-k Approximation via Singular Value Decomposition (SVD). It demonstrates how extracting features from handwritten digit images can lead to effective and accurate classification, by reducing the dimensionality and focusing on important features.\n\nMNIST Handwritten Digit Data\nThe data used in this project is the MNIST handwritten digit image dataset, which is widely used for image classification tasks. For more detailed information, refer to the link provided below.\n\nhttps://www.tensorflow.org/datasets/catalog/mnist\n\n\n\n\nDownloading data from https://storage.googleapis.com/tensorflow/tf-keras-datasets/mnist.npz\n\n\n       0/11490434 ━━━━━━━━━━━━━━━━━━━━ 0s 0s/step\n\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\n   65536/11490434 ━━━━━━━━━━━━━━━━━━━━ 8s 1us/step\n\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\n  286720/11490434 ━━━━━━━━━━━━━━━━━━━━ 4s 0us/step\n\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\n 1228800/11490434 ━━━━━━━━━━━━━━━━━━━━ 1s 0us/step\n\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\n 5300224/11490434 ━━━━━━━━━━━━━━━━━━━━ 0s 0us/step\n\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\n11490434/11490434 ━━━━━━━━━━━━━━━━━━━━ 0s 0us/step\n\n\n\n\n\n\n\n\n\n\n\nAbove are 16 sample images from the dataset. This dataset contains a total of 70,000 images, with 60,000 images used for the training set and 10,000 images for the test set.\n\n\nRank-k Approximation using SVD\nIn this project, Rank-k Approximation via Singular Value Decomposition (SVD) is used for classification method. This method extracts essential features and reduces dimensionality, improving efficiency. The SVD decomposition is as follows\n\\[\n\\text{Image Data} = U_k \\Sigma_k V_k^T\n\\]\nThis approach extracts essential information from the data, allowing each digit image to be represented in a reduced form. The focus is on the first k left singular vectors U, which capture the important features of the images. The k-th approximation is a linear combination of the vectors \\(u_1, u_2, \\dots, u_k\\), representing one element in their span.\n\\[\nA_k = \\sum_{i=1}^{k} \\alpha_i u_i\n\\]\nThe error between test images and the k-approximation is calculated using the Euclidean Norm, which measures the difference or distance between two data. The error is computed as\n\\[\n\\text{Error} = \\| \\text{Test Data Set} - \\text{k-Approximation} \\|_2\n\\]\nThe classification model predicts the digit by finding the smallest error, indicating the closest match between the test image and the k-approximation.\nThe goal is to find the optimal k that captures most of the data while keeping k as small as possible.\n\n\nResult\n\n\n\n\n\n\n\n\n\nThe above plot shows the classification rate for each value of k. For most cases, the classification rate is over 90% with k within 15, which demonstrates that dimension reduction was successful while capturing most of the data.\n\n\nConfusion Matrix\n\n\n\n\n\n\n\n\n\n0\n1\n2\n3\n4\n5\n6\n7\n8\n9\n\n\n\n\n0\n969.0\n0.0\n2.0\n0.0\n0.0\n0.0\n6.0\n1.0\n2.0\n0.0\n\n\n1\n0.0\n1130.0\n3.0\n1.0\n0.0\n0.0\n1.0\n0.0\n0.0\n0.0\n\n\n2\n17.0\n3.0\n962.0\n8.0\n4.0\n0.0\n2.0\n14.0\n22.0\n0.0\n\n\n3\n7.0\n1.0\n4.0\n941.0\n0.0\n23.0\n2.0\n8.0\n18.0\n6.0\n\n\n4\n1.0\n8.0\n1.0\n0.0\n957.0\n0.0\n4.0\n2.0\n2.0\n7.0\n\n\n5\n5.0\n2.0\n1.0\n18.0\n1.0\n837.0\n9.0\n1.0\n14.0\n4.0\n\n\n6\n9.0\n5.0\n0.0\n0.0\n3.0\n9.0\n930.0\n0.0\n2.0\n0.0\n\n\n7\n1.0\n15.0\n16.0\n1.0\n6.0\n0.0\n1.0\n956.0\n3.0\n29.0\n\n\n8\n7.0\n3.0\n6.0\n16.0\n5.0\n4.0\n3.0\n4.0\n911.0\n15.0\n\n\n9\n8.0\n8.0\n3.0\n6.0\n14.0\n6.0\n0.0\n12.0\n6.0\n946.0\n\n\n\n\n\n\n\nThe figure above shows the confusion matrix when k = 6, comparing the actual labels with the predicted labels. The distribution of results indicates that most predictions were correct.\nModified: Oct 18, 2024."
   },
   {
     "objectID": "projects/hp.html",
@@ -60,7 +60,7 @@
     "href": "notes/outofdate.html",
     "title": "Out of Date Data",
     "section": "",
-    "text": "Data that has been more than 5 days past the last update.\n\n\n\n\n\n\n\n \noutOfDate\ndatasetID\ntitle\n\n\n\n\n0\n136.496230\nnesdisSSH1day\nNOAA CoastWatch, Sea Surface Height Anomalies and Geostrophic Currents from Altimetry, Global, 2017-present, EXPERIMENTAL"
+    "text": "Data that has been more than 5 days past the last update.\n\n\n\n\n\n\n\n \noutOfDate\ndatasetID\ntitle\n\n\n\n\n0\n136.498490\nnesdisSSH1day\nNOAA CoastWatch, Sea Surface Height Anomalies and Geostrophic Currents from Altimetry, Global, 2017-present, EXPERIMENTAL"
   },
   {
     "objectID": "projects/stuffplus.html",
@@ -72,9 +72,23 @@
   {
     "objectID": "about.html",
     "href": "about.html",
-    "title": "About",
+    "title": "Sung Woo Bak",
     "section": "",
-    "text": "About this site"
+    "text": "LinkedIn\n  \n  \n    \n     Github\n  \n  \n    \n     Email\n  \n\n  \n  \nHi, I’m Sung Woo Bak, a statistics graduate who enjoys uncovering insights through data analysis. I currently have a deep interest in machine learning and look forward to study deeper into this field.\n\n\nUniversity of California, Davis | Davis, CA B.S. in Statistics | Graduated June 2024\n\n\n\nAmerican Red Cross Software Developer - Imagery Analysis September 2024 - present"
+  },
+  {
+    "objectID": "about.html#education",
+    "href": "about.html#education",
+    "title": "Sung Woo Bak",
+    "section": "",
+    "text": "University of California, Davis | Davis, CA B.S. in Statistics | Graduated June 2024"
+  },
+  {
+    "objectID": "about.html#experience",
+    "href": "about.html#experience",
+    "title": "Sung Woo Bak",
+    "section": "",
+    "text": "American Red Cross Software Developer - Imagery Analysis September 2024 - present"
   },
   {
     "objectID": "project.html",

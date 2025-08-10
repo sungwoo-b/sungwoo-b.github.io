@@ -11,7 +11,7 @@
 <meta name="keywords" content="Image Classification, Singular Value Decomposition, Rank-k Approximation">
 <meta name="description" content="Exploration and implementation of Rank-k Approximation in handwritten digit classification">
 
-<title>Handwritten Digit Classification – page</title>
+<title>Handwritten Digit Classification – Sungwoo</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -116,7 +116,7 @@ window.Quarto = {
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="../index.html">
-    <span class="navbar-title">page</span>
+    <span class="navbar-title">Sungwoo</span>
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
@@ -128,6 +128,18 @@ window.Quarto = {
   <li class="nav-item">
     <a class="nav-link" href="../index.html"> 
 <span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../project.html"> 
+<span class="menu-text">Project</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../statistics.html"> 
+<span class="menu-text">Statistics</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../note.html"> 
+<span class="menu-text">Note</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="../about.html"> 
@@ -213,7 +225,7 @@ window.Quarto = {
 <ul>
 <li>https://www.tensorflow.org/datasets/catalog/mnist</li>
 </ul>
-<div id="9e327294" class="cell" data-message="false" data-results="hide" data-execution_count="3">
+<div id="c4cc9b7c" class="cell" data-message="false" data-results="hide" data-execution_count="3">
 <div class="cell-output cell-output-stdout">
 <div class="ansi-escaped-output">
 <pre>Downloading data from https://storage.googleapis.com/tensorflow/tf-keras-datasets/mnist.npz
@@ -221,9 +233,13 @@ window.Quarto = {
 
 <span class="ansi-bold">       0/11490434</span> <span class="ansi-white-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">0s</span> 0s/step
 
-<span class="ansi-bold">  761856/11490434</span> <span class="ansi-green-fg">━</span><span class="ansi-white-fg">━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">0s</span> 0us/step
+<span class="ansi-bold">   65536/11490434</span> <span class="ansi-white-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">8s</span> 1us/step
 
-<span class="ansi-bold"> 6299648/11490434</span> <span class="ansi-green-fg">━━━━━━━━━━</span><span class="ansi-white-fg">━━━━━━━━━━</span> <span class="ansi-bold">0s</span> 0us/step
+<span class="ansi-bold">  286720/11490434</span> <span class="ansi-white-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">4s</span> 0us/step
+
+<span class="ansi-bold"> 1228800/11490434</span> <span class="ansi-green-fg">━━</span><span class="ansi-white-fg">━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">1s</span> 0us/step
+
+<span class="ansi-bold"> 5300224/11490434</span> <span class="ansi-green-fg">━━━━━━━━━</span><span class="ansi-white-fg">━━━━━━━━━━━</span> <span class="ansi-bold">0s</span> 0us/step
 
 <span class="ansi-bold">11490434/11490434</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">0s</span> 0us/step
 </pre>
@@ -258,7 +274,7 @@ A_k = \sum_{i=1}^{k} \alpha_i u_i
 </section>
 <section id="result" class="level1">
 <h1>Result</h1>
-<div id="6730e58d" class="cell" data-message="false" data-execution_count="5">
+<div id="2e33b576" class="cell" data-message="false" data-execution_count="5">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -271,7 +287,7 @@ A_k = \sum_{i=1}^{k} \alpha_i u_i
 </section>
 <section id="confusion-matrix" class="level1">
 <h1>Confusion Matrix</h1>
-<div id="e479ea81" class="cell" data-message="false" data-execution_count="6">
+<div id="5a9d60ba" class="cell" data-message="false" data-execution_count="6">
 <div class="cell-output cell-output-display" data-execution_count="6">
 <div>
 
