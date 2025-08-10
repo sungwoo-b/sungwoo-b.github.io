@@ -1,7 +1,26 @@
 ---
-title: "page"
+title: "Aloha"
+toc: false
+about:
+  template: jolla
+  image: img/sungwoo.png
+  links:
+    - icon: linkedin
+      text: LinkedIn
+      href: https://www.linkedin.com/in/sungwoo-o/
+    - icon: github
+      text: Github
+      href: https://github.com/sungwoo-b
+    - icon: envelope
+      text: Email
+      href: mailto:sungwoo.ba@gmail.com
 ---
 
-This is a Quarto website.
 
-To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
+:::{#hero-heading}
+
+Welcome to my personal page! I’m Sung Woo Bak, a recent graduate with a degree in Statistics. <br>
+Here, I’ll be sharing what I've learned throughout my journey in statistics and machine learning.
+
+:::
+

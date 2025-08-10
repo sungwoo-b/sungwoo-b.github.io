@@ -2,20 +2,22 @@ project:
   type: website
 
 website:
-  title: "page"
+  title: "Sungwoo"
   navbar:
     left:
       - href: index.qmd
         text: Home
-      - about.qmd
+      - href: project.qmd
+        text: Project
+      - href: statistics.qmd
+        text: Statistics
+      - href: note.qmd
+        text: Note
+      - href: about.qmd
+        text: About
 
 format:
   html:
-    theme:
-      - cosmo
-      - brand
+    theme: cosmo
     css: styles.css
     toc: true
-
-
-
