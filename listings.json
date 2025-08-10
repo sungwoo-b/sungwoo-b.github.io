@@ -1,0 +1,24 @@
+[
+  {
+    "listing": "/note.html",
+    "items": [
+      "/notes/outofdate.html",
+      "/notes/annotation.html",
+      "/notes/python.html",
+      "/notes/git.html"
+    ]
+  },
+  {
+    "listing": "/statistics.html",
+    "items": []
+  },
+  {
+    "listing": "/project.html",
+    "items": [
+      "/projects/hp.html",
+      "/projects/seaice.html",
+      "/projects/stuffplus.html",
+      "/projects/digit.html"
+    ]
+  }
+]
