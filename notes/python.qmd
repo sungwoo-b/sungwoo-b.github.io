@@ -1,0 +1,39 @@
+---
+title: "Python"
+subtitle: "Testing Python Compatibility"
+description: "This note is to check the compatibility between Quarto and Python"
+date: 2024-9-10
+categories: ["Python"]
+author: "Sung Woo Bak"
+draft: false
+image: "../img/python.png"
+layout: "article"
+toc: true
+---
+
+```{python}
+#| echo: false
+
+print('Hello world!')
+
+```
+
+```{python}
+
+import matplotlib.pyplot as plt
+import numpy as np
+
+mu, sigma = 0, 1  # mean and sd
+x = np.linspace(-5, 5, 100)
+y = (1 / (sigma * np.sqrt(2 * np.pi))) * np.exp(-0.5 * ((x - mu) / sigma) ** 2)
+
+# Plot
+plt.plot(x, y, label="N(0, 1)")
+plt.title("Normal Distribution N(0, 1)")
+plt.xlabel("X")
+plt.ylabel("Probability Density")
+plt.legend()
+plt.grid(True)
+plt.show()
+
+```

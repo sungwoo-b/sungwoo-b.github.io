@@ -1,0 +1,50 @@
+---
+title: "K-Means and K-Medoid"
+subtitle: "Implementing Algorithms in Python"
+description: "The implementation of K-Means and K-Medoid (PAM) clustering algorithms in Python to understand their workings, differences, and how they apply to data clustering tasks"
+date: 2024-03-08
+categories: ["Machine Learning", "Statistics"]
+tags: ["K-Means", "K-Medoid", "PAM"]
+author: "Sung Woo Bak"
+draft: true
+image: "../img/barplot.png"
+layout: "article"
+toc: true
+keywords: ["machine learning", "data science"]
+---
+
+
+```{python}
+#| echo: false
+#| warning: false
+#| message: false
+#| results: 'hide'
+
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.datasets import make_blobs
+
+```
+
+
+
+```{python}
+#| echo: false
+#| warning: false
+#| message: false
+#| results: 'hide'
+
+data, labels = make_blobs(n_samples=300, centers=3, cluster_std=1.0, random_state=42)
+
+plt.scatter(data[:, 0], data[:, 1], c=labels, cmap='viridis', marker='o')
+plt.title("Scatter Plot with 3 Generated Groups")
+plt.xlabel("X-axis")
+plt.ylabel("Y-axis")
+plt.grid(True)
+
+plt.show()
+
+```
+
+
+

@@ -1,0 +1,19 @@
+---
+title: "Template"
+subtitle: "Template for Note Page"
+description: "Add Description"
+date: 2024-03-07
+categories: ["Machine Learning", "Statistics"]
+tags: ["Compution Vision", "Annotation"]
+author: "Sung Woo Bak"
+draft: true
+image: "../img/barplot.png"
+layout: "article"
+toc: true
+slug: "template"
+keywords: ["machine learning", "AI", "data science"]
+---
+
+# title
+
+description

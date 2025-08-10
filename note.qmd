@@ -1,0 +1,14 @@
+---
+title: "Note"
+listing:
+  contents:
+    - notes
+  categories: true
+  sort:
+    - "date desc"
+    - "title asc"
+  sort-ui: [title, date]
+  filter-ui: [title, date]
+---
+
+Here, I'll be posting personal notes.

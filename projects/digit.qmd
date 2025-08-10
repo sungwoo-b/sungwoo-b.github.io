@@ -1,0 +1,249 @@
+---
+title: "Handwritten Digit Classification"
+subtitle: "via Rank-k Approximation"
+description: "Exploration and implementation of Rank-k Approximation in handwritten digit classification"
+date: 2023-12-11
+categories: ["Machine Learning", "Linear Algebra"]
+author: "Sung Woo Bak"
+draft: false
+image: "../img/digit.png"
+layout: "article"
+toc: true
+keywords: ["Image Classification", "Singular Value Decomposition", "Rank-k Approximation"]
+---
+
+```{python}
+#| echo: false
+#| warning: false
+#| message: false
+#| results: 'hide'
+
+import numpy as np
+import pandas as pd
+from scipy.sparse.linalg import svds
+import matplotlib.pyplot as plt
+from tensorflow.keras.datasets import mnist
+```
+
+This project covers image classification using **Rank-k Approximation** via **Singular Value Decomposition (SVD)**. It demonstrates how extracting features from handwritten digit images can lead to effective and accurate classification, by reducing the dimensionality and focusing on important features.
+
+
+# MNIST Handwritten Digit Data
+
+The data used in this project is the MNIST handwritten digit image dataset, which is widely used for image classification tasks. For more detailed information, refer to the link provided below.
+
+- https://www.tensorflow.org/datasets/catalog/mnist
+
+
+```{python}
+#| echo: false
+#| warning: false
+#| message: false
+#| results: 'hide'
+
+def label_modification(label):
+  '''
+  Modify label format
+  INPUT:
+  - label : 1 by (number of images) matrix
+  OUTPUT:
+  - new_label : 10 by (number of images) matrix (1 for true class -1 otherwise)
+  '''
+  cols = label.shape[0] # Number of Columns
+  new_label = (-1) * np.ones((10, cols)) # Make Empty Matrix filled with -1
+  for i in range(cols):
+    value = int(label[i])
+    new_label[value, i] = 1 # Add 1 to the matching indices
+  return new_label
+
+```
+
+
+```{python}
+#| echo: false
+#| warning: false
+#| message: false
+#| results: 'hide'
+
+# Data set
+(train_img, train_label), (test_img, test_label) = mnist.load_data()
+
+# Modify label format
+train_label = label_modification(train_label)
+test_label = label_modification(test_label)
+
+# Reshape the data set into the form used for the model
+train_img = train_img.reshape((60000, 28 * 28)).astype('float64') # Change Dimension and Data Type to Float
+train_img = train_img.T # Transpose
+
+test_img = test_img.reshape((10000, 28 * 28)).astype('float64') # Change Dimension and Data Type to Float
+test_img = test_img.T # Transpose
+
+# Plot 16 sample images from the test set
+fig, axes = plt.subplots(4, 4, figsize=(10, 10))
+for i in range(4):
+    for j in range(4):
+        k = i * 4 + j
+        temp = np.reshape(test_img[:, k], (28,28))
+        axes[i, j].imshow(temp, cmap='gray')
+        axes[i, j].set_title(f'Image {k}')
+        axes[i, j].axis('off')
+plt.show()
+
+```
+
+Above are 16 sample images from the dataset. This dataset contains a total of **70,000** images, with **60,000** images used for the training set and **10,000** images for the test set.
+
+
+
+# Rank-k Approximation using SVD
+
+In this project, Rank-k Approximation via Singular Value Decomposition (SVD) is used for classification method. This method extracts essential features and reduces dimensionality, improving efficiency. The SVD decomposition is as follows
+
+$$
+\text{Image Data} = U_k \Sigma_k V_k^T
+$$
+
+This approach extracts essential information from the data, allowing each digit image to be represented in a reduced form. The focus is on the first **k** left singular vectors U, which capture the important features of the images. The k-th approximation is a linear combination of the vectors $u_1, u_2, \dots, u_k$, representing one element in their span.
+
+$$
+A_k = \sum_{i=1}^{k} \alpha_i u_i
+$$
+
+The error between test images and the k-approximation is calculated using the Euclidean Norm, which measures the difference or distance between two data. The error is computed as
+
+$$ 
+\text{Error} = \| \text{Test Data Set} - \text{k-Approximation} \|_2
+$$
+
+The classification model predicts the digit by finding the smallest error, indicating the closest match between the test image and the k-approximation.
+
+The goal is to find the **optimal k** that captures most of the data while keeping k as small as possible.
+
+# Result
+
+```{python}
+#| echo: false
+#| warning: false
+#| message: false
+
+def k_classification(train_img, test_img, train_label, test_label, k):
+  """
+  Implemented the rank k SVD-based classification
+  INPUT:
+  - train_pattern: Train Set (Features) X (Images) Matrix
+  - test_pattern: Test Set (Features) X (Images) Matrix
+  - train_label: Train Set (class/digit) X (Images) Matrix
+  - test_label: Test Set (class/digit) X (Images) Matrix
+  - k: interger number greater than 0 less than or equal to the number of images
+  OUTPUT:
+  - rate: the overall classification rate of the test_pattern
+  - test_predict: the predicted label for the test_pattern
+  """
+  # Dimension Variables
+  digit = train_label.shape[0]
+  feature = train_img.shape[0]
+  train_image = train_img.shape[1]
+  test_image = test_img.shape[1]
+
+  # Make empty matrices using dimensions of Inputs
+  train_u = np.zeros((feature, k, digit))
+  test_svd = np.zeros((k, test_image, digit))
+  test_svdres = np.zeros((digit, test_image))
+
+  for i in range(digit):
+    # Left Singular Vectors U_k from Train Set
+    train_u[:,:,i], tmp, tmp2 = svds(train_img[:,train_label[i,:]==1], k)
+    # Expension Coefficient
+    test_svd[:, :, i] = train_u[:, :, i].T @ test_img
+    # K_Approximation
+    k_approx = train_u[:, :, i] @ test_svd[:, :, i]
+
+    for j in range(test_image):
+      # Distance (Error) between Test_Patterns and K_Approx
+      errors = np.linalg.norm(test_img[:, j] - k_approx[:, j])
+      test_svdres[i, j] = errors
+
+  # Prediction
+  test_predict = np.argmin(test_svdres, axis=0)
+  # Find Correct Prediction
+  correct_pred = np.sum(test_predict == np.argmax(test_label, axis=0))
+  # Find the Overall Classification Rate
+  rate = correct_pred / test_image
+
+  return rate, test_predict
+
+
+  # Plot Function
+def plot_rate(train_img, test_img, train_label, test_label, k):
+  """
+  Plot the classification rates over rank k's
+  INPUT:
+  - train_pattern: Train Set (Features) X (Images) Matrix
+  - test_pattern: Test Set (Features) X (Images) Matrix
+  - train_label: Train Set (class/digit) X (Images) Matrix
+  - test_label: Test Set (class/digit) X (Images) Matrix
+  - k: interger number greater than 0 less than or equal to the number of images
+  OUTPUT:
+  - best_k: the rank k with the highest classification rate
+  - best_rate: the highest classification rate
+  """
+  ks = range(1, k+1)
+  rates = []
+  for i in ks:
+    rate, temp = k_classification(train_img, test_img, train_label, test_label, i)
+    rates.append(rate)
+
+  # Find the Best k and rate
+  best_k = ks[np.argmax(rates)]
+  best_rate = max(rates)
+
+  plt.plot(ks, rates, marker='o')
+  plt.title('Overall Classification Rate vs Rank k-Approximation')
+  plt.xlabel('Rank k-Approximation')
+  plt.ylabel('Classification Rate')
+  plt.show()
+  return best_k, best_rate
+
+```
+
+
+```{python}
+#| echo: false
+#| warning: false
+#| message: false
+
+best_k, best_rate = plot_rate(train_img, test_img, train_label, test_label, 15)
+
+```
+
+The above plot shows the classification rate for each value of **k**. For most cases, the classification rate is over 90% with k within 15, which demonstrates that dimension reduction was successful while capturing most of the data.
+
+# Confusion Matrix
+
+```{python}
+#| echo: false
+#| warning: false
+#| message: false
+
+best_rate, best_predict = k_classification(train_img, test_img, train_label, test_label, 17)
+
+# Confusion Matrix
+confusion = np.zeros((10, 10))
+
+for k in range(10):
+    tmp = best_predict[np.where(test_label[k, :] == 1)[0]] # Match the prediction and true value
+    for j in range(10):
+        confusion[k, j] = np.count_nonzero(tmp == j) # Store in the Confusion Matrix
+
+classification_rate = np.sum(np.diag(confusion)) / test_img.shape[1] # Classification Rate
+
+pd.DataFrame(confusion)
+
+```
+
+The figure above shows the **confusion matrix** when **k = 6**, comparing the actual labels with the predicted labels. The distribution of results indicates that most predictions were correct.
+
+
+
+Modified: Oct 18, 2024.

@@ -1,0 +1,17 @@
+---
+title: "Street Level Imagery for Humanitarian Analysis"
+subtitle: "In Progress"
+description: "Developing automated tools for street level imagery analysis"
+date: 2024-10-01
+categories: ["Machine Learning", "Compution Vision"]
+author: "Sung Woo Bak"
+draft: false
+image: "../img/rc.png"
+layout: "article"
+toc: true
+keywords: ["Computer Vision", "Annotation"]
+---
+
+This project is currently **in progress**.
+
+The **objective** is to develop automated tools that extract insights from street-level imagery. The initial focus will be the improvement of planning information for climate-related disaster risk reduction in urban areas. This project will establish a foundation for future plans to transition into post-disaster impact assessments.

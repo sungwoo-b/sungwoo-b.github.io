@@ -1,0 +1,14 @@
+---
+title: "Statistics"
+listing:
+  contents:
+    - stats
+  categories: true
+  sort:
+    - "date desc"
+    - "title asc"
+  sort-ui: [title, date]
+  filter-ui: [title, date]
+---
+
+Statistics Notes

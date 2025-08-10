@@ -1,0 +1,541 @@
+---
+title: "Sea Ice Concentration and Animal Telemetry"
+subtitle: "Geospatial Data Analysis"
+description: "Analysis of Sea Ice Concentration and Animal Telemetry in the South Pole Region"
+date: 2024-09-10
+categories: ["Statistics", "Python"]
+tags: ["Remote Sensing", "Geospatial"]
+author: "Sung Woo Bak"
+draft: false
+image: "../img/southpole.png"
+layout: "article"
+toc: true
+---
+
+The surface of Antarctica is largely covered by sea ice, and its area changes over time. This project aims to explore how these changes are related to the movement patterns of penguins, one of the continent's representative species, as seasonal variations in sea ice may impact their behavior and migration patterns.
+
+```{python}
+#| echo: false
+#| warning: false
+#| message: false
+#| results: 'hide'
+
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+from IPython.display import clear_output
+import cftime # CDF time format conversion
+
+import netCDF4 as nc
+import cartopy.crs as ccrs # geospatial data visualization
+import cartopy.feature as cfeature
+import warnings
+warnings.filterwarnings("ignore")
+
+```
+
+# Sea Ice Concentration Data
+
+Sea Ice Concentration data was obtained from the NOAA Polar Watch ERDDAP Data Server and NetCDF format data was used in this project. This data includes time, coordinates, and Sea Ice Concentration data.
+
+Data and its details can be accessed through the link below.
+
+- https://polarwatch.noaa.gov/erddap/griddap/nsidcG02202v4shmday.html
+
+
+```{python}
+#| echo: false
+#| warning: false
+#| message: false
+#| results: 'hide'
+
+# Generate URL
+#def point_to_dataset(dataset_id, base_url='https://polarwatch.noaa.gov/erddap/griddap'):
+#    base_url = base_url.rstrip('/')
+#    full_url = '/'.join([base_url, dataset_id])
+#    return nc.Dataset(full_url)
+
+# Unigue ID's
+#south_month_url = 'nsidcG02202v4shmday' # Monthly
+
+# Data
+#da = point_to_dataset(south_month_url)
+
+```
+
+```{python}
+#| echo: false
+#| warning: false
+#| message: false
+#| results: 'hide'
+
+# The data is replaced with the downloaded version to ensure safety during publishing
+da = nc.Dataset('data/nsidcG02202v4shmday_47c8_d8c6_99d8_U1728973265301.nc')
+
+```
+
+```{python}
+#| echo: false
+#| warning: false
+#| message: false
+#| results: 'hide'
+
+# Check Time
+time = da.variables['time']
+seaice_concen = da.variables['cdr_seaice_conc_monthly'][:]
+
+# Covent time format
+time_val = nc.num2date(time[:], units=time.units, calendar=time.calendar)
+
+sample_time = cftime.DatetimeGregorian(2003, 1, 1)  # Desired time
+time_ind = np.where(time_val == sample_time)[0]     # Find matching indices
+sample_sea_ice = seaice_concen[time_ind, :, :][0]
+
+```
+
+### South Polar Projections
+
+There are methods to represent the spherical Earth on a flat surface. Using the two projection methods below, the South Polar region of the data used here can be displayed on a flat map.
+
+**I. Polar Stereographic Projection**
+
+The Polar Stereographic Projection is a projection method centered on the polar regions.<br>
+In this case, it is centered on the South Pole.
+
+Details about the Polar Stereographic Projection can be found from the link below.
+
+- https://nsidc.org/data/user-resources/help-center/guide-nsidcs-polar-stereographic-projection
+
+```{python}
+#| echo: false
+#| warning: false
+#| message: false
+
+
+# set mapping crs to Cartopy's South Polar Stereo graphic
+crs_epsg = ccrs.SouthPolarStereo(central_longitude=-45)
+
+# set figure size
+fig = plt.figure(figsize=[10, 10])
+
+# set the map projection and associated boundaries
+ax = plt.axes(projection = crs_epsg)
+ax.set_extent([-3950000.0, 3950000.0, -3950000.0, 4350000.0], crs_epsg) # Valid Range: xgrid [-3950000.0, 3950000.0] & ygrid [-3950000.0, 4350000.0]
+ax.coastlines()
+ax.add_feature(cfeature.LAND)
+
+# set the data crs using 'transform'
+# set the data crs as described in the netcdf metadata
+cs = ax.pcolormesh(da['xgrid'], da['ygrid'], da['cdr_seaice_conc_monthly'][0][:] ,
+                   cmap=plt.cm.Blues,  transform= ccrs.SouthPolarStereo(true_scale_latitude=-70, central_longitude=0)) #transform default is basemap specs
+
+fig.colorbar(cs, ax=ax, location='bottom', shrink =0.8)
+ax.set_title('Ice Concentration using Cartopy Projection SouthPolarStereo()')
+
+plt.show()
+
+```
+
+The blue areas in the map above represent Sea Ice Concentration, and the concentration levels can be referenced using the color bar.
+
+
+
+**II. EPSG Code 3412**
+
+Another projection method is to use a location-specific EPSG code. The EPSG code for the South Pole is 3412, and the map below shows the projection using this code.
+
+Other EPSG Codes can be found from the link below.
+
+- https://epsg.io/
+
+
+```{python}
+#| echo: false
+
+data_crs = ccrs.epsg('3412')
+crs_epsg = ccrs.SouthPolarStereo(central_longitude=-45)
+
+fig = plt.figure(figsize=[10, 10])
+ax = plt.axes(projection = crs_epsg)
+ax.set_extent([-3950000.0, 3950000.0, -3950000.0, 4350000.0], ccrs.SouthPolarStereo(central_longitude=0))
+ax.add_feature(cfeature.LAND)
+ax.coastlines()
+
+cs = ax.pcolormesh(da['xgrid'], da['ygrid'], da['cdr_seaice_conc_monthly'][0][:],
+                   cmap=plt.cm.Blues,  transform= data_crs)
+
+fig.colorbar(cs, ax=ax, location='bottom', shrink =0.8)
+ax.set_title('Ice Concentration using EPSG code (3412)')
+
+plt.show()
+
+```
+
+# Adelie Penguin Telemetry Data
+
+Adelie Penguin Telemetry Data was obtained from NOAA NCEI and can be accessed through the link below.
+
+- https://www.ncei.noaa.gov/node/6696
+
+
+```{python}
+#| echo: false
+
+# Import Dataset
+penguin = pd.read_csv('data/copa_adpe_ncei.csv')
+penguin.head()
+
+```
+
+The table above shows a sample of the Telemetry Data.
+
+
+```{python}
+#| echo: false
+
+# Sort Date
+penguin['DateGMT'] = pd.to_datetime(penguin['DateGMT'], format='%d/%m/%Y')
+penguin['Year_Month'] = penguin['DateGMT'].dt.strftime('%Y-%m')
+unique_year_month = penguin['Year_Month'].unique()
+#np.sort(unique_year_month)
+
+```
+
+### The Distribution of Penguins
+
+```{python}
+#| echo: false
+
+fig, axs = plt.subplots(2, 2, figsize=(8, 8))
+
+# Top left
+axs[0, 0].bar(range(len(penguin['BirdId'].value_counts())), penguin['BirdId'].value_counts())
+axs[0, 0].set_title('Bird ID Count')
+axs[0, 0].set_xlabel('Bird ID')
+axs[0, 0].set_ylabel('Count')
+
+# Top right
+axs[0, 1].bar(penguin['Sex'].value_counts().index, penguin['Sex'].value_counts())
+axs[0, 1].set_title('Sex Count')
+axs[0, 1].set_xlabel('Sex')
+axs[0, 1].set_ylabel('Count')
+
+# Bottom left
+axs[1, 0].bar(penguin['Breed Stage'].value_counts().index, penguin['Breed Stage'].value_counts())
+axs[1, 0].set_title('Breed Stage Count')
+axs[1, 0].set_xlabel('Breed Stage')
+axs[1, 0].set_ylabel('Count')
+
+# Remove Bottom right
+fig.delaxes(axs[1, 1])
+
+
+plt.tight_layout()
+plt.show()
+
+```
+
+The distributions are shown above to better understand the data, allowing for further analysis based on different categories.
+
+
+# Penguin Locations on the Projected Map
+
+The locations of penguins on Earth are shown as follows.
+
+```{python}
+#| echo: false
+
+fig = plt.figure(figsize=[10, 10])
+ax = plt.axes(projection=ccrs.PlateCarree())
+ax.coastlines()
+ax.set_global()
+ax.add_feature(cfeature.LAND)
+
+# Location of Penguins on the Projected Map
+plt.scatter(
+    y = penguin["Latitude"],
+    x = penguin["Longitude"],
+    color="red",
+    s=5,
+    alpha=1,
+    transform=ccrs.PlateCarree()
+)
+ax.set_title('Penguin Tracking')
+plt.show()
+
+```
+
+
+```{python}
+#| echo: false
+#| warning: false
+#| message: false
+
+fig = plt.figure(figsize=[10, 10])
+
+ax = plt.axes(projection=crs_epsg)
+ax.add_feature(cfeature.LAND)
+ax.coastlines(resolution='50m')
+ax.set_extent([-3950000.0, 3950000.0, -3950000.0, 4350000.0], crs_epsg)
+ax.gridlines(draw_labels=True, dms=True, x_inline=False, y_inline=True)
+
+cs = ax.pcolormesh(da['xgrid'], da['ygrid'], sample_sea_ice,
+                   cmap=plt.cm.Blues,  transform= ccrs.NorthPolarStereo(true_scale_latitude=-70, central_longitude=0))
+
+scatter = plt.scatter(
+    y=penguin["Latitude"],
+    x=penguin["Longitude"],
+    color="red",
+    s=3,
+    alpha=1,
+    transform=ccrs.PlateCarree()
+)
+
+fig.colorbar(cs, ax=ax, location='right', shrink =0.8)
+ax.set_title('Ice Concentration and Penguin Track Data on Polar Stereographic Map')
+
+plt.show()
+
+```
+
+### Penguin Tracking Considering Various Factors
+
+
+```{python}
+#| echo: false
+#| warning: false
+#| message: false
+
+fig = plt.figure(figsize=[10, 10])
+ax = plt.axes(projection=crs_epsg)
+
+ax.add_feature(cfeature.LAND)
+ax.coastlines(resolution='50m')
+ax.set_extent([-1500000.0, 500000.0, 2000000.0, 3500000.0], crs=crs_epsg)
+ax.gridlines(draw_labels=True, dms=True, x_inline=False, y_inline=True)
+
+cs = ax.pcolormesh(
+    da['xgrid'], da['ygrid'], sample_sea_ice,
+    cmap=plt.cm.Blues,
+    transform=ccrs.NorthPolarStereo(true_scale_latitude=-70, central_longitude=0)
+)
+
+colors = {'female': 'indianred', 'male': 'skyblue', 'unknown': 'lightgreen'}
+labels = {'female': 'Female', 'male': 'Male', 'unknown': 'Unknown'}
+
+for sex, color in colors.items():
+    subset = penguin[penguin['Sex'] == sex]
+    ax.scatter(
+        y=subset['Latitude'],
+        x=subset['Longitude'],
+        c=color,
+        s=5,
+        alpha=1,
+        transform=ccrs.PlateCarree(),
+        label=labels[sex]
+    )
+
+ax.legend(title='Sex', loc='upper left')
+fig.colorbar(cs, ax=ax, location='right', shrink=0.8)
+ax.set_title('Penguin Tracking by Sex')
+
+plt.show()
+
+```
+
+The plot above shows the daily movement paths of penguins by sex, illustrating the differences in movement patterns between sex groups.
+
+
+```{python}
+#| echo: false
+#| warning: false
+#| message: false
+
+# Extract Data with ArgosQulity A and B
+penguin_23 = penguin[(penguin['ArgosQuality'] == '3') | (penguin['ArgosQuality'] == '2')]
+penguin_23_avg = penguin_23.groupby(['BirdId', 'DateGMT']).agg({'Latitude': 'mean', 'Longitude': 'mean'}).reset_index()
+
+# Add Color
+unique_birds = penguin_23_avg['BirdId'].unique()
+colors = plt.cm.get_cmap('Spectral', len(unique_birds))
+bird_colors = {bird: colors(i) for i, bird in enumerate(unique_birds)}
+
+# Map
+fig = plt.figure(figsize=[10, 10])
+ax = plt.axes(projection=crs_epsg)
+
+ax.add_feature(cfeature.LAND)
+ax.coastlines(resolution='50m')
+ax.set_extent([-1500000.0, 500000.0, 2000000.0, 3500000.0], crs=crs_epsg)
+ax.gridlines(draw_labels=True, dms=True, x_inline=False, y_inline=True)
+
+ax.pcolormesh(da['xgrid'], da['ygrid'], sample_sea_ice,
+              cmap=plt.cm.Blues, transform=ccrs.NorthPolarStereo(true_scale_latitude=-70, central_longitude=0))
+
+for bird_id, group in penguin_23_avg.groupby('BirdId'):
+    lat = group['Latitude'].values
+    lon = group['Longitude'].values
+    dates = group['DateGMT'].values
+    arrow_color = bird_colors[bird_id]
+
+    ax.scatter(lon, lat, color=bird_colors[bird_id], s=10, alpha=0.7, transform=ccrs.PlateCarree())
+
+    for i in range(len(lon) - 1):
+        ax.annotate('', xy=(lon[i+1], lat[i+1]), xytext=(lon[i], lat[i]),
+                    arrowprops=dict(edgecolor=arrow_color, arrowstyle='->'),
+                    transform=ccrs.PlateCarree())
+
+ax.set_title('Penguin Tracking with Direction (ArgosQuality 3 & 2)')
+fig.colorbar(cs, ax=ax, location='right', shrink=0.8)
+plt.show()
+
+```
+
+The plot above shows the daily movement paths, including direction, filtered only to include data with Argos Quality of 3 and 2, which indicate data accuracy.
+
+Note:
+
+- Argos Quality 3 - an error of less than 150 meters (with 4 or more messages)
+- Argos Quality 2 - an error between 150 and 350 meters (with 4 or more messages)
+
+
+# Monthly Tracking with Sea Ice Concentration
+
+
+
+```{python}
+#| echo: false
+#| warning: false
+#| message: false
+
+# Find BirdID with the most count by sex
+penguin.groupby('Sex')['BirdId'].apply(lambda x: x.value_counts().idxmax())
+
+adpe24 = penguin[penguin['BirdId']=='ADPE24']
+adpe29 = penguin[penguin['BirdId']=='ADPE29']
+adpe17 = penguin[penguin['BirdId']=='ADPE17']
+
+```
+
+**Bird ID ADPE24 (Female)**
+
+The individual with the most data is used as a representative example below, and its paths over time are shown with the corresponding sea ice concentration below. This can show the relationship between Sea Ice Concentration and penguin movement patterns.
+
+```{python}
+#| echo: false
+#| warning: false
+#| message: false
+
+#print(adpe24['Year_Month'].unique())
+
+start_time = cftime.DatetimeGregorian(2003, 1, 1)
+end_time = cftime.DatetimeGregorian(2003, 3, 1)
+time_ind = np.where((time_val >= start_time) & (time_val <= end_time))
+time_ind[0]
+
+# Sea Ice Data for Each Month
+concen_jan_03 = seaice_concen[time_ind[0][0], :, :]
+concen_feb_03 = seaice_concen[time_ind[0][1], :, :]
+concen_mar_03 = seaice_concen[time_ind[0][2], :, :]
+
+# Penguin Data for Each Month
+adpe24_jan = adpe24[adpe24['DateGMT'].dt.month == 1]
+adpe24_feb = adpe24[adpe24['DateGMT'].dt.month == 2]
+adpe24_mar = adpe24[adpe24['DateGMT'].dt.month == 3]
+
+concen_data = [concen_jan_03, concen_feb_03, concen_mar_03]
+adpe24_data = [adpe24_jan, adpe24_feb, adpe24_mar]
+titles = ['ADPE24 January', 'February', 'March']
+
+```
+
+```{python}
+#| echo: false
+#| warning: false
+#| message: false
+#| results: 'hide'
+
+
+fig, axes = plt.subplots(2, 2, figsize=(9, 8), subplot_kw={'projection': crs_epsg})
+
+for i, ax in enumerate(axes.flat):
+    ax.add_feature(cfeature.LAND)
+    ax.coastlines(resolution='50m')
+    ax.set_extent([-1500000.0, 200000.0, 2000000.0, 3500000.0], crs_epsg)
+    ax.gridlines(draw_labels=True, dms=True, x_inline=False, y_inline=True)
+
+    if i < 3:
+        cs = ax.pcolormesh(da['xgrid'], da['ygrid'], concen_data[i],
+                           cmap=plt.cm.Blues, transform=ccrs.NorthPolarStereo(true_scale_latitude=-70, central_longitude=0))
+
+        # set the data crs
+        ax.scatter(
+            y=adpe24_data[i]["Latitude"],
+            x=adpe24_data[i]["Longitude"],
+            color="red",
+            s=3,
+            alpha=1,
+            transform=ccrs.PlateCarree()
+        )
+
+        ax.set_title(titles[i])
+
+ax = axes.flat[3]
+ax.add_feature(cfeature.LAND)
+ax.coastlines(resolution='50m')
+ax.set_extent([-1500000.0, 200000.0, 2000000.0, 3500000.0], crs=crs_epsg)
+ax.gridlines(draw_labels=True, dms=True, x_inline=False, y_inline=True)
+
+cs1 = ax.pcolormesh(da['xgrid'], da['ygrid'], concen_data[0],
+                   cmap=plt.cm.Oranges, alpha=0.7,
+                   transform=ccrs.SouthPolarStereo(true_scale_latitude=-70, central_longitude=0))
+
+cs2 = ax.pcolormesh(da['xgrid'], da['ygrid'], concen_data[1],
+                   cmap=plt.cm.Blues, alpha=0.5,
+                   transform=ccrs.SouthPolarStereo(true_scale_latitude=-70, central_longitude=0))
+
+cs3 = ax.pcolormesh(da['xgrid'], da['ygrid'], concen_data[2],
+                   cmap=plt.cm.Greens, alpha=0.1,
+                   transform=ccrs.SouthPolarStereo(true_scale_latitude=-70, central_longitude=0))
+
+scatter1 = ax.scatter(
+    y=adpe24_data[0]["Latitude"],
+    x=adpe24_data[0]["Longitude"],
+    color="orange",
+    s=3,
+    alpha=1,
+    transform=ccrs.PlateCarree(),
+    label='January'
+)
+
+scatter2 = ax.scatter(
+    y=adpe24_data[1]["Latitude"],
+    x=adpe24_data[1]["Longitude"],
+    color="skyblue",
+    s=3,
+    alpha=1,
+    transform=ccrs.PlateCarree(),
+    label='February'
+)
+
+scatter3 = ax.scatter(
+    y=adpe24_data[2]["Latitude"],
+    x=adpe24_data[2]["Longitude"],
+    color="lightgreen",
+    s=3,
+    alpha=1,
+    transform=ccrs.PlateCarree(),
+    label='March'
+)
+
+ax.set_title('All Months')
+ax.legend(loc='lower right')
+
+plt.tight_layout()
+plt.show()
+
+```
+As shown above, ADPE24 has data from January to March 2003, and it traveled from the island towards areas with higher sea ice concentrations. The sea ice concentration varies by month, and it is clear that ADPE24 follows these changes. Although this is just one sample, it suggests that there is a relationship between sea ice and penguin movement patterns.
+
+
+Modified: Oct 10, 2024.

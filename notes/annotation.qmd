@@ -1,0 +1,15 @@
+---
+title: "Image Labeling"
+subtitle: "Tips for Labeling Images"
+description: "Essential tips and best practices for efficient image labeling for training object detector"
+date: 2024-10-08
+categories: ["Machine Learning", "Computer Vision"]
+tags: ["Compution Vision"]
+author: "Sung Woo Bak"
+draft: false
+image: "../img/anno.png"
+layout: "article"
+toc: true
+slug: "image-labeling"
+keywords: ["Image", "Labeling", "Annotation", "CVAT"]
+---

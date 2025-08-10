@@ -1,0 +1,21 @@
+---
+title: "HTML Cheat Sheet"
+subtitle: "HTML Tags"
+description: "A quick reference for common HTML tags"
+date: 2024-03-07
+categories: ["HTML"]
+author: "Sung Woo Bak"
+draft: true
+image: "../img/barplot.png"
+layout: "article"
+toc: true
+---
+
+- **Tags**: 
+    - Tags are elements like `<h1>`, `<p>`, and `<a>`.
+    - They define the structure of a web page.
+- **Opening Tag**: 
+    - Tags start with an opening tag, such as `<p>`.
+- **Closing Tag**: 
+    - Most tags have a closing tag, such as `</p>`.
+    - Some tags, like `<img>`, are self-closing.
