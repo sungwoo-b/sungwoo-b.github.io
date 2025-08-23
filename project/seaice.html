@@ -7,11 +7,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Sung Woo Bak">
-<meta name="dcterms.date" content="2024-03-07">
-<meta name="keywords" content="Git, GitHub, SSH">
-<meta name="description" content="A quick reference to essential Git commands and workflows">
+<meta name="dcterms.date" content="2024-09-10">
+<meta name="description" content="Analysis of Sea Ice Concentration and Animal Telemetry in the South Pole Region">
 
-<title>Git Cheat Sheet – Sungwoo</title>
+<title>Sea Ice Concentration and Animal Telemetry – Sungwoo</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -27,7 +26,7 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../site_libs/quarto-nav/headroom.min.js"></script>
 <script src="../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
@@ -43,7 +42,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-ea385d0e468b0dd5ea5bf0780b1290d9.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-4df3b0c4fafa0f66eafcead0ee6cff11.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-aecc83f6f3f98d492d37fd48a15aef73.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -71,6 +70,9 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
 
 <link rel="stylesheet" href="../styles.css">
@@ -129,15 +131,19 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#git" id="toc-git" class="nav-link active" data-scroll-target="#git">Git</a>
+  <li><a href="#sea-ice-concentration-data" id="toc-sea-ice-concentration-data" class="nav-link active" data-scroll-target="#sea-ice-concentration-data">Sea Ice Concentration Data</a>
   <ul class="collapse">
-  <li><a href="#setup" id="toc-setup" class="nav-link" data-scroll-target="#setup">1. Setup</a></li>
-  <li><a href="#basic-git-commands" id="toc-basic-git-commands" class="nav-link" data-scroll-target="#basic-git-commands">2. <strong>Basic Git Commands</strong></a></li>
-  <li><a href="#branch" id="toc-branch" class="nav-link" data-scroll-target="#branch">3. <strong>Branch</strong></a></li>
-  <li><a href="#remote-repository-commands" id="toc-remote-repository-commands" class="nav-link" data-scroll-target="#remote-repository-commands">4. <strong>Remote Repository Commands</strong></a></li>
-  <li><a href="#example" id="toc-example" class="nav-link" data-scroll-target="#example">Example</a></li>
+  <li><a href="#south-polar-projections" id="toc-south-polar-projections" class="nav-link" data-scroll-target="#south-polar-projections">South Polar Projections</a></li>
   </ul></li>
-  <li><a href="#ssh" id="toc-ssh" class="nav-link" data-scroll-target="#ssh">SSH</a></li>
+  <li><a href="#adelie-penguin-telemetry-data" id="toc-adelie-penguin-telemetry-data" class="nav-link" data-scroll-target="#adelie-penguin-telemetry-data">Adelie Penguin Telemetry Data</a>
+  <ul class="collapse">
+  <li><a href="#the-distribution-of-penguins" id="toc-the-distribution-of-penguins" class="nav-link" data-scroll-target="#the-distribution-of-penguins">The Distribution of Penguins</a></li>
+  </ul></li>
+  <li><a href="#penguin-locations-on-the-projected-map" id="toc-penguin-locations-on-the-projected-map" class="nav-link" data-scroll-target="#penguin-locations-on-the-projected-map">Penguin Locations on the Projected Map</a>
+  <ul class="collapse">
+  <li><a href="#penguin-tracking-considering-various-factors" id="toc-penguin-tracking-considering-various-factors" class="nav-link" data-scroll-target="#penguin-tracking-considering-various-factors">Penguin Tracking Considering Various Factors</a></li>
+  </ul></li>
+  <li><a href="#monthly-tracking-with-sea-ice-concentration" id="toc-monthly-tracking-with-sea-ice-concentration" class="nav-link" data-scroll-target="#monthly-tracking-with-sea-ice-concentration">Monthly Tracking with Sea Ice Concentration</a></li>
   </ul>
 </nav>
     </div>
@@ -146,16 +152,17 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Git Cheat Sheet</h1>
-<p class="subtitle lead">Git Commands &amp; GitHub Workflow</p>
+<h1 class="title">Sea Ice Concentration and Animal Telemetry</h1>
+<p class="subtitle lead">Geospatial Data Analysis</p>
   <div class="quarto-categories">
-    <div class="quarto-category">Git</div>
+    <div class="quarto-category">Statistics</div>
+    <div class="quarto-category">Python</div>
   </div>
   </div>
 
 <div>
   <div class="description">
-    A quick reference to essential Git commands and workflows
+    Analysis of Sea Ice Concentration and Animal Telemetry in the South Pole Region
   </div>
 </div>
 
@@ -172,7 +179,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">March 7, 2024</p>
+      <p class="date">September 10, 2024</p>
     </div>
   </div>
   
@@ -180,132 +187,227 @@ ul.task-list li input[type="checkbox"] {
   </div>
   
 
-<div>
-  <div class="keywords">
-    <div class="block-title">Keywords</div>
-    <p>Git, GitHub, SSH</p>
-  </div>
-</div>
 
 </header>
 
 
-<p>Referenced from <a href="https://education.github.com/git-cheat-sheet-education.pdf">GitHub Education</a></p>
-<section id="git" class="level1">
-<h1>Git</h1>
-<section id="setup" class="level3">
-<h3 class="anchored" data-anchor-id="setup">1. Setup</h3>
+<p>The surface of Antarctica is largely covered by sea ice, and its area changes over time. This project aims to explore how these changes are related to the movement patterns of penguins, one of the continent’s representative species, as seasonal variations in sea ice may impact their behavior and migration patterns.</p>
+<section id="sea-ice-concentration-data" class="level1">
+<h1>Sea Ice Concentration Data</h1>
+<p>Sea Ice Concentration data was obtained from the NOAA Polar Watch ERDDAP Data Server and NetCDF format data was used in this project. This data includes time, coordinates, and Sea Ice Concentration data.</p>
+<p>Data and its details can be accessed through the link below.</p>
 <ul>
-<li><strong><code>git config --global user.name "Firstname Lastname"</code></strong>
+<li>https://polarwatch.noaa.gov/erddap/griddap/nsidcG02202v4shmday.html</li>
+</ul>
+<section id="south-polar-projections" class="level3">
+<h3 class="anchored" data-anchor-id="south-polar-projections">South Polar Projections</h3>
+<p>There are methods to represent the spherical Earth on a flat surface. Using the two projection methods below, the South Polar region of the data used here can be displayed on a flat map.</p>
+<p><strong>I. Polar Stereographic Projection</strong></p>
+<p>The Polar Stereographic Projection is a projection method centered on the polar regions.<br> In this case, it is centered on the South Pole.</p>
+<p>Details about the Polar Stereographic Projection can be found from the link below.</p>
 <ul>
-<li>Set a name</li>
-<li>Example: <code>git config --global user.name "Sung Woo Bak"</code></li>
-</ul></li>
-<li><strong><code>git config --global user.email “email address”</code></strong>
+<li>https://nsidc.org/data/user-resources/help-center/guide-nsidcs-polar-stereographic-projection</li>
+</ul>
+<div id="86359b63" class="cell" data-message="false" data-execution_count="5">
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="seaice_files/figure-html/cell-6-output-1.png" width="636" height="720" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The blue areas in the map above represent Sea Ice Concentration, and the concentration levels can be referenced using the color bar.</p>
+<p><strong>II. EPSG Code 3412</strong></p>
+<p>Another projection method is to use a location-specific EPSG code. The EPSG code for the South Pole is 3412, and the map below shows the projection using this code.</p>
+<p>Other EPSG Codes can be found from the link below.</p>
 <ul>
-<li>Set an email</li>
-</ul></li>
+<li>https://epsg.io/</li>
+</ul>
+<div id="baf94197" class="cell" data-execution_count="6">
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="seaice_files/figure-html/cell-7-output-1.png" width="636" height="720" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="adelie-penguin-telemetry-data" class="level1">
+<h1>Adelie Penguin Telemetry Data</h1>
+<p>Adelie Penguin Telemetry Data was obtained from NOAA NCEI and can be accessed through the link below.</p>
+<ul>
+<li>https://www.ncei.noaa.gov/node/6696</li>
+</ul>
+<div id="adffe28b" class="cell" data-execution_count="7">
+<div class="cell-output cell-output-display" data-execution_count="7">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">BirdId</th>
+<th data-quarto-table-cell-role="th">Sex</th>
+<th data-quarto-table-cell-role="th">Age</th>
+<th data-quarto-table-cell-role="th">Breed Stage</th>
+<th data-quarto-table-cell-role="th">DateGMT</th>
+<th data-quarto-table-cell-role="th">TimeGMT</th>
+<th data-quarto-table-cell-role="th">Latitude</th>
+<th data-quarto-table-cell-role="th">Longitude</th>
+<th data-quarto-table-cell-role="th">ArgosQuality</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>ADPE1</td>
+<td>female</td>
+<td>adult</td>
+<td>incubation</td>
+<td>28/10/1997</td>
+<td>7:54:00</td>
+<td>-62.171667</td>
+<td>-58.445000</td>
+<td>2</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>ADPE1</td>
+<td>female</td>
+<td>adult</td>
+<td>incubation</td>
+<td>28/10/1997</td>
+<td>9:32:00</td>
+<td>-62.173333</td>
+<td>-58.463333</td>
+<td>2</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>ADPE1</td>
+<td>female</td>
+<td>adult</td>
+<td>incubation</td>
+<td>28/10/1997</td>
+<td>18:15:00</td>
+<td>-62.158333</td>
+<td>-58.426667</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>ADPE1</td>
+<td>female</td>
+<td>adult</td>
+<td>incubation</td>
+<td>28/10/1997</td>
+<td>19:57:00</td>
+<td>-62.175000</td>
+<td>-58.441667</td>
+<td>2</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>ADPE1</td>
+<td>female</td>
+<td>adult</td>
+<td>incubation</td>
+<td>28/10/1997</td>
+<td>21:37:00</td>
+<td>-62.171667</td>
+<td>-58.445000</td>
+<td>2</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>The table above shows a sample of the Telemetry Data.</p>
+<section id="the-distribution-of-penguins" class="level3">
+<h3 class="anchored" data-anchor-id="the-distribution-of-penguins">The Distribution of Penguins</h3>
+<div id="235012d5" class="cell" data-execution_count="9">
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="seaice_files/figure-html/cell-10-output-1.png" width="758" height="758" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The distributions are shown above to better understand the data, allowing for further analysis based on different categories.</p>
+</section>
+</section>
+<section id="penguin-locations-on-the-projected-map" class="level1">
+<h1>Penguin Locations on the Projected Map</h1>
+<p>The locations of penguins on Earth are shown as follows.</p>
+<div id="181ca7a4" class="cell" data-execution_count="10">
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="seaice_files/figure-html/cell-11-output-1.png" width="763" height="411" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="dd891dd1" class="cell" data-message="false" data-execution_count="11">
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="seaice_files/figure-html/cell-12-output-1.png" width="744" height="755" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<section id="penguin-tracking-considering-various-factors" class="level3">
+<h3 class="anchored" data-anchor-id="penguin-tracking-considering-various-factors">Penguin Tracking Considering Various Factors</h3>
+<div id="d8650526" class="cell" data-message="false" data-execution_count="12">
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="seaice_files/figure-html/cell-13-output-1.png" width="712" height="624" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The plot above shows the daily movement paths of penguins by sex, illustrating the differences in movement patterns between sex groups.</p>
+<div id="ad664513" class="cell" data-message="false" data-execution_count="13">
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="seaice_files/figure-html/cell-14-output-1.png" width="712" height="624" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The plot above shows the daily movement paths, including direction, filtered only to include data with Argos Quality of 3 and 2, which indicate data accuracy.</p>
+<p>Note:</p>
+<ul>
+<li>Argos Quality 3 - an error of less than 150 meters (with 4 or more messages)</li>
+<li>Argos Quality 2 - an error between 150 and 350 meters (with 4 or more messages)</li>
 </ul>
 </section>
-<section id="basic-git-commands" class="level3">
-<h3 class="anchored" data-anchor-id="basic-git-commands">2. <strong>Basic Git Commands</strong></h3>
-<ul>
-<li><strong><code>git init</code></strong>
-<ul>
-<li>Initialize a new Git repository</li>
-</ul></li>
-<li><strong><code>git clone url</code></strong>
-<ul>
-<li>Retrieve an entire repository from a hosted location via URL</li>
-<li>Example: <code>git clone https://github.com/sungwoo-b/repository.git</code></li>
-</ul></li>
-<li><strong><code>git status</code></strong>
-<ul>
-<li>Show modified files in working directory, staged for your next commit</li>
-</ul></li>
-<li><strong><code>git add file_name</code></strong>
-<ul>
-<li>add a file as it looks now to your next commit (stage)</li>
-<li>Example: <code>git add file.txt</code></li>
-<li>To add all files: <code>git add .</code></li>
-</ul></li>
-<li><strong><code>git reset file_name</code></strong>
-<ul>
-<li>Unstage a file while retaining the changes in working directory</li>
-</ul></li>
-<li><strong><code>git commit -m "commit message"</code></strong>
-<ul>
-<li>Saves the changes to the repository with a descriptive message</li>
-</ul></li>
-<li><strong><code>git push alias branch</code></strong>
-<ul>
-<li>Upload the changes to the remote repository</li>
-<li>Example: <code>git push origin main</code></li>
-</ul></li>
-<li><strong><code>git pull</code></strong>
-<ul>
-<li>Download the latest changes and merges them into your local branch</li>
-<li>Example: <code>git pull</code></li>
-</ul></li>
-</ul>
 </section>
-<section id="branch" class="level3">
-<h3 class="anchored" data-anchor-id="branch">3. <strong>Branch</strong></h3>
-<ul>
-<li><strong><code>git branch</code></strong>
-<ul>
-<li>Display a list of branches</li>
-</ul></li>
-<li><strong><code>git branch branch_name</code></strong>
-<ul>
-<li>Create a new branch at the current commit</li>
-</ul></li>
-<li><strong><code>git checkout branch</code></strong>
-<ul>
-<li>Change the current working branch</li>
-<li>Example: <code>git checkout another_branch</code></li>
-</ul></li>
-<li><strong><code>git log</code></strong>
-<ul>
-<li>show all commits in the current branch’s history</li>
-</ul></li>
-</ul>
-</section>
-<section id="remote-repository-commands" class="level3">
-<h3 class="anchored" data-anchor-id="remote-repository-commands">4. <strong>Remote Repository Commands</strong></h3>
-<ul>
-<li><strong><code>git remote add &lt;name&gt; &lt;url&gt;</code></strong>: Adds a remote repository.
-<ul>
-<li>Links a remote repository with a name (e.g., origin) and URL.</li>
-<li>Example: <code>git remote add origin https://github.com/user/repository.git</code></li>
-</ul></li>
-<li><strong><code>git remote -v</code></strong>: Shows the remote repository URLs.
-<ul>
-<li>Displays the URLs of the remote repositories connected to your local repository.</li>
-</ul></li>
-</ul>
-</section>
-<section id="example" class="level3">
-<h3 class="anchored" data-anchor-id="example">Example</h3>
-<pre><code>cd working_dir
-git pull
-git status
-git add .
-git commit -m "commit message"
-git push origin main</code></pre>
-</section>
-</section>
-<section id="ssh" class="level1">
-<h1>SSH</h1>
-<p>Referenced from <a href="https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent">GitHub Docs</a></p>
-<p>Using Git Bash</p>
-<p><strong>1. Generate SSH key</strong></p>
-<p><code>ssh-keygen -t ed25519-sk -C "your_email@example.com"</code></p>
-<p><strong>2. Add Passphrase</strong></p>
-<p><strong>3. Copy Public key</strong></p>
-<p><code>clip &lt; ~/.ssh/id_ed25519.pub</code></p>
-<p><strong>4. Add to GitHub</strong></p>
-<p>Settings - Add new SSH key</p>
+<section id="monthly-tracking-with-sea-ice-concentration" class="level1">
+<h1>Monthly Tracking with Sea Ice Concentration</h1>
+<p><strong>Bird ID ADPE24 (Female)</strong></p>
+<p>The individual with the most data is used as a representative example below, and its paths over time are shown with the corresponding sea ice concentration below. This can show the relationship between Sea Ice Concentration and penguin movement patterns.</p>
+<div id="7cef9d20" class="cell" data-message="false" data-results="hide" data-execution_count="16">
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="seaice_files/figure-html/cell-17-output-1.png" width="734" height="758" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>As shown above, ADPE24 has data from January to March 2003, and it traveled from the island towards areas with higher sea ice concentrations. The sea ice concentration varies by month, and it is clear that ADPE24 follows these changes. Although this is just one sample, it suggests that there is a relationship between sea ice and penguin movement patterns.</p>
+<p>Modified: Oct 10, 2024.</p>
 
 
 </section>

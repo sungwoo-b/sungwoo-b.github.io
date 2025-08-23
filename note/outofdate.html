@@ -6,12 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Sung Woo Bak">
-<meta name="dcterms.date" content="2023-12-11">
-<meta name="keywords" content="Image Classification, Singular Value Decomposition, Rank-k Approximation">
-<meta name="description" content="Exploration and implementation of Rank-k Approximation in handwritten digit classification">
 
-<title>Handwritten Digit Classification – Sungwoo</title>
+<title>Out of Date Data – Sungwoo</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -43,7 +39,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-ea385d0e468b0dd5ea5bf0780b1290d9.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-4df3b0c4fafa0f66eafcead0ee6cff11.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-aecc83f6f3f98d492d37fd48a15aef73.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -75,35 +71,6 @@ ul.task-list li input[type="checkbox"] {
 
 <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 <link rel="stylesheet" href="../styles.css">
 </head>
@@ -156,300 +123,179 @@ window.Quarto = {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#mnist-handwritten-digit-data" id="toc-mnist-handwritten-digit-data" class="nav-link active" data-scroll-target="#mnist-handwritten-digit-data">MNIST Handwritten Digit Data</a></li>
-  <li><a href="#rank-k-approximation-using-svd" id="toc-rank-k-approximation-using-svd" class="nav-link" data-scroll-target="#rank-k-approximation-using-svd">Rank-k Approximation using SVD</a></li>
-  <li><a href="#result" id="toc-result" class="nav-link" data-scroll-target="#result">Result</a></li>
-  <li><a href="#confusion-matrix" id="toc-confusion-matrix" class="nav-link" data-scroll-target="#confusion-matrix">Confusion Matrix</a></li>
-  </ul>
-</nav>
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+        
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content page-columns page-full" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Handwritten Digit Classification</h1>
-<p class="subtitle lead">via Rank-k Approximation</p>
-  <div class="quarto-categories">
-    <div class="quarto-category">Machine Learning</div>
-    <div class="quarto-category">Linear Algebra</div>
-  </div>
-  </div>
-
-<div>
-  <div class="description">
-    Exploration and implementation of Rank-k Approximation in handwritten digit classification
-  </div>
+<h1 class="title">Out of Date Data</h1>
 </div>
+
 
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>Sung Woo Bak </p>
-          </div>
-  </div>
     
-    <div>
-    <div class="quarto-title-meta-heading">Published</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">December 11, 2023</p>
-    </div>
-  </div>
   
     
   </div>
   
 
-<div>
-  <div class="keywords">
-    <div class="block-title">Keywords</div>
-    <p>Image Classification, Singular Value Decomposition, Rank-k Approximation</p>
-  </div>
-</div>
 
 </header>
 
 
-<p>This project covers image classification using <strong>Rank-k Approximation</strong> via <strong>Singular Value Decomposition (SVD)</strong>. It demonstrates how extracting features from handwritten digit images can lead to effective and accurate classification, by reducing the dimensionality and focusing on important features.</p>
-<section id="mnist-handwritten-digit-data" class="level1">
-<h1>MNIST Handwritten Digit Data</h1>
-<p>The data used in this project is the MNIST handwritten digit image dataset, which is widely used for image classification tasks. For more detailed information, refer to the link provided below.</p>
-<ul>
-<li>https://www.tensorflow.org/datasets/catalog/mnist</li>
-</ul>
-<div id="c4cc9b7c" class="cell" data-message="false" data-results="hide" data-execution_count="3">
-<div class="cell-output cell-output-stdout">
-<div class="ansi-escaped-output">
-<pre>Downloading data from https://storage.googleapis.com/tensorflow/tf-keras-datasets/mnist.npz
+<p>Data that has been more than 5 days past the last update.</p>
+<div id="a6338737" class="cell page-columns page-full" data-message="false" data-execution_count="3">
+<div class="cell-output cell-output-display column-page">
+<style type="text/css">
+</style>
 
-
-<span class="ansi-bold">       0/11490434</span> <span class="ansi-white-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">0s</span> 0s/step
-
-<span class="ansi-bold">   65536/11490434</span> <span class="ansi-white-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">8s</span> 1us/step
-
-<span class="ansi-bold">  286720/11490434</span> <span class="ansi-white-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">4s</span> 0us/step
-
-<span class="ansi-bold"> 1228800/11490434</span> <span class="ansi-green-fg">━━</span><span class="ansi-white-fg">━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">1s</span> 0us/step
-
-<span class="ansi-bold"> 5300224/11490434</span> <span class="ansi-green-fg">━━━━━━━━━</span><span class="ansi-white-fg">━━━━━━━━━━━</span> <span class="ansi-bold">0s</span> 0us/step
-
-<span class="ansi-bold">11490434/11490434</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">0s</span> 0us/step
-</pre>
-</div>
-</div>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="digit_files/figure-html/cell-4-output-2.png" width="762" height="778" class="figure-img"></p>
-</figure>
-</div>
-</div>
-</div>
-<p>Above are 16 sample images from the dataset. This dataset contains a total of <strong>70,000</strong> images, with <strong>60,000</strong> images used for the training set and <strong>10,000</strong> images for the test set.</p>
-</section>
-<section id="rank-k-approximation-using-svd" class="level1">
-<h1>Rank-k Approximation using SVD</h1>
-<p>In this project, Rank-k Approximation via Singular Value Decomposition (SVD) is used for classification method. This method extracts essential features and reduces dimensionality, improving efficiency. The SVD decomposition is as follows</p>
-<p><span class="math display">\[
-\text{Image Data} = U_k \Sigma_k V_k^T
-\]</span></p>
-<p>This approach extracts essential information from the data, allowing each digit image to be represented in a reduced form. The focus is on the first <strong>k</strong> left singular vectors U, which capture the important features of the images. The k-th approximation is a linear combination of the vectors <span class="math inline">\(u_1, u_2, \dots, u_k\)</span>, representing one element in their span.</p>
-<p><span class="math display">\[
-A_k = \sum_{i=1}^{k} \alpha_i u_i
-\]</span></p>
-<p>The error between test images and the k-approximation is calculated using the Euclidean Norm, which measures the difference or distance between two data. The error is computed as</p>
-<p><span class="math display">\[
-\text{Error} = \| \text{Test Data Set} - \text{k-Approximation} \|_2
-\]</span></p>
-<p>The classification model predicts the digit by finding the smallest error, indicating the closest match between the test image and the k-approximation.</p>
-<p>The goal is to find the <strong>optimal k</strong> that captures most of the data while keeping k as small as possible.</p>
-</section>
-<section id="result" class="level1">
-<h1>Result</h1>
-<div id="2e33b576" class="cell" data-message="false" data-execution_count="5">
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="digit_files/figure-html/cell-6-output-1.png" width="597" height="449" class="figure-img"></p>
-</figure>
-</div>
-</div>
-</div>
-<p>The above plot shows the classification rate for each value of <strong>k</strong>. For most cases, the classification rate is over 90% with k within 15, which demonstrates that dimension reduction was successful while capturing most of the data.</p>
-</section>
-<section id="confusion-matrix" class="level1">
-<h1>Confusion Matrix</h1>
-<div id="5a9d60ba" class="cell" data-message="false" data-execution_count="6">
-<div class="cell-output cell-output-display" data-execution_count="6">
-<div>
-
-
-<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<table id="T_07d12" class="caption-top table table-sm table-striped small" data-quarto-postprocess="true">
 <thead>
 <tr class="header">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">0</th>
-<th data-quarto-table-cell-role="th">1</th>
-<th data-quarto-table-cell-role="th">2</th>
-<th data-quarto-table-cell-role="th">3</th>
-<th data-quarto-table-cell-role="th">4</th>
-<th data-quarto-table-cell-role="th">5</th>
-<th data-quarto-table-cell-role="th">6</th>
-<th data-quarto-table-cell-role="th">7</th>
-<th data-quarto-table-cell-role="th">8</th>
-<th data-quarto-table-cell-role="th">9</th>
+<th class="blank level0" data-quarto-table-cell-role="th">&nbsp;</th>
+<th id="T_07d12_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th">outOfDate</th>
+<th id="T_07d12_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">datasetID</th>
+<th id="T_07d12_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">title</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">0</td>
-<td>969.0</td>
-<td>0.0</td>
-<td>2.0</td>
-<td>0.0</td>
-<td>0.0</td>
-<td>0.0</td>
-<td>6.0</td>
-<td>1.0</td>
-<td>2.0</td>
-<td>0.0</td>
+<td id="T_07d12_level0_row0" class="row_heading level0 row0" data-quarto-table-cell-role="th">0</td>
+<td id="T_07d12_row0_col0" class="data row0 col0">175.116940</td>
+<td id="T_07d12_row0_col1" class="data row0 col1"><a href="https://polarwatch.noaa.gov/erddap/info/SOCCOM_BGC_Argo/index.html" target="_blank">SOCCOM_BGC_Argo</a></td>
+<td id="T_07d12_row0_col2" class="data row0 col2">BioGeoChemical-Argo Float data from SOCCOM and UW-MBARI, preliminary near real-time</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">1</td>
-<td>0.0</td>
-<td>1130.0</td>
-<td>3.0</td>
-<td>1.0</td>
-<td>0.0</td>
-<td>0.0</td>
-<td>1.0</td>
-<td>0.0</td>
-<td>0.0</td>
-<td>0.0</td>
+<td id="T_07d12_level0_row1" class="row_heading level0 row1" data-quarto-table-cell-role="th">1</td>
+<td id="T_07d12_row1_col0" class="data row1 col0">140.850420</td>
+<td id="T_07d12_row1_col1" class="data row1 col1"><a href="https://polarwatch.noaa.gov/erddap/info/nesdisSSH1day/index.html" target="_blank">nesdisSSH1day</a></td>
+<td id="T_07d12_row1_col2" class="data row1 col2">NOAA CoastWatch, Sea Surface Height Anomalies and Geostrophic Currents from Altimetry, Global, 2017-present, EXPERIMENTAL</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">2</td>
-<td>17.0</td>
-<td>3.0</td>
-<td>962.0</td>
-<td>8.0</td>
-<td>4.0</td>
-<td>0.0</td>
-<td>2.0</td>
-<td>14.0</td>
-<td>22.0</td>
-<td>0.0</td>
+<td id="T_07d12_level0_row2" class="row_heading level0 row2" data-quarto-table-cell-role="th">2</td>
+<td id="T_07d12_row2_col0" class="data row2 col0">99.034440</td>
+<td id="T_07d12_row2_col1" class="data row2 col1"><a href="https://polarwatch.noaa.gov/erddap/info/noaacwVIIRSn20icethickNP06Daily4Day_pw/index.html" target="_blank">noaacwVIIRSn20icethickNP06Daily4Day_pw</a></td>
+<td id="T_07d12_row2_col2" class="data row2 col2">Latest Baseline of IceThickness from NOAA-20 VIIRS</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">3</td>
-<td>7.0</td>
-<td>1.0</td>
-<td>4.0</td>
-<td>941.0</td>
-<td>0.0</td>
-<td>23.0</td>
-<td>2.0</td>
-<td>8.0</td>
-<td>18.0</td>
-<td>6.0</td>
+<td id="T_07d12_level0_row3" class="row_heading level0 row3" data-quarto-table-cell-role="th">3</td>
+<td id="T_07d12_row3_col0" class="data row3 col0">89.011970</td>
+<td id="T_07d12_row3_col1" class="data row3 col1"><a href="https://polarwatch.noaa.gov/erddap/info/cwwcNDBCMet/index.html" target="_blank">cwwcNDBCMet</a></td>
+<td id="T_07d12_row3_col2" class="data row3 col2">NDBC Standard Meteorological Buoy Data, 1970-present</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">4</td>
-<td>1.0</td>
-<td>8.0</td>
-<td>1.0</td>
-<td>0.0</td>
-<td>957.0</td>
-<td>0.0</td>
-<td>4.0</td>
-<td>2.0</td>
-<td>2.0</td>
-<td>7.0</td>
+<td id="T_07d12_level0_row4" class="row_heading level0 row4" data-quarto-table-cell-role="th">4</td>
+<td id="T_07d12_row4_col0" class="data row4 col0">55.394520</td>
+<td id="T_07d12_row4_col1" class="data row4 col1"><a href="https://polarwatch.noaa.gov/erddap/info/usnic_weekly_iceberg/index.html" target="_blank">usnic_weekly_iceberg</a></td>
+<td id="T_07d12_row4_col2" class="data row4 col2">Iceberg Locations from USNIC, Antarctic, 2014 to Present, Weekly</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">5</td>
-<td>5.0</td>
-<td>2.0</td>
-<td>1.0</td>
-<td>18.0</td>
-<td>1.0</td>
-<td>837.0</td>
-<td>9.0</td>
-<td>1.0</td>
-<td>14.0</td>
-<td>4.0</td>
+<td id="T_07d12_level0_row5" class="row_heading level0 row5" data-quarto-table-cell-role="th">5</td>
+<td id="T_07d12_row5_col0" class="data row5 col0">37.435020</td>
+<td id="T_07d12_row5_col1" class="data row5 col1"><a href="https://polarwatch.noaa.gov/erddap/info/erdMH1cflh1day/index.html" target="_blank">erdMH1cflh1day</a></td>
+<td id="T_07d12_row5_col2" class="data row5 col2">Fluorescence Line Height, Aqua MODIS, NPP, L3SMI, Global, 4km, Science Quality, 2003- present (1 Day Composite)</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">6</td>
-<td>9.0</td>
-<td>5.0</td>
-<td>0.0</td>
-<td>0.0</td>
-<td>3.0</td>
-<td>9.0</td>
-<td>930.0</td>
-<td>0.0</td>
-<td>2.0</td>
-<td>0.0</td>
+<td id="T_07d12_level0_row6" class="row_heading level0 row6" data-quarto-table-cell-role="th">6</td>
+<td id="T_07d12_row6_col0" class="data row6 col0">37.435020</td>
+<td id="T_07d12_row6_col1" class="data row6 col1"><a href="https://polarwatch.noaa.gov/erddap/info/erdMH1chla1day/index.html" target="_blank">erdMH1chla1day</a></td>
+<td id="T_07d12_row6_col2" class="data row6 col2">Chlorophyll-a, Aqua MODIS, NPP, L3SMI, Global, 4km, Science Quality, 2003-present (1 Day Composite)</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">7</td>
-<td>1.0</td>
-<td>15.0</td>
-<td>16.0</td>
-<td>1.0</td>
-<td>6.0</td>
-<td>0.0</td>
-<td>1.0</td>
-<td>956.0</td>
-<td>3.0</td>
-<td>29.0</td>
+<td id="T_07d12_level0_row7" class="row_heading level0 row7" data-quarto-table-cell-role="th">7</td>
+<td id="T_07d12_row7_col0" class="data row7 col0">37.435020</td>
+<td id="T_07d12_row7_col1" class="data row7 col1"><a href="https://polarwatch.noaa.gov/erddap/info/erdMH1kd4901day/index.html" target="_blank">erdMH1kd4901day</a></td>
+<td id="T_07d12_row7_col2" class="data row7 col2">Diffuse Attenuation K490, Aqua MODIS, NPP, L3SMI, Global, 4km, Science Quality, 2003- present (1 Day Composite)</td>
 </tr>
 <tr class="odd">
-<td data-quarto-table-cell-role="th">8</td>
-<td>7.0</td>
-<td>3.0</td>
-<td>6.0</td>
-<td>16.0</td>
-<td>5.0</td>
-<td>4.0</td>
-<td>3.0</td>
-<td>4.0</td>
-<td>911.0</td>
-<td>15.0</td>
+<td id="T_07d12_level0_row8" class="row_heading level0 row8" data-quarto-table-cell-role="th">8</td>
+<td id="T_07d12_row8_col0" class="data row8 col0">37.435020</td>
+<td id="T_07d12_row8_col1" class="data row8 col1"><a href="https://polarwatch.noaa.gov/erddap/info/erdMH1par01day/index.html" target="_blank">erdMH1par01day</a></td>
+<td id="T_07d12_row8_col2" class="data row8 col2">Photosynthetically Available Radiation, Aqua MODIS, NPP, L3SMI, Global, 4km, Science Quality, 2003-present (1 Day Composite)</td>
 </tr>
 <tr class="even">
-<td data-quarto-table-cell-role="th">9</td>
-<td>8.0</td>
-<td>8.0</td>
-<td>3.0</td>
-<td>6.0</td>
-<td>14.0</td>
-<td>6.0</td>
-<td>0.0</td>
-<td>12.0</td>
-<td>6.0</td>
-<td>946.0</td>
+<td id="T_07d12_level0_row9" class="row_heading level0 row9" data-quarto-table-cell-role="th">9</td>
+<td id="T_07d12_row9_col0" class="data row9 col0">31.137629</td>
+<td id="T_07d12_row9_col1" class="data row9 col1"><a href="https://polarwatch.noaa.gov/erddap/info/daily_seaice_drift_buoy/index.html" target="_blank">daily_seaice_drift_buoy</a></td>
+<td id="T_07d12_row9_col2" class="data row9 col2">X- Experimental Sea ice drift data derived from the buoy data from the IABP, Daily Arctic</td>
+</tr>
+<tr class="odd">
+<td id="T_07d12_level0_row10" class="row_heading level0 row10" data-quarto-table-cell-role="th">10</td>
+<td id="T_07d12_row10_col0" class="data row10 col0">30.975554</td>
+<td id="T_07d12_row10_col1" class="data row10 col1"><a href="https://polarwatch.noaa.gov/erddap/info/iabpv2_buoys/index.html" target="_blank">iabpv2_buoys</a></td>
+<td id="T_07d12_row10_col2" class="data row10 col2">International Arctic Buoy Programme meteorological and oceanographic buoys</td>
+</tr>
+<tr class="even">
+<td id="T_07d12_level0_row11" class="row_heading level0 row11" data-quarto-table-cell-role="th">11</td>
+<td id="T_07d12_row11_col0" class="data row11 col0">15.842506</td>
+<td id="T_07d12_row11_col1" class="data row11 col1"><a href="https://polarwatch.noaa.gov/erddap/info/erdQMwindmday_LonPM180/index.html" target="_blank">erdQMwindmday_LonPM180</a></td>
+<td id="T_07d12_row11_col2" class="data row11 col2">Wind, All Metop ASCAT, 0.25°, Global, Near Real Time, 2013-present (Monthly), Lon+/-180</td>
+</tr>
+<tr class="odd">
+<td id="T_07d12_level0_row12" class="row_heading level0 row12" data-quarto-table-cell-role="th">12</td>
+<td id="T_07d12_row12_col0" class="data row12 col0">13.283894</td>
+<td id="T_07d12_row12_col1" class="data row12 col1"><a href="https://polarwatch.noaa.gov/erddap/info/erdMH1cflhmday/index.html" target="_blank">erdMH1cflhmday</a></td>
+<td id="T_07d12_row12_col2" class="data row12 col2">Fluorescence Line Height, Aqua MODIS, NPP, L3SMI, Global, 4km, Science Quality, 2003- present (Monthly Composite)</td>
+</tr>
+<tr class="even">
+<td id="T_07d12_level0_row13" class="row_heading level0 row13" data-quarto-table-cell-role="th">13</td>
+<td id="T_07d12_row13_col0" class="data row13 col0">13.283894</td>
+<td id="T_07d12_row13_col1" class="data row13 col1"><a href="https://polarwatch.noaa.gov/erddap/info/erdMH1chlamday/index.html" target="_blank">erdMH1chlamday</a></td>
+<td id="T_07d12_row13_col2" class="data row13 col2">Chlorophyll-a, Aqua MODIS, NPP, L3SMI, Global, 4km, Science Quality, 2003-present (Monthly Composite)</td>
+</tr>
+<tr class="odd">
+<td id="T_07d12_level0_row14" class="row_heading level0 row14" data-quarto-table-cell-role="th">14</td>
+<td id="T_07d12_row14_col0" class="data row14 col0">13.283894</td>
+<td id="T_07d12_row14_col1" class="data row14 col1"><a href="https://polarwatch.noaa.gov/erddap/info/erdMH1kd490mday/index.html" target="_blank">erdMH1kd490mday</a></td>
+<td id="T_07d12_row14_col2" class="data row14 col2">Diffuse Attenuation K490, Aqua MODIS, NPP, L3SMI, Global, 4km, Science Quality, 2003- present (Monthly Composite)</td>
+</tr>
+<tr class="even">
+<td id="T_07d12_level0_row15" class="row_heading level0 row15" data-quarto-table-cell-role="th">15</td>
+<td id="T_07d12_row15_col0" class="data row15 col0">13.283894</td>
+<td id="T_07d12_row15_col1" class="data row15 col1"><a href="https://polarwatch.noaa.gov/erddap/info/erdMH1par0mday/index.html" target="_blank">erdMH1par0mday</a></td>
+<td id="T_07d12_row15_col2" class="data row15 col2">Photosynthetically Available Radiation, Aqua MODIS, NPP, L3SMI, Global, 4km, Science Quality, 2003-present (Monthly Composite)</td>
+</tr>
+<tr class="odd">
+<td id="T_07d12_level0_row16" class="row_heading level0 row16" data-quarto-table-cell-role="th">16</td>
+<td id="T_07d12_row16_col0" class="data row16 col0">12.961671</td>
+<td id="T_07d12_row16_col1" class="data row16 col1"><a href="https://polarwatch.noaa.gov/erddap/info/erdMH1cflh8day/index.html" target="_blank">erdMH1cflh8day</a></td>
+<td id="T_07d12_row16_col2" class="data row16 col2">Fluorescence Line Height, Aqua MODIS, NPP, L3SMI, Global, 4km, Science Quality, 2003- present (8 Day Composite)</td>
+</tr>
+<tr class="even">
+<td id="T_07d12_level0_row17" class="row_heading level0 row17" data-quarto-table-cell-role="th">17</td>
+<td id="T_07d12_row17_col0" class="data row17 col0">12.961671</td>
+<td id="T_07d12_row17_col1" class="data row17 col1"><a href="https://polarwatch.noaa.gov/erddap/info/erdMH1chla8day/index.html" target="_blank">erdMH1chla8day</a></td>
+<td id="T_07d12_row17_col2" class="data row17 col2">Chlorophyll-a, Aqua MODIS, NPP, L3SMI, Global, 4km, Science Quality, 2003-present (8 Day Composite)</td>
+</tr>
+<tr class="odd">
+<td id="T_07d12_level0_row18" class="row_heading level0 row18" data-quarto-table-cell-role="th">18</td>
+<td id="T_07d12_row18_col0" class="data row18 col0">12.961671</td>
+<td id="T_07d12_row18_col1" class="data row18 col1"><a href="https://polarwatch.noaa.gov/erddap/info/erdMH1kd4908day/index.html" target="_blank">erdMH1kd4908day</a></td>
+<td id="T_07d12_row18_col2" class="data row18 col2">Diffuse Attenuation K490, Aqua MODIS, NPP, L3SMI, Global, 4km, Science Quality, 2003- present (8 Day Composite)</td>
+</tr>
+<tr class="even">
+<td id="T_07d12_level0_row19" class="row_heading level0 row19" data-quarto-table-cell-role="th">19</td>
+<td id="T_07d12_row19_col0" class="data row19 col0">12.961671</td>
+<td id="T_07d12_row19_col1" class="data row19 col1"><a href="https://polarwatch.noaa.gov/erddap/info/erdMH1par08day/index.html" target="_blank">erdMH1par08day</a></td>
+<td id="T_07d12_row19_col2" class="data row19 col2">Photosynthetically Available Radiation, Aqua MODIS, NPP, L3SMI, Global, 4km, Science Quality, 2003-present (8 Day Composite)</td>
+</tr>
+<tr class="odd">
+<td id="T_07d12_level0_row20" class="row_heading level0 row20" data-quarto-table-cell-role="th">20</td>
+<td id="T_07d12_row20_col0" class="data row20 col0">6.033570</td>
+<td id="T_07d12_row20_col1" class="data row20 col1"><a href="https://polarwatch.noaa.gov/erddap/info/noaacwVIIRSn20iceconcNP06Daily/index.html" target="_blank">noaacwVIIRSn20iceconcNP06Daily</a></td>
+<td id="T_07d12_row20_col2" class="data row20 col2">Ice Concentration, NOAA-20 VIIRS, Near Real-Time, Polar Stereographic (North), Daily</td>
 </tr>
 </tbody>
 </table>
-
 </div>
 </div>
-</div>
-<p>The figure above shows the <strong>confusion matrix</strong> when <strong>k = 6</strong>, comparing the actual labels with the predicted labels. The distribution of results indicates that most predictions were correct.</p>
-<p>Modified: Oct 18, 2024.</p>
 
 
-</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

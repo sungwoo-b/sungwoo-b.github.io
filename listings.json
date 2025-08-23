@@ -2,10 +2,11 @@
   {
     "listing": "/note.html",
     "items": [
-      "/notes/outofdate.html",
-      "/notes/annotation.html",
-      "/notes/python.html",
-      "/notes/git.html"
+      "/note/git.html",
+      "/note/outofdate.html",
+      "/note/venv.html",
+      "/note/annotation.html",
+      "/note/python.html"
     ]
   },
   {
@@ -15,10 +16,10 @@
   {
     "listing": "/project.html",
     "items": [
-      "/projects/hp.html",
-      "/projects/seaice.html",
-      "/projects/stuffplus.html",
-      "/projects/digit.html"
+      "/project/hp.html",
+      "/project/seaice.html",
+      "/project/stuffplus.html",
+      "/project/digit.html"
     ]
   }
 ]

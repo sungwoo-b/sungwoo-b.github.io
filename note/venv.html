@@ -6,11 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Sung Woo Bak &amp; Adam Hetherwick">
-<meta name="dcterms.date" content="2024-06-10">
-<meta name="description" content="Implementation of a metric for evaluating pitch performance, focusing on analyzing Whiff%">
+<meta name="description" content="Quick setup of a virtual environment for Detectron2 projects">
 
-<title>Stuff+ – Sungwoo</title>
+<title>Virtual Environment Setup Guide – Sungwoo</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,10 +21,45 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../site_libs/quarto-nav/headroom.min.js"></script>
 <script src="../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
@@ -42,7 +75,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-ea385d0e468b0dd5ea5bf0780b1290d9.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-4df3b0c4fafa0f66eafcead0ee6cff11.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-aecc83f6f3f98d492d37fd48a15aef73.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -70,39 +103,7 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
 
-<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
-
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 <link rel="stylesheet" href="../styles.css">
 </head>
@@ -160,47 +161,39 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#data" id="toc-data" class="nav-link active" data-scroll-target="#data">Data</a></li>
-  <li><a href="#distributions-of-pitch-related-variables" id="toc-distributions-of-pitch-related-variables" class="nav-link" data-scroll-target="#distributions-of-pitch-related-variables">Distributions of Pitch-Related Variables</a></li>
-  <li><a href="#method" id="toc-method" class="nav-link" data-scroll-target="#method">Method</a></li>
-  <li><a href="#stuff" id="toc-stuff" class="nav-link" data-scroll-target="#stuff">Stuff+</a></li>
+  <li><a href="#virtual-environment-setup-guide-for-detectron2" id="toc-virtual-environment-setup-guide-for-detectron2" class="nav-link active" data-scroll-target="#virtual-environment-setup-guide-for-detectron2">Virtual Environment Setup Guide for Detectron2</a>
+  <ul class="collapse">
+  <li><a href="#detectron2-requirments" id="toc-detectron2-requirments" class="nav-link" data-scroll-target="#detectron2-requirments">Detectron2 Requirments</a></li>
+  <li><a href="#create-virtual-environment" id="toc-create-virtual-environment" class="nav-link" data-scroll-target="#create-virtual-environment">Create Virtual Environment</a></li>
+  <li><a href="#activate-virtual-environment" id="toc-activate-virtual-environment" class="nav-link" data-scroll-target="#activate-virtual-environment">Activate Virtual Environment</a></li>
+  <li><a href="#connect-to-vs-code" id="toc-connect-to-vs-code" class="nav-link" data-scroll-target="#connect-to-vs-code">Connect to VS Code</a></li>
+  <li><a href="#install-detectron2" id="toc-install-detectron2" class="nav-link" data-scroll-target="#install-detectron2">Install Detectron2</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
-<main class="content page-columns page-full" id="quarto-document-content">
+<main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Stuff+</h1>
-<p class="subtitle lead">MLB Pitcher Evaluation by Stabilized Metric</p>
+<h1 class="title">Virtual Environment Setup Guide</h1>
+<p class="subtitle lead">For Detectron2</p>
   <div class="quarto-categories">
-    <div class="quarto-category">Statistics</div>
+    <div class="quarto-category">Python</div>
   </div>
   </div>
 
 <div>
   <div class="description">
-    Implementation of a metric for evaluating pitch performance, focusing on analyzing Whiff%
+    Quick setup of a virtual environment for Detectron2 projects
   </div>
 </div>
 
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>Sung Woo Bak &amp; Adam Hetherwick </p>
-          </div>
-  </div>
     
-    <div>
-    <div class="quarto-title-meta-heading">Published</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">June 10, 2024</p>
-    </div>
-  </div>
   
     
   </div>
@@ -210,343 +203,46 @@ window.Quarto = {
 </header>
 
 
-<p>In evaluating a pitcher’s performance, various metrics such as ERA, WHIP, FIP, and SIERA are commonly used. However, these metrics can introduce noise and become less reliable, especially when the sample size is small. This project aims to define a stabilized metric that offers a more consistent and reliable method of assessing a pitcher’s performance.</p>
-<p><strong>Stuff+</strong> is a metric that focuses on evaluating each pitch by considering its physical characteristics such as pitch location, speed, spin rate, and more. Unlike other metrics, which provide an overall performance, Stuff+ offers insights into the effectiveness of each individual pitch. This metric was conceptualized by Max Bay and Eno Sarris, and many people have created and tested their own Stuff+ models.</p>
-<p>For more details about Stuff+, refer to the link provided below.</p>
+<section id="virtual-environment-setup-guide-for-detectron2" class="level1">
+<h1>Virtual Environment Setup Guide for Detectron2</h1>
+<section id="detectron2-requirments" class="level3">
+<h3 class="anchored" data-anchor-id="detectron2-requirments">Detectron2 Requirments</h3>
 <ul>
-<li>https://library.fangraphs.com/pitching/stuff-location-and-pitching-primer/</li>
+<li><strong>Python 3.12.X</strong></li>
+<li><strong>Torch/TorchVision</strong></li>
+<li><strong>CUDA 12</strong></li>
 </ul>
-<section id="data" class="level3">
-<h3 class="anchored" data-anchor-id="data">Data</h3>
-<p>The data used in this project is from <strong>Statcast</strong>, accessed via pybaseball, and includes every pitch from the 2023 MLB season.</p>
-<div id="bbc563eb" class="cell" data-message="false" data-results="hide" data-execution_count="2">
-<div class="cell-output cell-output-display" data-execution_count="2">
-<div>
-
-
-<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
-<thead>
-<tr class="header">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">player_name</th>
-<th data-quarto-table-cell-role="th">pitch_name</th>
-<th data-quarto-table-cell-role="th">description</th>
-<th data-quarto-table-cell-role="th">release_speed</th>
-<th data-quarto-table-cell-role="th">release_pos_x</th>
-<th data-quarto-table-cell-role="th">release_pos_z</th>
-<th data-quarto-table-cell-role="th">p_throws</th>
-<th data-quarto-table-cell-role="th">pfx_x</th>
-<th data-quarto-table-cell-role="th">pfx_z</th>
-<th data-quarto-table-cell-role="th">plate_x</th>
-<th data-quarto-table-cell-role="th">...</th>
-<th data-quarto-table-cell-role="th">az</th>
-<th data-quarto-table-cell-role="th">effective_speed</th>
-<th data-quarto-table-cell-role="th">release_spin_rate</th>
-<th data-quarto-table-cell-role="th">release_extension</th>
-<th data-quarto-table-cell-role="th">release_pos_y</th>
-<th data-quarto-table-cell-role="th">spin_axis</th>
-<th data-quarto-table-cell-role="th">delta_run_exp</th>
-<th data-quarto-table-cell-role="th">pitch_name_label</th>
-<th data-quarto-table-cell-role="th">description_label</th>
-<th data-quarto-table-cell-role="th">cs</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">0</td>
-<td>Martinez, Nick</td>
-<td>CU</td>
-<td>F</td>
-<td>79.5</td>
-<td>-1.79</td>
-<td>6.29</td>
-<td>1</td>
-<td>0.23</td>
-<td>-1.31</td>
-<td>0.14</td>
-<td>...</td>
-<td>-44.94</td>
-<td>78.8</td>
-<td>2583</td>
-<td>6.0</td>
-<td>54.49</td>
-<td>18</td>
-<td>0.000</td>
-<td>1</td>
-<td>4</td>
-<td>0</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">1</td>
-<td>Helsley, Ryan</td>
-<td>FF</td>
-<td>CS</td>
-<td>100.2</td>
-<td>-0.35</td>
-<td>5.99</td>
-<td>1</td>
-<td>-0.08</td>
-<td>1.42</td>
-<td>-0.28</td>
-<td>...</td>
-<td>-10.08</td>
-<td>100.9</td>
-<td>2658</td>
-<td>6.5</td>
-<td>53.98</td>
-<td>200</td>
-<td>-0.054</td>
-<td>3</td>
-<td>3</td>
-<td>1</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">2</td>
-<td>Alvarado, José</td>
-<td>FS</td>
-<td>CS</td>
-<td>98.6</td>
-<td>1.38</td>
-<td>6.64</td>
-<td>0</td>
-<td>0.97</td>
-<td>1.31</td>
-<td>-0.07</td>
-<td>...</td>
-<td>-11.74</td>
-<td>99.6</td>
-<td>2127</td>
-<td>6.8</td>
-<td>53.67</td>
-<td>154</td>
-<td>-0.052</td>
-<td>4</td>
-<td>3</td>
-<td>1</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">3</td>
-<td>May, Trevor</td>
-<td>FF</td>
-<td>F</td>
-<td>95.6</td>
-<td>-1.15</td>
-<td>5.81</td>
-<td>1</td>
-<td>-0.37</td>
-<td>1.28</td>
-<td>0.72</td>
-<td>...</td>
-<td>-14.57</td>
-<td>96.8</td>
-<td>2146</td>
-<td>7.1</td>
-<td>53.44</td>
-<td>211</td>
-<td>-0.047</td>
-<td>3</td>
-<td>4</td>
-<td>0</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">4</td>
-<td>Strider, Spencer</td>
-<td>FF</td>
-<td>FT</td>
-<td>98.0</td>
-<td>-2.07</td>
-<td>5.93</td>
-<td>1</td>
-<td>-0.38</td>
-<td>1.39</td>
-<td>-0.33</td>
-<td>...</td>
-<td>-12.59</td>
-<td>99.2</td>
-<td>2293</td>
-<td>6.9</td>
-<td>53.60</td>
-<td>210</td>
-<td>-0.042</td>
-<td>3</td>
-<td>6</td>
-<td>0</td>
-</tr>
-</tbody>
-</table>
-
-<p>5 rows × 26 columns</p>
-</div>
-</div>
-</div>
-<p>Details about the variables can be found at the link below.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python custom-code code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>pip3 install torch torchvision <span class="op">--</span>index<span class="op">-</span>url https:<span class="op">//</span>download.pytorch.org<span class="op">/</span>whl<span class="op">/</span>cu129</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="create-virtual-environment" class="level3">
+<h3 class="anchored" data-anchor-id="create-virtual-environment">Create Virtual Environment</h3>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash custom-code code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">py</span> <span class="at">-3.12</span> <span class="at">-m</span> venv env_name</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="activate-virtual-environment" class="level3">
+<h3 class="anchored" data-anchor-id="activate-virtual-environment">Activate Virtual Environment</h3>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash custom-code code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">env_name\Scripts\activate</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>If you see <strong>(env_name)</strong> in your prompt, the activation is successful.</p>
+</section>
+<section id="connect-to-vs-code" class="level3">
+<h3 class="anchored" data-anchor-id="connect-to-vs-code">Connect to VS Code</h3>
 <ul>
-<li>https://baseballsavant.mlb.com/csv-docs</li>
+<li>Press Ctrl + Shift + P → type Python: Select Interpreter</li>
+<li>Choose: env_name/Scripts/python.exe</li>
 </ul>
 </section>
-<section id="distributions-of-pitch-related-variables" class="level3 page-columns page-full">
-<h3 class="anchored" data-anchor-id="distributions-of-pitch-related-variables">Distributions of Pitch-Related Variables</h3>
-<div id="7d96c911" class="cell page-columns page-full" data-message="false" data-execution_count="3">
-<div class="cell-output cell-output-display page-columns page-full">
-<div class="page-columns page-full">
-<figure class="figure page-columns page-full">
-<p class="page-columns page-full"><img src="stuffplus_files/figure-html/cell-4-output-1.png" width="854" height="854" class="figure-img column-body-outset"></p>
-</figure>
-</div>
-</div>
-</div>
-<p>The plots above provide an overview of the data. It allows a better understanding of the data’s structure and distribution.</p>
+<section id="install-detectron2" class="level3">
+<h3 class="anchored" data-anchor-id="install-detectron2">Install Detectron2</h3>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python custom-code code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>pip install <span class="op">--</span>no<span class="op">-</span>build<span class="op">-</span>isolation git<span class="op">+</span>https:<span class="op">//</span>github.com<span class="op">/</span>facebookresearch<span class="op">/</span>detectron2.git</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Check</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> torch, detectron2</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"torch version:"</span>, torch.__version__)</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"CUDA available:"</span>, torch.cuda.is_available())</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"torch CUDA version:"</span>, torch.version.cuda)</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"cuDNN version:"</span>, torch.backends.cudnn.version())</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"detectron2:"</span>, detectron2.__version__)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+
 </section>
-<section id="method" class="level3 page-columns page-full">
-<h3 class="anchored" data-anchor-id="method">Method</h3>
-<p>To define Stuff+, the metrics, such as spin rate, horizontal and vertical break, and other pitch characteristics were considered as covariates and CS% (Called Strike Percentage), CSW% (Called Strike + Whiff Percentage), strikeout percentage (K%), and changes in run expectancy as the corresponding response indicators that represent the performance of the pitches. However, after evaluating the consistency of these metrics, Whiff% was chosen as the primary indicator.</p>
-<p>In this project, Stuff+ was defined using the following formula.</p>
-<p><span class="math display">\[
-\text{Stuff+} = \frac{\text{Predicted Whiff\%}}{\text{mean League predicted Whiff\%}} \cdot 100
-\]</span></p>
-<p>and Whiff% is computed as follows</p>
-<p><span class="math display">\[
-\text{Whiff\%} = \frac{\text{Missed Swings (swinging strike, swinging strike blocked, missed bunt)}}{\text{Total Swing Attempts}}
-\]</span></p>
-<p>This Predicted Whiff% is used to ensure stable outputs because it relies on probability. This approach is based on the methodologies referenced from A. Jon (2023), Cameron Grove (2021), and RG Pitching (2023).</p>
-<p>To find the Predicted Whiff%, Logistic Regression, XGBoost, and Random Forest were considered. Although algorithms like XGBoost were more robust compared to Random Forest, Logistic Regression provided the most consistent and reliable results. Therefore, Logistic Regression was used to predict Whiff% in this project.</p>
-<section id="correlation-matrix" class="level4 page-columns page-full">
-<h4 class="anchored" data-anchor-id="correlation-matrix">Correlation Matrix</h4>
-<div id="1c676654" class="cell page-columns page-full" data-message="false" data-execution_count="4">
-<div class="cell-output cell-output-display page-columns page-full">
-<div class="page-columns page-full">
-<figure class="figure page-columns page-full">
-<p class="page-columns page-full"><img src="stuffplus_files/figure-html/cell-5-output-1.png" width="801" height="834" class="figure-img column-body-outset"></p>
-</figure>
-</div>
-</div>
-</div>
-<p>The plot above shows the correlation matrix, with the last row and column representing Whiff%.</p>
-</section>
-<section id="pitch-location-vs-cs-and-whiff" class="level4 page-columns page-full">
-<h4 class="anchored" data-anchor-id="pitch-location-vs-cs-and-whiff">Pitch Location vs CS% and Whiff%</h4>
-<div id="b3979228" class="cell page-columns page-full" data-message="false" data-execution_count="5">
-<div class="cell-output cell-output-display page-columns page-full">
-<div class="page-columns page-full">
-<figure class="figure page-columns page-full">
-<p class="page-columns page-full"><img src="stuffplus_files/figure-html/cell-6-output-1.png" width="810" height="417" class="figure-img column-body-outset"></p>
-</figure>
-</div>
-</div>
-</div>
-<p>The plots above show CS% (Called Strike Percentage) and Whiff% based on different pitch locations.</p>
-</section>
-</section>
-<section id="stuff" class="level3 page-columns page-full">
-<h3 class="anchored" data-anchor-id="stuff">Stuff+</h3>
-<div id="63fea20f" class="cell page-columns page-full" data-message="false" data-execution_count="8">
-<div class="cell-output cell-output-display page-columns page-full">
-<div class="page-columns page-full">
-<figure class="figure page-columns page-full">
-<p class="page-columns page-full"><img src="stuffplus_files/figure-html/cell-9-output-1.png" width="862" height="758" class="figure-img column-body-outset"></p>
-</figure>
-</div>
-</div>
-</div>
-<p>The plot above displays the standardized Stuff+ for each pitch type. Each Stuff+ is centered around 100.</p>
-<div id="fc1fa03c" class="cell" data-message="false" data-execution_count="9">
-<div class="cell-output cell-output-display" data-execution_count="9">
-<div>
-
-
-<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
-<thead>
-<tr class="header">
-<th data-quarto-table-cell-role="th">Pitcher</th>
-<th data-quarto-table-cell-role="th">Abbott, Andrew</th>
-<th data-quarto-table-cell-role="th">Corbin, Patrick</th>
-<th data-quarto-table-cell-role="th">Scherzer, Max</th>
-<th data-quarto-table-cell-role="th">Darvish, Yu</th>
-<th data-quarto-table-cell-role="th">Sears, JP</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">FF</td>
-<td>106</td>
-<td>66</td>
-<td>108</td>
-<td>120</td>
-<td>110</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">CH</td>
-<td>85</td>
-<td>129</td>
-<td>90</td>
-<td>&lt;NA&gt;</td>
-<td>79</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">CU</td>
-<td>106</td>
-<td>&lt;NA&gt;</td>
-<td>106</td>
-<td>101</td>
-<td>118</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">FC</td>
-<td>&lt;NA&gt;</td>
-<td>&lt;NA&gt;</td>
-<td>118</td>
-<td>103</td>
-<td>&lt;NA&gt;</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">KC</td>
-<td>&lt;NA&gt;</td>
-<td>&lt;NA&gt;</td>
-<td>&lt;NA&gt;</td>
-<td>86</td>
-<td>&lt;NA&gt;</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">FS</td>
-<td>113</td>
-<td>102</td>
-<td>&lt;NA&gt;</td>
-<td>102</td>
-<td>104</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">SL</td>
-<td>&lt;NA&gt;</td>
-<td>131</td>
-<td>113</td>
-<td>91</td>
-<td>85</td>
-</tr>
-<tr class="even">
-<td data-quarto-table-cell-role="th">SF</td>
-<td>&lt;NA&gt;</td>
-<td>&lt;NA&gt;</td>
-<td>&lt;NA&gt;</td>
-<td>96</td>
-<td>&lt;NA&gt;</td>
-</tr>
-<tr class="odd">
-<td data-quarto-table-cell-role="th">SW</td>
-<td>110</td>
-<td>&lt;NA&gt;</td>
-<td>&lt;NA&gt;</td>
-<td>87</td>
-<td>76</td>
-</tr>
-</tbody>
-</table>
-
-</div>
-</div>
-</div>
-<p>The table above shows the Stuff+ for each pitch type by the selected pitchers. This provides a comparative analysis of how each pitcher’s pitch types perform according to their Stuff+ ratings.</p>
-
-
 </section>
 
 </main> <!-- /main -->

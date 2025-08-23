@@ -6,12 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Sung Woo Bak">
-<meta name="dcterms.date" content="2024-10-08">
-<meta name="keywords" content="Image, Labeling, Annotation, CVAT">
-<meta name="description" content="Essential tips and best practices for efficient image labeling for training object detector">
+<meta name="keywords" content="Git, GitHub, SSH">
+<meta name="description" content="A quick reference to essential Git commands and workflows">
 
-<title>Image Labeling – Sungwoo</title>
+<title>Git Cheat Sheet – Sungwoo</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,6 +21,41 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -43,7 +76,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-ea385d0e468b0dd5ea5bf0780b1290d9.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-4df3b0c4fafa0f66eafcead0ee6cff11.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-aecc83f6f3f98d492d37fd48a15aef73.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -124,44 +157,45 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#git" id="toc-git" class="nav-link active" data-scroll-target="#git">Git</a>
+  <ul class="collapse">
+  <li><a href="#setup" id="toc-setup" class="nav-link" data-scroll-target="#setup">1. Setup</a></li>
+  <li><a href="#basic-git-commands" id="toc-basic-git-commands" class="nav-link" data-scroll-target="#basic-git-commands">2. Basic Git Commands</a></li>
+  <li><a href="#branch" id="toc-branch" class="nav-link" data-scroll-target="#branch">3. Branch</a></li>
+  <li><a href="#remote-repository-commands" id="toc-remote-repository-commands" class="nav-link" data-scroll-target="#remote-repository-commands">4. Remote Repository Commands</a></li>
+  <li><a href="#example-workflow" id="toc-example-workflow" class="nav-link" data-scroll-target="#example-workflow">Example Workflow</a></li>
+  </ul></li>
+  <li><a href="#ssh" id="toc-ssh" class="nav-link" data-scroll-target="#ssh">SSH</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Image Labeling</h1>
-<p class="subtitle lead">Tips for Labeling Images</p>
+<h1 class="title">Git Cheat Sheet</h1>
+<p class="subtitle lead">Git Commands &amp; GitHub Workflow</p>
   <div class="quarto-categories">
-    <div class="quarto-category">Machine Learning</div>
-    <div class="quarto-category">Computer Vision</div>
+    <div class="quarto-category">Git</div>
   </div>
   </div>
 
 <div>
   <div class="description">
-    Essential tips and best practices for efficient image labeling for training object detector
+    A quick reference to essential Git commands and workflows
   </div>
 </div>
 
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>Sung Woo Bak </p>
-          </div>
-  </div>
     
-    <div>
-    <div class="quarto-title-meta-heading">Published</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">October 8, 2024</p>
-    </div>
-  </div>
   
     
   </div>
@@ -170,15 +204,91 @@ ul.task-list li input[type="checkbox"] {
 <div>
   <div class="keywords">
     <div class="block-title">Keywords</div>
-    <p>Image, Labeling, Annotation, CVAT</p>
+    <p>Git, GitHub, SSH</p>
   </div>
 </div>
 
 </header>
 
 
+<p>Referenced from <a href="https://education.github.com/git-cheat-sheet-education.pdf">GitHub Education</a></p>
+<section id="git" class="level1">
+<h1>Git</h1>
+<section id="setup" class="level3">
+<h3 class="anchored" data-anchor-id="setup">1. Setup</h3>
+<pre class="custom-code"><code>git config --global user.name "Firstname Lastname"</code></pre>
+<pre class="custom-code"><code>git config --global user.email "email address"</code></pre>
+</section>
+<section id="basic-git-commands" class="level3">
+<h3 class="anchored" data-anchor-id="basic-git-commands">2. Basic Git Commands</h3>
+<p><strong>Initialize a new Git repository</strong></p>
+<pre class="custom-code"><code>git init</code></pre>
+<p><strong>Retrieve an entire repository from a hosted location via URL</strong></p>
+<pre class="custom-code"><code>git clone url
+# Example
+git clone https://github.com/sungwoo-b/repository.git</code></pre>
+<p><strong>Show modified files in working directory, staged for your next commit</strong></p>
+<pre class="custom-code"><code>git status</code></pre>
+<p><strong>Add a file as it looks now to your next commit (stage)</strong></p>
+<pre class="custom-code"><code>git add file_name
+# Example
+git add file.txt
+# To add all files
+git add .</code></pre>
+<p><strong>Unstage a file while retaining the changes in working directory</strong></p>
+<pre class="custom-code"><code>git reset file_name</code></pre>
+<p><strong>Save the changes to the repository with a descriptive message</strong></p>
+<pre class="custom-code"><code>git commit -m "commit message"</code></pre>
+<p><strong>Upload the changes to the remote repository</strong></p>
+<pre class="custom-code"><code>git push alias branch
+# Example
+git push origin main</code></pre>
+<p><strong>Download the latest changes and merge them into your local branch</strong></p>
+<pre class="custom-code"><code>git pull</code></pre>
+</section>
+<section id="branch" class="level3">
+<h3 class="anchored" data-anchor-id="branch">3. Branch</h3>
+<p><strong>Display a list of branches</strong></p>
+<pre class="custom-code"><code>git branch</code></pre>
+<p><strong>Create a new branch at the current commit</strong></p>
+<pre class="custom-code"><code>git branch branch_name</code></pre>
+<p><strong>Change the current working branch</strong></p>
+<pre class="custom-code"><code>git checkout branch
+# Example
+git checkout another_branch</code></pre>
+<p><strong>Show all commits in the current branch’s history</strong></p>
+<pre class="custom-code"><code>git log</code></pre>
+</section>
+<section id="remote-repository-commands" class="level3">
+<h3 class="anchored" data-anchor-id="remote-repository-commands">4. Remote Repository Commands</h3>
+<p><strong>Adds a remote repository</strong></p>
+<pre class="custom-code"><code>git remote add &lt;name&gt; &lt;url&gt;</code></pre>
+<p><strong>Shows the remote repository URLs</strong></p>
+<pre class="custom-code"><code>git remote -v</code></pre>
+</section>
+<section id="example-workflow" class="level3">
+<h3 class="anchored" data-anchor-id="example-workflow">Example Workflow</h3>
+<pre class="custom-code"><code>cd working_dir
+git pull
+git status
+git add .
+git commit -m "commit message"
+git push origin main</code></pre>
+</section>
+</section>
+<section id="ssh" class="level1">
+<h1>SSH</h1>
+<p>Referenced from <a href="https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent">GitHub Docs</a></p>
+<p><strong>1. Generate SSH key</strong></p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode bash custom-code code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh-keygen</span> <span class="at">-t</span> ed25519-sk <span class="at">-C</span> <span class="st">"your_email@example.com"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>2. Add Passphrase</strong></p>
+<p><strong>3. Copy Public key</strong></p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode bash custom-code code-with-copy"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="ex">clip</span> <span class="op">&lt;</span> ~/.ssh/id_ed25519.pub</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>4. Add to GitHub</strong></p>
+<p>Settings → Add new SSH key</p>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
