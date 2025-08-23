@@ -212,15 +212,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><strong>Torch/TorchVision</strong></li>
 <li><strong>CUDA 12</strong></li>
 </ul>
-<div class="sourceCode" id="cb1"><pre class="sourceCode python custom-code code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>pip3 install torch torchvision <span class="op">--</span>index<span class="op">-</span>url https:<span class="op">//</span>download.pytorch.org<span class="op">/</span>whl<span class="op">/</span>cu129</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>pip3 install torch torchvision <span class="op">--</span>index<span class="op">-</span>url https:<span class="op">//</span>download.pytorch.org<span class="op">/</span>whl<span class="op">/</span>cu129</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="create-virtual-environment" class="level3">
 <h3 class="anchored" data-anchor-id="create-virtual-environment">Create Virtual Environment</h3>
-<div class="sourceCode" id="cb2"><pre class="sourceCode bash custom-code code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">py</span> <span class="at">-3.12</span> <span class="at">-m</span> venv env_name</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">py</span> <span class="at">-3.12</span> <span class="at">-m</span> venv env_name</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="activate-virtual-environment" class="level3">
 <h3 class="anchored" data-anchor-id="activate-virtual-environment">Activate Virtual Environment</h3>
-<div class="sourceCode" id="cb3"><pre class="sourceCode bash custom-code code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">env_name\Scripts\activate</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">env_name\Scripts\activate</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>If you see <strong>(env_name)</strong> in your prompt, the activation is successful.</p>
 </section>
 <section id="connect-to-vs-code" class="level3">
@@ -232,7 +232,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="install-detectron2" class="level3">
 <h3 class="anchored" data-anchor-id="install-detectron2">Install Detectron2</h3>
-<div class="sourceCode" id="cb4"><pre class="sourceCode python custom-code code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>pip install <span class="op">--</span>no<span class="op">-</span>build<span class="op">-</span>isolation git<span class="op">+</span>https:<span class="op">//</span>github.com<span class="op">/</span>facebookresearch<span class="op">/</span>detectron2.git</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>pip install <span class="op">--</span>no<span class="op">-</span>build<span class="op">-</span>isolation git<span class="op">+</span>https:<span class="op">//</span>github.com<span class="op">/</span>facebookresearch<span class="op">/</span>detectron2.git</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Check</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> torch, detectron2</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"torch version:"</span>, torch.__version__)</span>
