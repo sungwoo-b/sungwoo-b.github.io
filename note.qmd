@@ -2,7 +2,7 @@
 title: "Note"
 listing:
   contents:
-    - notes
+    - note
   categories: true
   sort:
     - "date desc"

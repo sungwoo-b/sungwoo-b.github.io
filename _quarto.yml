@@ -21,3 +21,8 @@ format:
     theme: cosmo
     css: styles.css
     toc: true
+
+    code-tools: false
+    code-copy: true       # Copy
+    code-block-bg: true   # Background
+    #code-block-border-left: "#ccc"

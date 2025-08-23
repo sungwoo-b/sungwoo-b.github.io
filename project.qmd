@@ -2,7 +2,7 @@
 title: "Project"
 listing:
   contents:
-    - projects
+    - project
   categories: true
   sort:
     - "date desc"

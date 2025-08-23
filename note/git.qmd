@@ -1,0 +1,150 @@
+---
+title: "Git Cheat Sheet"
+subtitle: "Git Commands & GitHub Workflow"
+description: "A quick reference to essential Git commands and workflows"
+categories: ["Git"]
+tags: ["Git", "GitHub","SSH"]
+draft: false
+image: "../img/git.png"
+layout: "article"
+toc: true
+slug: "git-cheatsheet"
+keywords: ["Git", "GitHub", "SSH"]
+---
+
+Referenced from [GitHub Education](https://education.github.com/git-cheat-sheet-education.pdf)
+
+# Git
+
+### 1. Setup
+
+```{.custom-code}
+git config --global user.name "Firstname Lastname"
+```
+
+```{.custom-code}
+git config --global user.email "email address"
+```
+
+### 2. Basic Git Commands
+
+**Initialize a new Git repository**
+```{.custom-code}
+git init
+```
+
+**Retrieve an entire repository from a hosted location via URL**
+```{.custom-code}
+git clone url
+# Example
+git clone https://github.com/sungwoo-b/repository.git
+```
+
+**Show modified files in working directory, staged for your next commit**
+```{.custom-code}
+git status
+```
+
+**Add a file as it looks now to your next commit (stage)**
+```{.custom-code}
+git add file_name
+# Example
+git add file.txt
+# To add all files
+git add .
+```
+
+**Unstage a file while retaining the changes in working directory**
+```{.custom-code}
+git reset file_name
+```
+
+**Save the changes to the repository with a descriptive message**
+```{.custom-code}
+git commit -m "commit message"
+```
+
+**Upload the changes to the remote repository**
+```{.custom-code}
+git push alias branch
+# Example
+git push origin main
+```
+
+**Download the latest changes and merge them into your local branch**
+```{.custom-code}
+git pull
+```
+
+### 3. Branch
+**Display a list of branches**
+```{.custom-code}
+git branch
+```
+
+**Create a new branch at the current commit**
+```{.custom-code}
+git branch branch_name
+```
+
+**Change the current working branch**
+```{.custom-code}
+git checkout branch
+# Example
+git checkout another_branch
+```
+
+**Show all commits in the current branch’s history**
+```{.custom-code}
+git log
+```
+
+
+### 4. Remote Repository Commands
+**Adds a remote repository**
+```{.custom-code}
+git remote add <name> <url>
+```
+
+**Shows the remote repository URLs**
+```{.custom-code}
+git remote -v
+```
+
+### Example Workflow
+
+```{.custom-code}
+cd working_dir
+git pull
+git status
+git add .
+git commit -m "commit message"
+git push origin main
+```
+
+---
+---
+
+# SSH
+
+Referenced from [GitHub Docs](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent)
+
+**1. Generate SSH key**
+
+```{.bash .custom-code}
+ssh-keygen -t ed25519-sk -C "your_email@example.com"
+```
+
+**2. Add Passphrase**
+
+**3. Copy Public key**
+
+```{.bash .custom-code}
+clip < ~/.ssh/id_ed25519.pub
+```
+
+**4. Add to GitHub**
+
+Settings → Add new SSH key
+
+

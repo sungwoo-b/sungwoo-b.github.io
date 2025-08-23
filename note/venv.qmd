@@ -1,0 +1,52 @@
+---
+title: "Virtual Environment Setup Guide"
+subtitle: "For Detectron2"
+description: "Quick setup of a virtual environment for Detectron2 projects"
+categories: ["Python"]
+draft: false
+image: "../img/barplot.png"
+layout: "article"
+toc: true
+---
+
+# Virtual Environment Setup Guide for Detectron2
+
+### Detectron2 Requirments
+
+- **Python 3.12.X**
+- **Torch/TorchVision**
+- **CUDA 12**
+```{.python .custom-code}
+!pip3 install torch torchvision --index-url https://download.pytorch.org/whl/cu129
+```
+
+### Create Virtual Environment
+```{.bash .custom-code}
+py -3.12 -m venv env_name
+```
+
+### Activate Virtual Environment
+```{.bash .custom-code}
+env_name\Scripts\activate
+```
+If you see **(env_name)** in your prompt, the activation is successful.
+
+### Connect to VS Code
+- Press Ctrl + Shift + P → type Python: Select Interpreter
+- Choose: env_name/Scripts/python.exe
+
+
+### Install Detectron2
+```{.python .custom-code}
+!pip install --no-build-isolation git+https://github.com/facebookresearch/detectron2.git
+```
+
+```{.python}
+# Check
+import torch, detectron2
+print("torch version:", torch.__version__)
+print("CUDA available:", torch.cuda.is_available())
+print("torch CUDA version:", torch.version.cuda)
+print("cuDNN version:", torch.backends.cudnn.version())
+print("detectron2:", detectron2.__version__)
+```
