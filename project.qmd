@@ -9,6 +9,6 @@ listing:
     - "title asc"
   sort-ui: [title, date]
   filter-ui: [title, date]
+  image-height: 160px
 ---
 
-Here, I'll be posting brief overviews of the projects I've worked on.

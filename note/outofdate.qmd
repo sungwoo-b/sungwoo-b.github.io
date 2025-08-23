@@ -1,7 +1,6 @@
 ---
 title: "Out of Date Data"
 draft: false
-image: "../img/barplot.png"
 layout: "blog"
 ---
 

@@ -1,14 +1,17 @@
 ---
 title: "Note"
+resources:
+  - img/note.png
 listing:
   contents:
     - note
+  type: grid
   categories: true
   sort:
     - "date desc"
     - "title asc"
   sort-ui: [title, date]
   filter-ui: [title, date]
+  image-height: 160px
+  image-placeholder: "../img/note.png"
 ---
-
-Here, I'll be posting personal notes.

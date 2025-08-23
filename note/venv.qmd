@@ -4,7 +4,6 @@ subtitle: "For Detectron2"
 description: "Quick setup of a virtual environment for Detectron2 projects"
 categories: ["Python"]
 draft: false
-image: "../img/barplot.png"
 layout: "article"
 toc: true
 ---
@@ -16,17 +15,17 @@ toc: true
 - **Python 3.12.X**
 - **Torch/TorchVision**
 - **CUDA 12**
-```{.python .custom-code}
+```{.python}
 !pip3 install torch torchvision --index-url https://download.pytorch.org/whl/cu129
 ```
 
 ### Create Virtual Environment
-```{.bash .custom-code}
+```{.bash}
 py -3.12 -m venv env_name
 ```
 
 ### Activate Virtual Environment
-```{.bash .custom-code}
+```{.bash}
 env_name\Scripts\activate
 ```
 If you see **(env_name)** in your prompt, the activation is successful.
@@ -37,7 +36,7 @@ If you see **(env_name)** in your prompt, the activation is successful.
 
 
 ### Install Detectron2
-```{.python .custom-code}
+```{.python}
 !pip install --no-build-isolation git+https://github.com/facebookresearch/detectron2.git
 ```
 

@@ -1,0 +1,101 @@
+---
+title: "Quarto"
+subtitle: "GitHub Pages"
+description: "Creating GitHub Pages using Quarto"
+categories: ["Quarto"]
+draft: false
+layout: "article"
+toc: true
+---
+
+# Create Quarto Project
+
+```{.bash}
+# create scaffolding
+quarto create-project proj_name --type website 
+
+# move into the project directory
+cd funsite
+
+# preview the template website
+quarto preview
+```
+
+```{.bash}
+# initialize git repo (main branch)
+git init
+git add .
+git commit -m "initial commit"
+git branch -M main
+
+# make sure you create the 'funsite' repository on GitHub first
+git remote add origin git@github.com:[your-github]/funsite.git
+git push -u origin main
+```
+
+# Create `gh-pages` Branch
+
+```{.bash}
+# create gh-pages branch
+git checkout --orphan gh-pages
+git reset --hard   # make sure all changes are committed before running this!
+git commit --allow-empty -m "Initializing gh-pages branch"
+git push origin gh-pages
+
+# switch back to main branch
+git checkout main
+```
+
+# Add `.gitignore`
+
+```{.custom-code}
+# .gitignore
+/.quarto/
+/_site/
+```
+
+# Set GitHub Action
+
+Create a file in .github/workflows/deploy.yaml and copy and paste the following
+
+```{.custom-code}
+# .github/workflows/deploy.yaml
+on:
+  workflow_dispatch:
+  push:
+    branches: main
+
+name: Quarto Publish
+
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Quarto
+        uses: quarto-dev/quarto-actions/setup@v2
+
+      - name: Render and Publish
+        uses: quarto-dev/quarto-actions/publish@v2
+        with:
+          target: gh-pages
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+```
+
+Go to the repository Settings -> Actions -> General -> Select Read and write permissions under Workflow permissions
+
+Go to the repository Settings -> Pages -> Select deploy from a branch -> gh-pages and root/
+
+
+# Resources
+
+[**Guide from Soisos**](https://soisos.com/?p=383)
+
+[**Guide**](https://quarto.org/docs/guide/)
+
+[**Listing Pages**](https://quarto.org/docs/websites/website-listings.html)

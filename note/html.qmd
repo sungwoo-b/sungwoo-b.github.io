@@ -6,7 +6,6 @@ date: 2024-03-07
 categories: ["HTML"]
 author: "Sung Woo Bak"
 draft: true
-image: "../img/barplot.png"
 layout: "article"
 toc: true
 ---
