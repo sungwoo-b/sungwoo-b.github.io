@@ -1,0 +1,155 @@
+---
+title: "SQL Cheatsheet"
+subtitle: "SQL Tips and Commands"
+description: "A quick reference for SQL Basics"
+categories: ["SQL"]
+draft: false
+layout: "article"
+toc: true
+---
+
+### SQL Data Types
+
+| Category | Data Type | Description | Storage Size | Example |
+|-----------|------------|--------------|---------------|----------|
+| **Int** | `TINYINT` | 0 to 255 | 1 byte | 120 |
+|  | `SMALLINT` | -32,768 to 32,767 | 2 bytes | -100 |
+|  | `INT` | -2,147,483,648 to 2,147,483,647 | 4 bytes | 1000 |
+|  | `BIGINT` | Very large integer | 8 bytes | 9000000000 |
+| **Float** | `DECIMAL(p,s)` | Fixed-point number, p = precision, s = scale | Depends on precision | `DECIMAL(6,2)` → 1234.56 |
+|  | `FLOAT` | Approximate floating-point number | 4–8 bytes | 3.14 |
+|  | `REAL` | Single-precision floating-point number | 4 bytes | 2.718 |
+| **Char** | `CHAR(n)` | Fixed-length string | n bytes | `'A'`, `'SQL  '` |
+|  | `VARCHAR(n)` | Variable-length string | Actual string length | `'Hello'` |
+|  | `TEXT` | Long text (up to 2GB, deprecated) | Variable | `'Long text...'` |
+| **Date** | `DATE` | Date only (YYYY-MM-DD) | 3 bytes | `2025-11-04` |
+|  | `TIME` | Time only (HH:MM:SS) | 3–5 bytes | `14:30:00` |
+|  | `DATETIME` | Date + Time | 8 bytes | `2025-11-04 14:30:00` |
+|  | `SMALLDATETIME` | Date + Time (minute precision) | 4 bytes | `2025-11-04 14:00` |
+|  | `DATETIME2` | Date + Time (higher precision) | 6–8 bytes | `2025-11-04 14:30:00.123` |
+| **Boolean** | `BIT` | 0 or 1 (TRUE/FALSE) | 1 bit | 0 / 1 |
+| **Binary** | `BINARY(n)` | Fixed-length binary data | n bytes | `0x1234` |
+|  | `VARBINARY(n)` | Variable-length binary data | Actual length | `0xFFEE` |
+|  | `IMAGE` | Large binary data (deprecated) | Variable | File data |
+| **Other** | `UNIQUEIDENTIFIER` | GUID-style unique ID | 16 bytes | `6F9619FF-8B86-D011-B42D-00CF4FC964FF` |
+|  | `XML` | Stores XML-formatted data | Variable | `<person><name>John</name></person>` |
+
+
+### Data Definition Language
+
+**Create, Alter, Rename, Truncate & Drop**
+
+```{.SQL}
+-- Create Database
+CREATE DATABASE MYDATABASE
+
+-- Create Table
+USE [MYDATABASE]
+
+CREATE TABLE [MYTABLE](
+[COL1] VARCHAR(10) PRIMARY KEY,
+[COL2] INT NOT NULL
+)
+
+-- Add Column
+ALTER TABLE [MYTABLE] ADD [col3] DATE
+
+-- Change Col Type
+ALTER TABLE [MYTABLE] ALTER COLUMN [col3] INT
+
+-- Rename Col
+SP_RENAME '[MYTABLE].[col3]', 'col4'
+
+-- Rename Table
+SP_RENAME 'MYTABLE', 'THETABLE'
+
+-- Remove Row Data
+TRUNCATE TABLE [THETABLE]
+
+-- Remove Table
+DROP TABLE [THETABLE]
+
+-- Remove Col
+ALTER TABLE [THETABLE] DROP COLUMN [col4]
+
+
+```
+
+### Data Manipulation Language DML
+
+**Insert, Select, Update, Delete**
+
+
+```{.SQL}
+
+-- Insert
+INSERT INTO [MYTABLE] VALUES ('char', 5)
+
+-- Select
+SELECT * -- all columns
+    FROM [MYTABLE]
+
+SELECT [col1],
+        [col2] AS [col3]
+    FROM [MYTABLE]
+
+-- Update
+UPDATE [MYTABLE]
+    SET [col2] = 1
+
+UPDATE [MYTABLE]
+    SET [col2] = 2
+    WHERE [col1] = 'A'
+
+-- Check
+SELECT *
+    FROM [MYTABLE]
+
+-- Delete
+DELETE
+    FROM [MYTABLE]
+
+DELETE
+    FROM [MYTABLE]
+    WHERE [col1] = 'A'
+
+```
+
+
+### Data Control Language DCL
+
+**Grant & Revoke**
+
+```{.SQL}
+-- Grant
+GRANT SELECT, INSERT, UPDATE, DELETE ON [MYTABLE] TO SOMEUSER WITH GRANT OPTION
+-GRANT OPTION: OTHERUSER CAN GRANT OTHER
+
+-- Revoke
+REVOKE SELECT, INSERT, UPDATE, DELETE ON [MYTABLE] TO SOMEUSER WITH CASCADE
+- REVOKE: REVOKE OTHER
+```
+
+
+### Transaction Control Language TCL
+
+**Commit, Rollback, Savepoint**
+
+```{.SQL}
+-- Transaction & Save Points
+USE MYTABLE
+
+BEGIN TRAN
+
+SAVE TRAN S1;
+INSERT INTO [MYTABLE] VALUES ('B', 2)
+
+SAVE TRAN S2
+UPDATE [MYTABLE] SET [col2] = 0 WHERE [col1] = 'A'
+
+SELECT * FROM [MYTABLE]
+
+ROLLBACK TRAN S1
+
+SELECT * FROM [MYTABLE]
+```
