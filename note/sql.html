@@ -165,7 +165,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
   <li><a href="#sql-data-types" id="toc-sql-data-types" class="nav-link active" data-scroll-target="#sql-data-types">SQL Data Types</a></li>
-  <li><a href="#data-definition-language" id="toc-data-definition-language" class="nav-link" data-scroll-target="#data-definition-language">Data Definition Language</a></li>
+  <li><a href="#data-definition-language-ddl" id="toc-data-definition-language-ddl" class="nav-link" data-scroll-target="#data-definition-language-ddl">Data Definition Language DDL</a></li>
   <li><a href="#data-manipulation-language-dml" id="toc-data-manipulation-language-dml" class="nav-link" data-scroll-target="#data-manipulation-language-dml">Data Manipulation Language DML</a></li>
   <li><a href="#data-control-language-dcl" id="toc-data-control-language-dcl" class="nav-link" data-scroll-target="#data-control-language-dcl">Data Control Language DCL</a></li>
   <li><a href="#transaction-control-language-tcl" id="toc-transaction-control-language-tcl" class="nav-link" data-scroll-target="#transaction-control-language-tcl">Transaction Control Language TCL</a></li>
@@ -373,8 +373,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tbody>
 </table>
 </section>
-<section id="data-definition-language" class="level3">
-<h3 class="anchored" data-anchor-id="data-definition-language">Data Definition Language</h3>
+<section id="data-definition-language-ddl" class="level3">
+<h3 class="anchored" data-anchor-id="data-definition-language-ddl">Data Definition Language DDL</h3>
 <p><strong>Create, Alter, Rename, Truncate &amp; Drop</strong></p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode SQL code-with-copy"><code class="sourceCode sql"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">-- Create Database</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">DATABASE</span> MYDATABASE</span>
@@ -449,11 +449,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><strong>Grant &amp; Revoke</strong></p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode SQL code-with-copy"><code class="sourceCode sql"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">-- Grant</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="kw">GRANT</span> <span class="kw">SELECT</span>, <span class="kw">INSERT</span>, <span class="kw">UPDATE</span>, <span class="kw">DELETE</span> <span class="kw">ON</span> [MYTABLE] <span class="kw">TO</span> SOMEUSER <span class="kw">WITH</span> <span class="kw">GRANT</span> <span class="kw">OPTION</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="op">-</span><span class="kw">GRANT</span> <span class="kw">OPTION</span>: OTHERUSER CAN <span class="kw">GRANT</span> OTHER</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co">-- GRANT OPTION: OTHERUSER CAN GRANT OTHER</span></span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co">-- Revoke</span></span>
 <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="kw">REVOKE</span> <span class="kw">SELECT</span>, <span class="kw">INSERT</span>, <span class="kw">UPDATE</span>, <span class="kw">DELETE</span> <span class="kw">ON</span> [MYTABLE] <span class="kw">TO</span> SOMEUSER <span class="kw">WITH</span> <span class="kw">CASCADE</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="op">-</span> <span class="kw">REVOKE</span>: <span class="kw">REVOKE</span> OTHER</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co">-- REVOKE: REVOKE OTHER</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="transaction-control-language-tcl" class="level3">
 <h3 class="anchored" data-anchor-id="transaction-control-language-tcl">Transaction Control Language TCL</h3>
