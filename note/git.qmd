@@ -1,5 +1,5 @@
 ---
-title: "Git Cheat Sheet"
+title: "Git Cheatsheet"
 subtitle: "Git Commands & GitHub Workflow"
 description: "A quick reference to essential Git commands and workflows"
 categories: ["Git"]
@@ -132,6 +132,7 @@ Referenced from [GitHub Docs](https://docs.github.com/en/authentication/connecti
 **1. Generate SSH key**
 
 ```{.bash .custom-code}
+ssh-keygen -t ed25519 -C "your_email@example.com"
 ssh-keygen -t ed25519-sk -C "your_email@example.com"
 ```
 
@@ -145,6 +146,6 @@ clip < ~/.ssh/id_ed25519.pub
 
 **4. Add to GitHub**
 
-Settings → Add new SSH key
+Settings → Add new SSH key (pub)
 
 

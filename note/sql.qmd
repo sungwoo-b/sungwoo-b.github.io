@@ -35,7 +35,7 @@ toc: true
 |  | `XML` | Stores XML-formatted data | Variable | `<person><name>John</name></person>` |
 
 
-### Data Definition Language
+### Data Definition Language DDL
 
 **Create, Alter, Rename, Truncate & Drop**
 
@@ -123,11 +123,11 @@ DELETE
 ```{.SQL}
 -- Grant
 GRANT SELECT, INSERT, UPDATE, DELETE ON [MYTABLE] TO SOMEUSER WITH GRANT OPTION
--GRANT OPTION: OTHERUSER CAN GRANT OTHER
+-- GRANT OPTION: OTHERUSER CAN GRANT OTHER
 
 -- Revoke
 REVOKE SELECT, INSERT, UPDATE, DELETE ON [MYTABLE] TO SOMEUSER WITH CASCADE
-- REVOKE: REVOKE OTHER
+-- REVOKE: REVOKE OTHER
 ```
 
 
