@@ -6,10 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="keywords" content="Git, GitHub, SSH">
-<meta name="description" content="A quick reference to essential Git commands and workflows">
+<meta name="description" content="A quick reference for SQL Basics">
 
-<title>Git Cheat Sheet – Sungwoo</title>
+<title>SQL Cheatsheet – Sungwoo</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -165,15 +164,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#git" id="toc-git" class="nav-link active" data-scroll-target="#git">Git</a>
-  <ul class="collapse">
-  <li><a href="#setup" id="toc-setup" class="nav-link" data-scroll-target="#setup">1. Setup</a></li>
-  <li><a href="#basic-git-commands" id="toc-basic-git-commands" class="nav-link" data-scroll-target="#basic-git-commands">2. Basic Git Commands</a></li>
-  <li><a href="#branch" id="toc-branch" class="nav-link" data-scroll-target="#branch">3. Branch</a></li>
-  <li><a href="#remote-repository-commands" id="toc-remote-repository-commands" class="nav-link" data-scroll-target="#remote-repository-commands">4. Remote Repository Commands</a></li>
-  <li><a href="#example-workflow" id="toc-example-workflow" class="nav-link" data-scroll-target="#example-workflow">Example Workflow</a></li>
-  </ul></li>
-  <li><a href="#ssh" id="toc-ssh" class="nav-link" data-scroll-target="#ssh">SSH</a></li>
+  <li><a href="#sql-data-types" id="toc-sql-data-types" class="nav-link active" data-scroll-target="#sql-data-types">SQL Data Types</a></li>
+  <li><a href="#data-definition-language" id="toc-data-definition-language" class="nav-link" data-scroll-target="#data-definition-language">Data Definition Language</a></li>
+  <li><a href="#data-manipulation-language-dml" id="toc-data-manipulation-language-dml" class="nav-link" data-scroll-target="#data-manipulation-language-dml">Data Manipulation Language DML</a></li>
+  <li><a href="#data-control-language-dcl" id="toc-data-control-language-dcl" class="nav-link" data-scroll-target="#data-control-language-dcl">Data Control Language DCL</a></li>
+  <li><a href="#transaction-control-language-tcl" id="toc-transaction-control-language-tcl" class="nav-link" data-scroll-target="#transaction-control-language-tcl">Transaction Control Language TCL</a></li>
   </ul>
 </nav>
     </div>
@@ -182,16 +177,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Git Cheat Sheet</h1>
-<p class="subtitle lead">Git Commands &amp; GitHub Workflow</p>
+<h1 class="title">SQL Cheatsheet</h1>
+<p class="subtitle lead">SQL Tips and Commands</p>
   <div class="quarto-categories">
-    <div class="quarto-category">Git</div>
+    <div class="quarto-category">SQL</div>
   </div>
   </div>
 
 <div>
   <div class="description">
-    A quick reference to essential Git commands and workflows
+    A quick reference for SQL Basics
   </div>
 </div>
 
@@ -204,91 +199,281 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </div>
   
 
-<div>
-  <div class="keywords">
-    <div class="block-title">Keywords</div>
-    <p>Git, GitHub, SSH</p>
-  </div>
-</div>
 
 </header>
 
 
-<p>Referenced from <a href="https://education.github.com/git-cheat-sheet-education.pdf">GitHub Education</a></p>
-<section id="git" class="level1">
-<h1>Git</h1>
-<section id="setup" class="level3">
-<h3 class="anchored" data-anchor-id="setup">1. Setup</h3>
-<pre class="custom-code"><code>git config --global user.name "Firstname Lastname"</code></pre>
-<pre class="custom-code"><code>git config --global user.email "email address"</code></pre>
+<section id="sql-data-types" class="level3">
+<h3 class="anchored" data-anchor-id="sql-data-types">SQL Data Types</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 17%">
+<col style="width: 19%">
+<col style="width: 22%">
+<col style="width: 24%">
+<col style="width: 16%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Category</th>
+<th>Data Type</th>
+<th>Description</th>
+<th>Storage Size</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Int</strong></td>
+<td><code>TINYINT</code></td>
+<td>0 to 255</td>
+<td>1 byte</td>
+<td>120</td>
+</tr>
+<tr class="even">
+<td></td>
+<td><code>SMALLINT</code></td>
+<td>-32,768 to 32,767</td>
+<td>2 bytes</td>
+<td>-100</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td><code>INT</code></td>
+<td>-2,147,483,648 to 2,147,483,647</td>
+<td>4 bytes</td>
+<td>1000</td>
+</tr>
+<tr class="even">
+<td></td>
+<td><code>BIGINT</code></td>
+<td>Very large integer</td>
+<td>8 bytes</td>
+<td>9000000000</td>
+</tr>
+<tr class="odd">
+<td><strong>Float</strong></td>
+<td><code>DECIMAL(p,s)</code></td>
+<td>Fixed-point number, p = precision, s = scale</td>
+<td>Depends on precision</td>
+<td><code>DECIMAL(6,2)</code> → 1234.56</td>
+</tr>
+<tr class="even">
+<td></td>
+<td><code>FLOAT</code></td>
+<td>Approximate floating-point number</td>
+<td>4–8 bytes</td>
+<td>3.14</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td><code>REAL</code></td>
+<td>Single-precision floating-point number</td>
+<td>4 bytes</td>
+<td>2.718</td>
+</tr>
+<tr class="even">
+<td><strong>Char</strong></td>
+<td><code>CHAR(n)</code></td>
+<td>Fixed-length string</td>
+<td>n bytes</td>
+<td><code>'A'</code>, <code>'SQL  '</code></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td><code>VARCHAR(n)</code></td>
+<td>Variable-length string</td>
+<td>Actual string length</td>
+<td><code>'Hello'</code></td>
+</tr>
+<tr class="even">
+<td></td>
+<td><code>TEXT</code></td>
+<td>Long text (up to 2GB, deprecated)</td>
+<td>Variable</td>
+<td><code>'Long text...'</code></td>
+</tr>
+<tr class="odd">
+<td><strong>Date</strong></td>
+<td><code>DATE</code></td>
+<td>Date only (YYYY-MM-DD)</td>
+<td>3 bytes</td>
+<td><code>2025-11-04</code></td>
+</tr>
+<tr class="even">
+<td></td>
+<td><code>TIME</code></td>
+<td>Time only (HH:MM:SS)</td>
+<td>3–5 bytes</td>
+<td><code>14:30:00</code></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td><code>DATETIME</code></td>
+<td>Date + Time</td>
+<td>8 bytes</td>
+<td><code>2025-11-04 14:30:00</code></td>
+</tr>
+<tr class="even">
+<td></td>
+<td><code>SMALLDATETIME</code></td>
+<td>Date + Time (minute precision)</td>
+<td>4 bytes</td>
+<td><code>2025-11-04 14:00</code></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td><code>DATETIME2</code></td>
+<td>Date + Time (higher precision)</td>
+<td>6–8 bytes</td>
+<td><code>2025-11-04 14:30:00.123</code></td>
+</tr>
+<tr class="even">
+<td><strong>Boolean</strong></td>
+<td><code>BIT</code></td>
+<td>0 or 1 (TRUE/FALSE)</td>
+<td>1 bit</td>
+<td>0 / 1</td>
+</tr>
+<tr class="odd">
+<td><strong>Binary</strong></td>
+<td><code>BINARY(n)</code></td>
+<td>Fixed-length binary data</td>
+<td>n bytes</td>
+<td><code>0x1234</code></td>
+</tr>
+<tr class="even">
+<td></td>
+<td><code>VARBINARY(n)</code></td>
+<td>Variable-length binary data</td>
+<td>Actual length</td>
+<td><code>0xFFEE</code></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td><code>IMAGE</code></td>
+<td>Large binary data (deprecated)</td>
+<td>Variable</td>
+<td>File data</td>
+</tr>
+<tr class="even">
+<td><strong>Other</strong></td>
+<td><code>UNIQUEIDENTIFIER</code></td>
+<td>GUID-style unique ID</td>
+<td>16 bytes</td>
+<td><code>6F9619FF-8B86-D011-B42D-00CF4FC964FF</code></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td><code>XML</code></td>
+<td>Stores XML-formatted data</td>
+<td>Variable</td>
+<td><code>&lt;person&gt;&lt;name&gt;John&lt;/name&gt;&lt;/person&gt;</code></td>
+</tr>
+</tbody>
+</table>
 </section>
-<section id="basic-git-commands" class="level3">
-<h3 class="anchored" data-anchor-id="basic-git-commands">2. Basic Git Commands</h3>
-<p><strong>Initialize a new Git repository</strong></p>
-<pre class="custom-code"><code>git init</code></pre>
-<p><strong>Retrieve an entire repository from a hosted location via URL</strong></p>
-<pre class="custom-code"><code>git clone url
-# Example
-git clone https://github.com/sungwoo-b/repository.git</code></pre>
-<p><strong>Show modified files in working directory, staged for your next commit</strong></p>
-<pre class="custom-code"><code>git status</code></pre>
-<p><strong>Add a file as it looks now to your next commit (stage)</strong></p>
-<pre class="custom-code"><code>git add file_name
-# Example
-git add file.txt
-# To add all files
-git add .</code></pre>
-<p><strong>Unstage a file while retaining the changes in working directory</strong></p>
-<pre class="custom-code"><code>git reset file_name</code></pre>
-<p><strong>Save the changes to the repository with a descriptive message</strong></p>
-<pre class="custom-code"><code>git commit -m "commit message"</code></pre>
-<p><strong>Upload the changes to the remote repository</strong></p>
-<pre class="custom-code"><code>git push alias branch
-# Example
-git push origin main</code></pre>
-<p><strong>Download the latest changes and merge them into your local branch</strong></p>
-<pre class="custom-code"><code>git pull</code></pre>
+<section id="data-definition-language" class="level3">
+<h3 class="anchored" data-anchor-id="data-definition-language">Data Definition Language</h3>
+<p><strong>Create, Alter, Rename, Truncate &amp; Drop</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode SQL code-with-copy"><code class="sourceCode sql"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">-- Create Database</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">DATABASE</span> MYDATABASE</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co">-- Create Table</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="kw">USE</span> [MYDATABASE]</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> [MYTABLE](</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>[COL1] <span class="dt">VARCHAR</span>(<span class="dv">10</span>) <span class="kw">PRIMARY</span> <span class="kw">KEY</span>,</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>[COL2] <span class="dt">INT</span> <span class="kw">NOT</span> <span class="kw">NULL</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co">-- Add Column</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="kw">ALTER</span> <span class="kw">TABLE</span> [MYTABLE] <span class="kw">ADD</span> [col3] <span class="dt">DATE</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="co">-- Change Col Type</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="kw">ALTER</span> <span class="kw">TABLE</span> [MYTABLE] <span class="kw">ALTER</span> <span class="kw">COLUMN</span> [col3] <span class="dt">INT</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="co">-- Rename Col</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>SP_RENAME <span class="st">'[MYTABLE].[col3]'</span>, <span class="st">'col4'</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="co">-- Rename Table</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>SP_RENAME <span class="st">'MYTABLE'</span>, <span class="st">'THETABLE'</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="co">-- Remove Row Data</span></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="kw">TRUNCATE</span> <span class="kw">TABLE</span> [THETABLE]</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a><span class="co">-- Remove Table</span></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a><span class="kw">DROP</span> <span class="kw">TABLE</span> [THETABLE]</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a><span class="co">-- Remove Col</span></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a><span class="kw">ALTER</span> <span class="kw">TABLE</span> [THETABLE] <span class="kw">DROP</span> <span class="kw">COLUMN</span> [col4]</span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
-<section id="branch" class="level3">
-<h3 class="anchored" data-anchor-id="branch">3. Branch</h3>
-<p><strong>Display a list of branches</strong></p>
-<pre class="custom-code"><code>git branch</code></pre>
-<p><strong>Create a new branch at the current commit</strong></p>
-<pre class="custom-code"><code>git branch branch_name</code></pre>
-<p><strong>Change the current working branch</strong></p>
-<pre class="custom-code"><code>git checkout branch
-# Example
-git checkout another_branch</code></pre>
-<p><strong>Show all commits in the current branch’s history</strong></p>
-<pre class="custom-code"><code>git log</code></pre>
+<section id="data-manipulation-language-dml" class="level3">
+<h3 class="anchored" data-anchor-id="data-manipulation-language-dml">Data Manipulation Language DML</h3>
+<p><strong>Insert, Select, Update, Delete</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode SQL code-with-copy"><code class="sourceCode sql"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co">-- Insert</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="kw">INSERT</span> <span class="kw">INTO</span> [MYTABLE] <span class="kw">VALUES</span> (<span class="st">'char'</span>, <span class="dv">5</span>)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co">-- Select</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span> <span class="co">-- all columns</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">FROM</span> [MYTABLE]</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> [col1],</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>        [col2] <span class="kw">AS</span> [col3]</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    <span class="kw">FROM</span> [MYTABLE]</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="co">-- Update</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="kw">UPDATE</span> [MYTABLE]</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>    <span class="kw">SET</span> [col2] <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="kw">UPDATE</span> [MYTABLE]</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>    <span class="kw">SET</span> [col2] <span class="op">=</span> <span class="dv">2</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>    <span class="kw">WHERE</span> [col1] <span class="op">=</span> <span class="st">'A'</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="co">-- Check</span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>    <span class="kw">FROM</span> [MYTABLE]</span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a><span class="co">-- Delete</span></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a><span class="kw">DELETE</span></span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>    <span class="kw">FROM</span> [MYTABLE]</span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a><span class="kw">DELETE</span></span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>    <span class="kw">FROM</span> [MYTABLE]</span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>    <span class="kw">WHERE</span> [col1] <span class="op">=</span> <span class="st">'A'</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
-<section id="remote-repository-commands" class="level3">
-<h3 class="anchored" data-anchor-id="remote-repository-commands">4. Remote Repository Commands</h3>
-<p><strong>Adds a remote repository</strong></p>
-<pre class="custom-code"><code>git remote add &lt;name&gt; &lt;url&gt;</code></pre>
-<p><strong>Shows the remote repository URLs</strong></p>
-<pre class="custom-code"><code>git remote -v</code></pre>
+<section id="data-control-language-dcl" class="level3">
+<h3 class="anchored" data-anchor-id="data-control-language-dcl">Data Control Language DCL</h3>
+<p><strong>Grant &amp; Revoke</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode SQL code-with-copy"><code class="sourceCode sql"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">-- Grant</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="kw">GRANT</span> <span class="kw">SELECT</span>, <span class="kw">INSERT</span>, <span class="kw">UPDATE</span>, <span class="kw">DELETE</span> <span class="kw">ON</span> [MYTABLE] <span class="kw">TO</span> SOMEUSER <span class="kw">WITH</span> <span class="kw">GRANT</span> <span class="kw">OPTION</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="op">-</span><span class="kw">GRANT</span> <span class="kw">OPTION</span>: OTHERUSER CAN <span class="kw">GRANT</span> OTHER</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co">-- Revoke</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="kw">REVOKE</span> <span class="kw">SELECT</span>, <span class="kw">INSERT</span>, <span class="kw">UPDATE</span>, <span class="kw">DELETE</span> <span class="kw">ON</span> [MYTABLE] <span class="kw">TO</span> SOMEUSER <span class="kw">WITH</span> <span class="kw">CASCADE</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="op">-</span> <span class="kw">REVOKE</span>: <span class="kw">REVOKE</span> OTHER</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
-<section id="example-workflow" class="level3">
-<h3 class="anchored" data-anchor-id="example-workflow">Example Workflow</h3>
-<pre class="custom-code"><code>cd working_dir
-git pull
-git status
-git add .
-git commit -m "commit message"
-git push origin main</code></pre>
-</section>
-</section>
-<section id="ssh" class="level1">
-<h1>SSH</h1>
-<p>Referenced from <a href="https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent">GitHub Docs</a></p>
-<p><strong>1. Generate SSH key</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode bash custom-code code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh-keygen</span> <span class="at">-t</span> ed25519-sk <span class="at">-C</span> <span class="st">"your_email@example.com"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p><strong>2. Add Passphrase</strong></p>
-<p><strong>3. Copy Public key</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode bash custom-code code-with-copy"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="ex">clip</span> <span class="op">&lt;</span> ~/.ssh/id_ed25519.pub</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p><strong>4. Add to GitHub</strong></p>
-<p>Settings → Add new SSH key</p>
+<section id="transaction-control-language-tcl" class="level3">
+<h3 class="anchored" data-anchor-id="transaction-control-language-tcl">Transaction Control Language TCL</h3>
+<p><strong>Commit, Rollback, Savepoint</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode SQL code-with-copy"><code class="sourceCode sql"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">-- Transaction &amp; Save Points</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="kw">USE</span> MYTABLE</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="cf">BEGIN</span> TRAN</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>SAVE TRAN S1;</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="kw">INSERT</span> <span class="kw">INTO</span> [MYTABLE] <span class="kw">VALUES</span> (<span class="st">'B'</span>, <span class="dv">2</span>)</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>SAVE TRAN S2</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="kw">UPDATE</span> [MYTABLE] <span class="kw">SET</span> [col2] <span class="op">=</span> <span class="dv">0</span> <span class="kw">WHERE</span> [col1] <span class="op">=</span> <span class="st">'A'</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span> <span class="kw">FROM</span> [MYTABLE]</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="kw">ROLLBACK</span> TRAN S1</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span> <span class="kw">FROM</span> [MYTABLE]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 
 
 </section>

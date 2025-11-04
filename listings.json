@@ -5,14 +5,11 @@
       "/note/git.html",
       "/note/outofdate.html",
       "/note/quarto.html",
+      "/note/sql.html",
       "/note/venv.html",
       "/note/annotation.html",
       "/note/python.html"
     ]
-  },
-  {
-    "listing": "/statistics.html",
-    "items": []
   },
   {
     "listing": "/project.html",
@@ -22,5 +19,9 @@
       "/project/stuffplus.html",
       "/project/digit.html"
     ]
+  },
+  {
+    "listing": "/statistics.html",
+    "items": []
   }
 ]
