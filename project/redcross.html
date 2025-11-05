@@ -8,7 +8,7 @@
 
 <meta name="author" content="Sung Woo Bak">
 <meta name="dcterms.date" content="2024-10-01">
-<meta name="keywords" content="Computer Vision, Annotation">
+<meta name="keywords" content="Machine Learning, Computer Vision, Image">
 <meta name="description" content="Developing automated tools for street level imagery analysis">
 
 <title>Street Level Imagery for Humanitarian Analysis – Sungwoo</title>
@@ -127,8 +127,29 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#project-overview" id="toc-project-overview" class="nav-link active" data-scroll-target="#project-overview">Project Overview</a></li>
+  <li><a href="#background" id="toc-background" class="nav-link" data-scroll-target="#background">Background</a></li>
+  <li><a href="#data-collection-and-preprocessing" id="toc-data-collection-and-preprocessing" class="nav-link" data-scroll-target="#data-collection-and-preprocessing">Data Collection and Preprocessing</a></li>
+  <li><a href="#annotation-and-labeling" id="toc-annotation-and-labeling" class="nav-link" data-scroll-target="#annotation-and-labeling">Annotation and Labeling</a></li>
+  <li><a href="#model-development" id="toc-model-development" class="nav-link" data-scroll-target="#model-development">Model Development</a>
+  <ul class="collapse">
+  <li><a href="#model-development-overview" id="toc-model-development-overview" class="nav-link" data-scroll-target="#model-development-overview">Model Development Overview</a></li>
+  <li><a href="#object-detection" id="toc-object-detection" class="nav-link" data-scroll-target="#object-detection">Object Detection</a></li>
+  <li><a href="#classification" id="toc-classification" class="nav-link" data-scroll-target="#classification">Classification</a></li>
+  </ul></li>
+  <li><a href="#research-and-model-comparison" id="toc-research-and-model-comparison" class="nav-link" data-scroll-target="#research-and-model-comparison">Research and Model Comparison</a></li>
+  <li><a href="#current-work-and-future-plans" id="toc-current-work-and-future-plans" class="nav-link" data-scroll-target="#current-work-and-future-plans">Current Work and Future plans</a></li>
+  <li><a href="#technical-stack" id="toc-technical-stack" class="nav-link" data-scroll-target="#technical-stack">Technical Stack</a></li>
+  <li><a href="#reflection" id="toc-reflection" class="nav-link" data-scroll-target="#reflection">Reflection</a></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary">Summary</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -173,17 +194,146 @@ ul.task-list li input[type="checkbox"] {
 <div>
   <div class="keywords">
     <div class="block-title">Keywords</div>
-    <p>Computer Vision, Annotation</p>
+    <p>Machine Learning, Computer Vision, Image</p>
   </div>
 </div>
 
 </header>
 
 
-<p>This project is currently <strong>in progress</strong>.</p>
-<p>The <strong>objective</strong> is to develop automated tools that extract insights from street-level imagery. The initial focus will be the improvement of planning information for climate-related disaster risk reduction in urban areas. This project will establish a foundation for future plans to transition into post-disaster impact assessments.</p>
+<p>This project is still <strong>in progress</strong> under <strong>the American Red Cross International Services</strong>.</p>
+<section id="project-overview" class="level1">
+<h1>Project Overview</h1>
+<p>The <strong>objective</strong> is to develop automated tools that <strong>extract insights from street-level imagery</strong>. The initial focus will be the improvement of <strong>planning information for climate-related disaster risk reduction</strong> in urban areas. This project will establish a foundation for future plans to transition into post-disaster impact assessments.</p>
+</section>
+<section id="background" class="level1">
+<h1>Background</h1>
+<p>Satellite imagery has long been a vital source of geospatial data, but its high cost and limited ground-level detail pose challenges. In contrast, Street-Level Imagery (SLI) offers an accessible and detailed view of the built environment, made possible by affordable GPS-enabled action cameras that can capture high-quality images efficiently. With rapid advances in computing, data storage, and machine learning, organizations can now process vast amounts of visual data to extract actionable insights. Supported by a growing ecosystem of open-source tools and data, the Indonesian Red Cross Society (PMI) launched this project to develop automated methods for analyzing SLI. The project aims to improve planning for climate-related disaster risk reduction and lay the groundwork for post-disaster impact assessment through rapid, reliable image analysis.</p>
+</section>
+<section id="data-collection-and-preprocessing" class="level1">
+<h1>Data Collection and Preprocessing</h1>
+<p>Street-level imagery was collected by PMI (Indonesian Red Cross Society), using 360° GoPro cameras. The collected images were uploaded to Mapillary, an open platform for geospatial imagery.</p>
+<p>Only side-view frames (excluding top, bottom, front, and rear views) that contained buildings from 360° images. These processed images served as the primary dataset for model training and annotation.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/rc_img_sample.png" class="img-fluid figure-img"></p>
+<figcaption>Image Processing Example</figcaption>
+</figure>
+</div>
+</section>
+<section id="annotation-and-labeling" class="level1">
+<h1>Annotation and Labeling</h1>
+<p>CVAT (Computer Vision Annotation Tool) was used for manual annotation, using the COCO format for bounding box and attribute labeling. Before starting, the team discussed and defined a set of disaster-related building attributes to ensure consistent and structured annotation across the dataset.</p>
+<ul>
+<li><p>Class: Building</p></li>
+<li><p>Attributes</p>
+<ul>
+<li>Building Quality: High, Medium, Informal</li>
+<li>Building Type: Residential, Commercial, Mixed, Industrial</li>
+<li>Presence of Soft Story: No, Yes</li>
+<li>Number of Stories: 0-100</li>
+<li>Overhang Type: None, Structural, Non-Structural</li>
+</ul></li>
+</ul>
+</section>
+<section id="model-development" class="level1">
+<h1>Model Development</h1>
+<section id="model-development-overview" class="level2">
+<h2 class="anchored" data-anchor-id="model-development-overview">Model Development Overview</h2>
+<p><img src="img/rc_flow.png" class="img-fluid"></p>
+</section>
+<section id="object-detection" class="level2">
+<h2 class="anchored" data-anchor-id="object-detection">Object Detection</h2>
+<p>We began by developing an object detection model using Detectron2. Multiple architectures were tested, including YOLO, RetinaNet, and Faster R-CNN. After comparative analysis of performance and computational efficiency, we selected Faster R-CNN as the final model due to its balance between accuracy and inference speed.</p>
+<p>The model was trained on the annotated building dataset and evaluated using mAP (mean Average Precision) metrics.</p>
+</section>
+<section id="classification" class="level2">
+<h2 class="anchored" data-anchor-id="classification">Classification</h2>
+<p>Next, we designed a building attribute classification model. However, the dataset for attribute classification was still limited — the number of samples for each attribute was much smaller than ideal. To address this, we built a training-ready framework: a pipeline capable of loading data, training, evaluating, and logging results, ready to scale once more data becomes available.</p>
+</section>
+</section>
+<section id="research-and-model-comparison" class="level1">
+<h1>Research and Model Comparison</h1>
+<p>During the model development phase, we performed an extensive model benchmarking process to compare multiple architectures for both detection and classification. This included evaluating model performance under different configurations, analyzing inference efficiency, and validating generalization across image types.</p>
+<p>Our analysis confirmed that Faster R-CNN provided the most consistent performance for object detection in complex urban scenes.</p>
+</section>
+<section id="current-work-and-future-plans" class="level1">
+<h1>Current Work and Future plans</h1>
+<p>At present, the team’s focus has shifted to other ongoing tasks, while dataset preparation remains on hold. Once additional building imagery and annotation data become available, the project will resume with data integration and model retraining. This next phase will involve refining the dataset, validating annotations, and improving the detection and classification models to achieve better accuracy and generalization.</p>
+<p>The long-term plan is to deploy the enhanced models as open-source tools that can support humanitarian organizations in disaster preparedness and response. Through continuous data expansion and periodic retraining, the system will evolve to adapt to diverse regions, building types, and environmental conditions across Indonesia.</p>
+</section>
+<section id="technical-stack" class="level1">
+<h1>Technical Stack</h1>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 24%">
+<col style="width: 44%">
+<col style="width: 31%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Category</th>
+<th>Tools / Frameworks</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Programming Languages</strong></td>
+<td>Python</td>
+<td>Core language for data processing and model development</td>
+</tr>
+<tr class="even">
+<td><strong>Data Annotation</strong></td>
+<td>CVAT</td>
+<td>Used for labeling building attributes and bounding boxes</td>
+</tr>
+<tr class="odd">
+<td><strong>Object Detection</strong></td>
+<td>Detectron2</td>
+<td>Framework for developing and evaluating object detection models</td>
+</tr>
+<tr class="even">
+<td><strong>Classification</strong></td>
+<td>PyTorch</td>
+<td>Used to build and train classification models for building attributes</td>
+</tr>
+<tr class="odd">
+<td><strong>Data Management</strong></td>
+<td>Mapillary</td>
+<td>Data source for street-level imagery</td>
+</tr>
+<tr class="even">
+<td><strong>Collaboration / Version Control</strong></td>
+<td>GitHub, Google Drive, Slack</td>
+<td>For code sharing, dataset versioning, and team coordination</td>
+</tr>
+<tr class="odd">
+<td><strong>Reference Framework</strong></td>
+<td>Development Seed’s Housing Passport</td>
+<td>Served as a conceptual and structural reference for the project</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="reflection" class="level1">
+<h1>Reflection</h1>
+<p>This project underscored the critical importance of building high-quality datasets. To develop a model that can be broadly applied across Indonesia, it is essential to include diverse building imagery that reflects different regions and structural types. Although image collection has been completed, the preparation of training-ready datasets has not yet been finalized. The process revealed that model performance depends not only on algorithmic sophistication but also on the quality, balance, and representativeness of the data itself. Establishing a robust data foundation will be a key step toward developing a model that is both accurate and scalable for real-world humanitarian applications.</p>
+</section>
+<section id="summary" class="level1">
+<h1>Summary</h1>
+<p>Developed a full pipeline to process 360° street-level imagery, detect buildings, and classify structural attributes related to disaster vulnerability. Building an open, scalable framework for AI-based urban risk assessment combining deep learning, crowdsourcing, and geospatial analysis.</p>
+</section>
+<section id="references" class="level1">
+<h1>References</h1>
+<ul>
+<li><p>Development Seed — Housing Passport</p></li>
+<li><p>PMI (Indonesian Red Cross Society)</p></li>
+<li><p>American Red Cross International Services</p></li>
+</ul>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
