@@ -142,7 +142,6 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#object-detection" id="toc-object-detection" class="nav-link" data-scroll-target="#object-detection">Object Detection</a></li>
   <li><a href="#classification" id="toc-classification" class="nav-link" data-scroll-target="#classification">Classification</a></li>
   </ul></li>
-  <li><a href="#research-and-model-comparison" id="toc-research-and-model-comparison" class="nav-link" data-scroll-target="#research-and-model-comparison">Research and Model Comparison</a></li>
   <li><a href="#current-work-and-future-plans" id="toc-current-work-and-future-plans" class="nav-link" data-scroll-target="#current-work-and-future-plans">Current Work and Future plans</a></li>
   <li><a href="#technical-stack" id="toc-technical-stack" class="nav-link" data-scroll-target="#technical-stack">Technical Stack</a></li>
   <li><a href="#reflection" id="toc-reflection" class="nav-link" data-scroll-target="#reflection">Reflection</a></li>
@@ -235,27 +234,43 @@ ul.task-list li input[type="checkbox"] {
 <li>Overhang Type: None, Structural, Non-Structural</li>
 </ul></li>
 </ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/anno_sample.png" class="img-fluid figure-img"></p>
+<figcaption>Annotation Example</figcaption>
+</figure>
+</div>
 </section>
 <section id="model-development" class="level1">
 <h1>Model Development</h1>
 <section id="model-development-overview" class="level2">
 <h2 class="anchored" data-anchor-id="model-development-overview">Model Development Overview</h2>
 <p><img src="img/rc_flow.png" class="img-fluid"></p>
+<p>The project’s modeling process was designed as a two-stage pipeline consisting of object detection and attribute classification.</p>
 </section>
 <section id="object-detection" class="level2">
 <h2 class="anchored" data-anchor-id="object-detection">Object Detection</h2>
-<p>We began by developing an object detection model using Detectron2. Multiple architectures were tested, including YOLO, RetinaNet, and Faster R-CNN. After comparative analysis of performance and computational efficiency, we selected Faster R-CNN as the final model due to its balance between accuracy and inference speed.</p>
-<p>The model was trained on the annotated building dataset and evaluated using mAP (mean Average Precision) metrics.</p>
+<p>Several architectures such as Faster R-CNN, RetinaNet, YOLOv8, and YOLOv11 were tested. Among these, <strong>Faster R-CNN</strong> using the Detectron2 franwork was chosen for its balance between detection accuracy and computational efficiency, making it suitable for diverse urban environments in Indonesia. The pretrained Faster R-CNN model from Detectron2’s Model Zoo was fine-tuned using annotated bounding boxes in COCO format and evaluated using <strong>mAP (mean Average Precision) metrics</strong>.</p>
+<p>The fine-tuned model achieved an <strong>mAP of 0.76</strong>, demonstrating strong detection performance.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/det_sample.png" class="img-fluid figure-img"></p>
+<figcaption>Detection Example</figcaption>
+</figure>
+</div>
 </section>
 <section id="classification" class="level2">
 <h2 class="anchored" data-anchor-id="classification">Classification</h2>
-<p>Next, we designed a building attribute classification model. However, the dataset for attribute classification was still limited — the number of samples for each attribute was much smaller than ideal. To address this, we built a training-ready framework: a pipeline capable of loading data, training, evaluating, and logging results, ready to scale once more data becomes available.</p>
+<p>A framework based on ConvNeXt V2 Tiny architecture was implemented for classification model, following the approach used in Development Seed’s Housing Passport project. This model is designed to classify disaster-related building attributes as mentioned above. Although the overall pipeline and training codebase have been established, full-scale training has not yet been conducted due to the limited number of labeled samples per attribute. Once sufficient annotated data become available, the framework will enable efficient retraining and performance evaluation across multiple attribute categories.</p>
+<!--
+# Research and Model Comparison
+
+During the model development phase, we performed an extensive model benchmarking process to compare multiple architectures for both detection and classification.
+This included evaluating model performance under different configurations, analyzing inference efficiency, and validating generalization across image types.
+
+Our analysis confirmed that Faster R-CNN provided the most consistent performance for object detection in complex urban scenes.
+-->
 </section>
-</section>
-<section id="research-and-model-comparison" class="level1">
-<h1>Research and Model Comparison</h1>
-<p>During the model development phase, we performed an extensive model benchmarking process to compare multiple architectures for both detection and classification. This included evaluating model performance under different configurations, analyzing inference efficiency, and validating generalization across image types.</p>
-<p>Our analysis confirmed that Faster R-CNN provided the most consistent performance for object detection in complex urban scenes.</p>
 </section>
 <section id="current-work-and-future-plans" class="level1">
 <h1>Current Work and Future plans</h1>
