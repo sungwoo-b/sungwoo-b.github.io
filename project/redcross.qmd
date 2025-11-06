@@ -57,6 +57,9 @@ Before starting, the team discussed and defined a set of disaster-related buildi
     - Overhang Type: None, Structural, Non-Structural
 
 
+![Annotation Example](img/anno_sample.png)
+
+
 # Model Development
 
 ## Model Development Overview
@@ -64,28 +67,35 @@ Before starting, the team discussed and defined a set of disaster-related buildi
 ![](img/rc_flow.png)
 
 
+The project’s modeling process was designed as a two-stage pipeline consisting of object detection and attribute classification.
+
 ## Object Detection
 
-We began by developing an object detection model using Detectron2.
-Multiple architectures were tested, including YOLO, RetinaNet, and Faster R-CNN.
-After comparative analysis of performance and computational efficiency, we selected Faster R-CNN as the final model due to its balance between accuracy and inference speed.
+Several architectures such as Faster R-CNN, RetinaNet, YOLOv8, and YOLOv11 were tested.
+Among these, **Faster R-CNN** using the Detectron2 franwork was chosen for its balance between detection accuracy and computational efficiency, making it suitable for diverse urban environments in Indonesia.
+The pretrained Faster R-CNN model from Detectron2’s Model Zoo was fine-tuned using annotated bounding boxes in COCO format and evaluated using **mAP (mean Average Precision) metrics**.
 
-The model was trained on the annotated building dataset and evaluated using mAP (mean Average Precision) metrics.
+The fine-tuned model achieved an **mAP of 0.76**, demonstrating strong detection performance.
+
+![Detection Example](img/det_sample.png)
 
 
 ## Classification
 
-Next, we designed a building attribute classification model.
-However, the dataset for attribute classification was still limited — the number of samples for each attribute was much smaller than ideal.
-To address this, we built a training-ready framework: a pipeline capable of loading data, training, evaluating, and logging results, ready to scale once more data becomes available.
+A framework based on ConvNeXt V2 Tiny architecture was implemented for classification model, following the approach used in Development Seed’s Housing Passport project.
+This model is designed to classify disaster-related building attributes as mentioned above.
+Although the overall pipeline and training codebase have been established, full-scale training has not yet been conducted due to the limited number of labeled samples per attribute.
+Once sufficient annotated data become available, the framework will enable efficient retraining and performance evaluation across multiple attribute categories.
 
 
+<!--
 # Research and Model Comparison
 
 During the model development phase, we performed an extensive model benchmarking process to compare multiple architectures for both detection and classification.
 This included evaluating model performance under different configurations, analyzing inference efficiency, and validating generalization across image types.
 
 Our analysis confirmed that Faster R-CNN provided the most consistent performance for object detection in complex urban scenes.
+-->
 
 
 # Current Work and Future plans
