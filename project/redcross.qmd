@@ -14,6 +14,7 @@ keywords: ["Machine Learning", "Computer Vision", "Image"]
 
 This project is still **in progress** under **the American Red Cross International Services**.
 
+[[한글 Korean]](../ko/redcross.qmd)
 
 # Project Overview
 
@@ -24,11 +25,11 @@ This project will establish a foundation for future plans to transition into pos
 
 # Background
 
-Satellite imagery has long been a vital source of geospatial data, but its high cost and limited ground-level detail pose challenges. 
-In contrast, Street-Level Imagery (SLI) offers an accessible and detailed view of the built environment, made possible by affordable GPS-enabled action cameras that can capture high-quality images efficiently. 
-With rapid advances in computing, data storage, and machine learning, organizations can now process vast amounts of visual data to extract actionable insights. 
-Supported by a growing ecosystem of open-source tools and data, the Indonesian Red Cross Society (PMI) launched this project to develop automated methods for analyzing SLI. 
-The project aims to improve planning for climate-related disaster risk reduction and lay the groundwork for post-disaster impact assessment through rapid, reliable image analysis.
+Satellite imagery has long been a vital source of geospatial data, but its high cost and limited ground-level detail pose challenges.
+In contrast, Street-Level Imagery (SLI) provides an accessible and detailed view of the built environment, enabled by affordable GPS-equipped action cameras that efficiently capture high-quality images.
+With rapid advances in computing and machine learning, it is now possible to process large amounts of visual data and extract actionable insights.
+The Indonesian Red Cross Society (PMI) seeks to adapt automated tools for mapping estimated urban heat risk, using this as a case study for humanitarian applications of SLI.
+The project aims to improve planning for climate-related disaster risk reduction and lay the groundwork for post-disaster impact assessment through reliable image analysis.
 
 
 # Data Collection and Preprocessing
@@ -36,16 +37,16 @@ The project aims to improve planning for climate-related disaster risk reduction
 Street-level imagery was collected by PMI (Indonesian Red Cross Society), using 360° GoPro cameras.
 The collected images were uploaded to Mapillary, an open platform for geospatial imagery.
 
-Only side-view frames (excluding top, bottom, front, and rear views) that contained buildings from 360° images.
-These processed images served as the primary dataset for model training and annotation.
+Only side-view frames (excluding top, bottom, front, and rear views) that contained buildings from 360° images were extracted for the dataset.
+These processed images served as the primary dataset for annotation and model training.
 
 ![Image Processing Example](img/rc_img_sample.png)
 
 
 # Annotation and Labeling
 
-CVAT (Computer Vision Annotation Tool) was used for manual annotation, using the COCO format for bounding box and attribute labeling. 
-Before starting, the team discussed and defined a set of disaster-related building attributes to ensure consistent and structured annotation across the dataset.
+CVAT (Computer Vision Annotation Tool) was used for manual annotation, with annotations exported in COCO format for bounding box and attribute labeling.
+Our team discussed and defined an initial set of disaster-related building attributes, which are as follows.
 
 - Class: Building
 
@@ -72,8 +73,8 @@ The project’s modeling process was designed as a two-stage pipeline consisting
 ## Object Detection
 
 Several architectures such as Faster R-CNN, RetinaNet, YOLOv8, and YOLOv11 were tested.
-Among these, **Faster R-CNN** using the Detectron2 franwork was chosen for its balance between detection accuracy and computational efficiency, making it suitable for diverse urban environments in Indonesia.
-The pretrained Faster R-CNN model from Detectron2’s Model Zoo was fine-tuned using annotated bounding boxes in COCO format and evaluated using **mAP (mean Average Precision) metrics**.
+Among these, **Faster R-CNN** using the Detectron2 franwork was chosen for its balance between detection accuracy and efficiency.
+The pretrained Faster R-CNN model from Detectron2’s Model Zoo was fine-tuned and evaluated using **mAP (mean Average Precision) metrics**.
 
 The fine-tuned model achieved an **mAP of 0.76**, demonstrating strong detection performance.
 
@@ -83,29 +84,18 @@ The fine-tuned model achieved an **mAP of 0.76**, demonstrating strong detection
 ## Classification
 
 A framework based on ConvNeXt V2 Tiny architecture was implemented for classification model, following the approach used in Development Seed’s Housing Passport project.
-This model is designed to classify disaster-related building attributes as mentioned above.
+This model is designed to classify disaster-related building attributes mentioned above.
 Although the overall pipeline and training codebase have been established, full-scale training has not yet been conducted due to the limited number of labeled samples per attribute.
-Once sufficient annotated data become available, the framework will enable efficient retraining and performance evaluation across multiple attribute categories.
-
-
-<!--
-# Research and Model Comparison
-
-During the model development phase, we performed an extensive model benchmarking process to compare multiple architectures for both detection and classification.
-This included evaluating model performance under different configurations, analyzing inference efficiency, and validating generalization across image types.
-
-Our analysis confirmed that Faster R-CNN provided the most consistent performance for object detection in complex urban scenes.
--->
+Once sufficient annotated data become available, it will enable efficient retraining and performance evaluation across multiple attribute categories.
 
 
 # Current Work and Future plans
 
 At present, the team’s focus has shifted to other ongoing tasks, while dataset preparation remains on hold. 
-Once additional building imagery and annotation data become available, the project will resume with data integration and model retraining. 
+Once additional building imagery and annotation data become available, the project will resume with model retraining. 
 This next phase will involve refining the dataset, validating annotations, and improving the detection and classification models to achieve better accuracy and generalization.
 
 The long-term plan is to deploy the enhanced models as open-source tools that can support humanitarian organizations in disaster preparedness and response. 
-Through continuous data expansion and periodic retraining, the system will evolve to adapt to diverse regions, building types, and environmental conditions across Indonesia.
 
 
 # Technical Stack
@@ -117,8 +107,8 @@ Through continuous data expansion and periodic retraining, the system will evolv
 | **Object Detection** | Detectron2 | Framework for developing and evaluating object detection models |
 | **Classification** | PyTorch | Used to build and train classification models for building attributes |
 | **Data Management** | Mapillary | Data source for street-level imagery |
-| **Collaboration / Version Control** | GitHub, Google Drive, Slack | For code sharing, dataset versioning, and team coordination |
-| **Reference Framework** | Development Seed’s Housing Passport | Served as a conceptual and structural reference for the project |
+| **Collaboration / Version Control** | GitHub, Hugging Face, Google Drive, Slack | For code, dataset, and model sharing, and team coordination |
+| **Reference** | Development Seed’s Housing Passport | Served as a conceptual and structural reference for the project |
 
 # Reflection
 
@@ -132,13 +122,11 @@ Establishing a robust data foundation will be a key step toward developing a mod
 # Summary
 
 Developed a full pipeline to process 360° street-level imagery, detect buildings, and classify structural attributes related to disaster vulnerability.
-Building an open, scalable framework for AI-based urban risk assessment combining deep learning, crowdsourcing, and geospatial analysis.
+Building an automated tool for urban risk assessment combining deep learning, crowdsourcing, and geospatial analysis.
 
 
 # References
 
-- Development Seed — Housing Passport
-
-- PMI (Indonesian Red Cross Society)
-
 - American Red Cross International Services
+- Development Seed — Housing Passport
+- PMI (Indonesian Red Cross Society)
