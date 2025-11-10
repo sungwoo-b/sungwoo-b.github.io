@@ -1,0 +1,36 @@
+---
+title: "Tableau"
+subtitle: "Testing Tableau Compatibility"
+description: "This note is to check the compatibility between Quarto and Tableau"
+date: 2024-9-17
+categories: ["Tableau"]
+author: "Sung Woo Bak"
+draft: false
+image: "../img/barplot.png"
+layout: "article"
+toc: false
+---
+
+
+---
+title: "Python"
+subtitle: "Testing Python Compatibility"
+description: "This note is to check the compatibility between Quarto and Python"
+date: 2024-9-10
+categories: ["Python"]
+author: "Sung Woo Bak"
+draft: false
+image: "../img/python.png"
+layout: "article"
+toc: true
+---
+
+
+
+
+<iframe 
+    src="https://public.tableau.com/views/Test_17627659682480/1_1?:language=ko-KR&publish=yes&:display_count=n&:origin=viz_share_link" 
+    width="1000" 
+    height="600" 
+    frameborder="0">
+</iframe>

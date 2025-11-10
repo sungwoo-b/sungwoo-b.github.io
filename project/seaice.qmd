@@ -12,7 +12,8 @@ layout: "article"
 toc: true
 ---
 
-The surface of Antarctica is largely covered by sea ice, and its area changes over time. This project aims to explore how these changes are related to the movement patterns of penguins, one of the continent's representative species, as seasonal variations in sea ice may impact their behavior and migration patterns.
+This project aims to explore and analyze NOAA’s geospatial data and introduce projection techniques that map it onto a plane.
+It further extends to integrating animal telemetry data for a comprehensive analysis.
 
 ```{python}
 #| echo: false
