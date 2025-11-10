@@ -4,6 +4,7 @@ subtitle: "SQL Tips and Commands"
 description: "A quick reference for SQL Basics"
 categories: ["SQL"]
 draft: false
+image: "../img/sql.png"
 layout: "article"
 toc: true
 ---
@@ -127,7 +128,7 @@ GRANT SELECT, INSERT, UPDATE, DELETE ON [MYTABLE] TO SOMEUSER WITH GRANT OPTION
 
 -- Revoke
 REVOKE SELECT, INSERT, UPDATE, DELETE ON [MYTABLE] TO SOMEUSER WITH CASCADE
--- REVOKE: REVOKE OTHER
+-- REVOKE: REVOKE OTHERUSER including OTHER
 ```
 
 
@@ -153,3 +154,15 @@ ROLLBACK TRAN S1
 
 SELECT * FROM [MYTABLE]
 ```
+
+
+
+SELECT FROM WHERE GROUP BY HAVING ORDER BY
+
+FROM: Select table
+WHERE: Filter
+GROUP BY: Group by column
+HAVING: Filter within group
+SELECT: Select column
+ORDER BY: Order
+

@@ -6,7 +6,7 @@ date: 2024-9-17
 categories: ["Tableau"]
 author: "Sung Woo Bak"
 draft: false
-image: "../img/barplot.png"
+image: "../img/tableau.png"
 layout: "article"
 toc: false
 ---
