@@ -13,10 +13,6 @@
     ]
   },
   {
-    "listing": "/statistics.html",
-    "items": []
-  },
-  {
     "listing": "/project.html",
     "items": [
       "/project/redcross.html",
@@ -24,5 +20,9 @@
       "/project/stuffplus.html",
       "/project/digit.html"
     ]
+  },
+  {
+    "listing": "/statistics.html",
+    "items": []
   }
 ]

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Sung Woo Bak">
-<meta name="dcterms.date" content="2024-10-01">
+<meta name="dcterms.date" content="2025-08-01">
 <meta name="keywords" content="Machine Learning, Computer Vision, Image">
 <meta name="description" content="Developing automated tools for street level imagery analysis">
 
@@ -127,28 +127,8 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#project-overview" id="toc-project-overview" class="nav-link active" data-scroll-target="#project-overview">Project Overview</a></li>
-  <li><a href="#background" id="toc-background" class="nav-link" data-scroll-target="#background">Background</a></li>
-  <li><a href="#data-collection-and-preprocessing" id="toc-data-collection-and-preprocessing" class="nav-link" data-scroll-target="#data-collection-and-preprocessing">Data Collection and Preprocessing</a></li>
-  <li><a href="#annotation-and-labeling" id="toc-annotation-and-labeling" class="nav-link" data-scroll-target="#annotation-and-labeling">Annotation and Labeling</a></li>
-  <li><a href="#model-development" id="toc-model-development" class="nav-link" data-scroll-target="#model-development">Model Development</a>
-  <ul class="collapse">
-  <li><a href="#model-development-overview" id="toc-model-development-overview" class="nav-link" data-scroll-target="#model-development-overview">Model Development Overview</a></li>
-  <li><a href="#object-detection" id="toc-object-detection" class="nav-link" data-scroll-target="#object-detection">Object Detection</a></li>
-  <li><a href="#classification" id="toc-classification" class="nav-link" data-scroll-target="#classification">Classification</a></li>
-  </ul></li>
-  <li><a href="#current-work-and-future-plans" id="toc-current-work-and-future-plans" class="nav-link" data-scroll-target="#current-work-and-future-plans">Current Work and Future plans</a></li>
-  <li><a href="#technical-stack" id="toc-technical-stack" class="nav-link" data-scroll-target="#technical-stack">Technical Stack</a></li>
-  <li><a href="#reflection" id="toc-reflection" class="nav-link" data-scroll-target="#reflection">Reflection</a></li>
-  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary">Summary</a></li>
-  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
-  </ul>
-</nav>
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+        
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -182,7 +162,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">October 1, 2024</p>
+      <p class="date">August 1, 2025</p>
     </div>
   </div>
   
@@ -200,8 +180,39 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>This project is still <strong>in progress</strong> under <strong>the American Red Cross International Services</strong>.</p>
-<p><a href="../ko/redcross.html">[한글 Korean]</a></p>
+<script>
+function switchLang(lang) {
+  document.querySelectorAll('.lang-content').forEach(el => {
+    el.style.display = el.classList.contains(lang) ? 'block' : 'none';
+  });
+  document.querySelectorAll('.lang-button').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.lang === lang);
+  });
+}
+</script>
+<style>
+.lang-button {
+  padding: 6px 12px;
+  margin-right: 8px;
+  background-color: #f3f3f3;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.lang-button.active {
+  background-color: #808080;
+  color: white;
+  font-weight: bold;
+}
+.lang-switch {
+  margin-bottom: 1em;
+}
+</style>
+<div class="lang-switch">
+<p><button class="lang-button active" data-lang="en" onclick="switchLang('en')">English</button> <button class="lang-button" data-lang="ko" onclick="switchLang('ko')">한국어</button></p>
+</div>
+<div class="lang-content en">
+<p>This project is currently <strong>in progress</strong> under <strong>the American Red Cross International Services</strong>.</p>
 <section id="project-overview" class="level1">
 <h1>Project Overview</h1>
 <p>The <strong>objective</strong> is to develop automated tools that <strong>extract insights from street-level imagery</strong>. The initial focus will be the improvement of <strong>planning information for climate-related disaster risk reduction</strong> in urban areas. This project will establish a foundation for future plans to transition into post-disaster impact assessments.</p>
@@ -339,9 +350,151 @@ ul.task-list li input[type="checkbox"] {
 <li>Development Seed — Housing Passport</li>
 <li>PMI (Indonesian Red Cross Society)</li>
 </ul>
-
-
 </section>
+</div>
+<div class="lang-content ko" style="display:none">
+<p>이 프로젝트는 현재 미국 적십자(American Red Cross International Services)에서 진행 중입니다.</p>
+<section id="프로젝트-개요" class="level1">
+<h1>프로젝트 개요</h1>
+<p><strong>거리 수준 이미지에서 인사이트를 추출할 수 있는 자동화 도구</strong>를 개발하는 것이 이 프로젝트의 목표입니다. 현재 단계에서는 도시 지역의 기후 관련 재난 위험 저감을 위한 계획 정보 개선에 중점을 두고 있으며 향후 재난 발생 후 영향 평가(Post-Disaster Impact Assessment)로 확장될 수 있는 기반을 마련하는 것이 목표입니다.</p>
+</section>
+<section id="배경" class="level1">
+<h1>배경</h1>
+<p>위성 이미지는 오랫동안 지리 및 공간 데이터를 제공해왔지만 높은 비용과 지상에서 세부 정보 제공에 제한이 있습니다. 거리 수준 이미지는 저렴한 GPS 기능을 갖춘 액션 카메라를 활용하여 효율적으로 고품질 이미지를 수집할 수 있고 건축물과 같은 지상 환경을 상세하게 보여줍니다. 머신러닝과 같은 기술의 발전으로 이제 대규모 시각 데이터를 처리하고 실질적인 인사이트를 추출하는 것이 가능해졌습니다. 인도네시아 적십자(PMI)는 이를 활용하여 예상 도시 열위험 (urban heat risk) 지도를 만드는데 자동화 도구를 적용하려고 합니다. 이 프로젝트는 기후 관련 재난 위험 저감을 위한 계획 수립을 지원하고 재난 발생 후 영향 평가를 위한 기반을 마련하는 것을 목표로 하고 있습니다.</p>
+</section>
+<section id="데이터-수집-및-전처리" class="level1">
+<h1>데이터 수집 및 전처리</h1>
+<p>거리 수준의 이미지들은 360° GoPro 카메라를 활용하여 PMI에 의해 수집되었습니다. 수집된 이미지들은 오픈 플랫폼인 Mapillary에 업로드 되었습니다.</p>
+<p>360° 이미지에서 건축물이 포함된 측면 프레임만 (상단, 하단, 전면, 후면 제외) 사용 되었습니다. 이렇게 전처리된 이미지들은 모델 개발에 주요 데이터셋으로 사용되었습니다.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../project/img/rc_img_sample.png" class="img-fluid figure-img"></p>
+<figcaption>이미지 처리 예시</figcaption>
+</figure>
+</div>
+</section>
+<section id="주석-annotation-및-라벨링" class="level1">
+<h1>주석 (Annotation) 및 라벨링</h1>
+<p>CVAT (Computer Vision Annotation Tool)을 사용하여 직접 바운딩박스와 속성 입력 작업을 수행하였으며 주석 데이터는 COCO 형식을 활용하였습니다. 초기 주석 작업을 하기 위해 사전에 재난에 관련된 속성들을 논의하고 정의 했으며 이는 다음과 같습니다.</p>
+<ul>
+<li><p>Class: Building</p></li>
+<li><p>Attributes</p>
+<ul>
+<li>Building Quality: High, Medium, Informal</li>
+<li>Building Type: Residential, Commercial, Mixed, Industrial</li>
+<li>Presence of Soft Story: No, Yes</li>
+<li>Number of Stories: 0-100</li>
+<li>Overhang Type: None, Structural, Non-Structural</li>
+</ul></li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../project/img/anno_sample.png" class="img-fluid figure-img"></p>
+<figcaption>주석 예시</figcaption>
+</figure>
+</div>
+</section>
+<section id="모델-개발" class="level1">
+<h1>모델 개발</h1>
+<section id="모델-개발-개요" class="level2">
+<h2 class="anchored" data-anchor-id="모델-개발-개요">모델 개발 개요</h2>
+<p><img src="../project/img/rc_flow.png" class="img-fluid"></p>
+<p>이 프로젝트에서 모델은 객체 탐지(Object Detection)와 속성 분류(Classification)를 포함한 두 단계의 파이프라인으로 구성되어 있습니다.</p>
+</section>
+<section id="객체-탐지-object-detection" class="level2">
+<h2 class="anchored" data-anchor-id="객체-탐지-object-detection">객체 탐지 Object Detection</h2>
+<p>많은 객체 탐지 모델들이 소개되었고 이 프로젝트에서는 Faster R-CNN, RetinaNet, YOLOv8, 그리고 YOLOv11와 같은 아키텍쳐들을 시험했습니다. 효율성과 정확성을 고려하여 Detectron2의 프레임워크를 사용한 <strong>Faster R-CNN</strong>을 선정했고 이를 사용하여 초기 모델을 구상했습니다. Detectron2의 Model Zoo에서 사전 학습된 모델을 fine-tune 하였고 mAP(mean Average Precision) 지표로 성능을 평가했습니다.</p>
+<p>이 모델은 모델은 mAP 0.76을 보여주며 높은 탐지 성능을 보여주었습니다.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../project/img/det_sample.png" class="img-fluid figure-img"></p>
+<figcaption>탐지 예시</figcaption>
+</figure>
+</div>
+</section>
+<section id="분류-classification" class="level2">
+<h2 class="anchored" data-anchor-id="분류-classification">분류 Classification</h2>
+<p>ConvNeXt V2 Tiny 아키텍처를 기반으로 한 분류 모델 프레임워크가 구현되었으며 이는 Development Seed의 Housing Passport 프로젝트에서 사용된 접근 방식을 참고한 것입니다. 이 모델은 앞서 언급한 재난 관련 건물 속성을 분류하도록 설계되었습니다. 전체 파이프라인과 학습 코드는 구축되었지만 속성별 데이터 샘플 수가 제한적이어서 아직 본격적인 학습은 진행되지 않았습니다. 충분한 데이터가 확보되면 속성 카테고리에 대한 재학습 및 성능 평가를 할 예정입니다.</p>
+</section>
+</section>
+<section id="진행-상황-및-향후-계획" class="level1">
+<h1>진행 상황 및 향후 계획</h1>
+<p>현재 저희 팀은 다른 진행 중인 업무에 집중하고 있으며 데이터셋 준비 작업은 잠시 보류된 상태입니다. 추가 이미지와 어노테이션 데이터가 확보되면 모델 재학습 단계가 재개될 예정입니다. 다음 단계에서는 데이터셋 정제, 어노테이션 검증, 탐지 및 분류 모델 개선을 통해 정확도와 일반화 성능을 높이는 작업이 진행됩니다.</p>
+<p>추후에 모델 성능이 충분히 검증되면 오픈소스로 배포하여 재난 대비와 대응에 활용할 계획입니다.</p>
+</section>
+<section id="기술-스택" class="level1">
+<h1>기술 스택</h1>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 24%">
+<col style="width: 44%">
+<col style="width: 31%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th>Tools / Frameworks</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>프로그래밍 언어</strong></td>
+<td>Python</td>
+<td>데이터 처리 및 모델 개발 핵심 언어</td>
+</tr>
+<tr class="even">
+<td><strong>데이터 라벨링</strong></td>
+<td>CVAT</td>
+<td>건물 속성 및 바운딩 박스 라벨링</td>
+</tr>
+<tr class="odd">
+<td><strong>객체 탐지</strong></td>
+<td>Detectron2</td>
+<td>객체 탐지 모델 개발 및 평가</td>
+</tr>
+<tr class="even">
+<td><strong>분류</strong></td>
+<td>PyTorch</td>
+<td>건물 속성 분류 모델 개발</td>
+</tr>
+<tr class="odd">
+<td><strong>데이터</strong></td>
+<td>Mapillary API</td>
+<td>거리 수준 이미지 데이터</td>
+</tr>
+<tr class="even">
+<td><strong>협업 / 버전관리</strong></td>
+<td>GitHub, Hugging Face, Google Drive, Slack</td>
+<td>코드, 데이터셋, 모댈, 팀 협업</td>
+</tr>
+<tr class="odd">
+<td><strong>참고</strong></td>
+<td>Development Seed’s Housing Passport</td>
+<td>프로젝트 개념 및 구조</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="평가" class="level1">
+<h1>평가</h1>
+<p>이 프로젝트를 통해 고품질 데이터셋 구축의 중요성을 다시 한번 확인할 수 있었습니다. 인도네시아 전역에 적용 가능한 모델을 개발하려면, 지역별, 구조 유형별로 다양한 건물 이미지를 포함하는 것이 필수적입니다. 이미지 수집은 완료되었지만 학습용 데이터셋 준비는 아직 최종적으로 완료되지 않은 상태입니다. 이번 과정을 통해 모델 성능은 단순히 알고리즘뿐만 아니라 데이터 자체의 품질이 크게 작용한다는 것을 발견했습니다. 강력한 데이터 기반을 구축하는 것은 정확하고 실무에 확장 가능한 모델 개발을 위한 핵심 단계가 될 것입니다.</p>
+</section>
+<section id="요약" class="level1">
+<h1>요약</h1>
+<p>360° 거리 수준 이미지를 처리하고 건물을 탐지하며 재난 취약성과 관련된 구조 속성을 분류하는 전체 파이프라인을 개발했습니다. 딥러닝, 크라우드소싱, 지리공간 분석을 결합하여 AI 기반 도시 위험 평가를 위한 자동화된 도구를 구축하고 있습니다.</p>
+</section>
+<section id="참고" class="level1">
+<h1>참고</h1>
+<ul>
+<li>American Red Cross International Services</li>
+<li>Development Seed</li>
+<li>PMI (Indonesian Red Cross Society)</li>
+</ul>
+</section>
+</div>
+
+
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
