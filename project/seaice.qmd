@@ -3,17 +3,131 @@ title: "Sea Ice Concentration and Animal Telemetry"
 subtitle: "Geospatial Data Analysis"
 description: "An Introduction to Integrated Analysis of Polar Projection and Animal Telemetry"
 date: 2024-09-10
-categories: ["Statistics", "Python"]
+categories: ["Remote Sensing"]
 tags: ["Remote Sensing", "Geospatial"]
 author: "Sung Woo Bak"
 draft: false
 image: "../img/southpole.png"
 layout: "article"
-toc: true
+toc: false
 ---
 
-This project aims to explore and analyze NOAA’s geospatial data and introduce projection techniques that map it onto a plane.
-It further extends to integrating animal telemetry data for a comprehensive analysis.
+<script>
+function switchLang(lang) {
+  document.querySelectorAll('.lang-content').forEach(el => {
+    el.style.display = el.classList.contains(lang) ? 'block' : 'none';
+  });
+  document.querySelectorAll('.lang-button').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.lang === lang);
+  });
+}
+</script>
+
+<style>
+.lang-button {
+  padding: 6px 12px;
+  margin-right: 8px;
+  background-color: #f3f3f3;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.lang-button.active {
+  background-color: #808080;
+  color: white;
+  font-weight: bold;
+}
+.lang-switch {
+  margin-bottom: 1em;
+}
+</style>
+
+<div class="lang-switch">
+  <button class="lang-button active" data-lang="en" onclick="switchLang('en')">English</button>
+  <button class="lang-button" data-lang="ko" onclick="switchLang('ko')">한국어</button>
+</div>
+
+
+<div class="lang-content en">
+
+</div>
+
+<div class="lang-content ko" style="display:none">
+
+</div>
+
+
+
+
+
+<div class="lang-content en">
+
+This project utilizes **Remote Sensing** data from NOAA Polar Watch, demonstrating the application of **projection** techniques, the integration of Animal Telemetry data.
+
+
+# Sea Ice Concentration Data
+
+Among the Remote Sensing data, widely known Sea Ice is also included. 
+Using Antarctica as a reference, this project visualizes the data on a plane and introduces projection techniques.
+
+Sea Ice Concentration data was obtained from the NOAA Polar Watch ERDDAP Data Server and NetCDF format was used in this project. 
+This data mainly includes time, coordinates, and Sea Ice Concentration data.
+
+The data and its details are available at the following link.
+
+- https://polarwatch.noaa.gov/erddap/griddap/nsidcG02202v4shmday.html
+
+
+### South Polar Projections
+
+There are many ways to represent the spherical Earth in a way that is easy to visualize. 
+However, representing the spherical Earth on a flat surface inevitably causes distortions. 
+Using the two projection methods introduced below, the South Polar region can be visualized on a flat map.
+
+**I. Polar Stereographic Projection**
+
+The Polar Stereographic Projection is a projection method centered on the polar regions.
+In this case, it is centered on the South Pole.
+
+Details about the Polar Stereographic Projection can be found from the link below.
+
+- https://nsidc.org/data/user-resources/help-center/guide-nsidcs-polar-stereographic-projection
+
+</div>
+
+<div class="lang-content ko" style="display:none">
+
+이 프로젝트는 NOAA Polar Watch의 원격 감지(Remote Sensing) 데이터를 활용하여 투영법(projection)과 동물 위치 추적(Animal Telemetry)의 분석을 소개합니다.
+
+# 해빙 농도 테이터 (Sea Ice Concentration)
+
+원격 감지 데이터 중 널리 알려진 해빙 데이터도 포함되어 있습니다.
+남극을 기준으로 이 프로젝트에서는 데이터를 평면에 시각화하고 적용 가능한 투영법을 소개합니다.
+
+해빙 농도 데이터는 NOAA Polar Watch ERDDAP 데이터 서버에서 얻었으며 이 프로젝트에서는 NetCDF 형식을 사용했습니다. 
+이 데이터는 주로 시간, 좌표, 해빙 농도 정보를 포함합니다.
+
+데이터와 세부 정보는 아래 링크에서 확인할 수 있습니다.
+
+- https://polarwatch.noaa.gov/erddap/griddap/nsidcG02202v4shmday.html
+
+### 남극 투영법 (South Polar Projections)
+
+지구는 구형이기 때문에 평면 지도에 나타낼 경우 왜곡이 발생합니다. 
+그러나 아래에서 소개하는 두 가지 방법을 사용하면 이 프로젝트에서 다루는 남극 지역을 평면 지도에 시각화할 수 있습니다.
+
+**I. Polar Stereographic Projection**
+
+Polar Stereographic Projection은 지구의 극 지역을 중심으로 하는 투영법입니다.
+이 프로젝트에서는 남극을 중심으로 적용했습니다.
+
+Polar Stereographic Projection에 관한 자세한 내용은 아래 링크에서 확인할 수 있습니다.
+
+- https://nsidc.org/data/user-resources/help-center/guide-nsidcs-polar-stereographic-projection
+
+</div>
+
+
 
 ```{python}
 #| echo: false
@@ -33,23 +147,6 @@ import cartopy.feature as cfeature
 import warnings
 warnings.filterwarnings("ignore")
 
-```
-
-# Sea Ice Concentration Data
-
-Sea Ice Concentration data was obtained from the NOAA Polar Watch ERDDAP Data Server and NetCDF format data was used in this project. This data includes time, coordinates, and Sea Ice Concentration data.
-
-Data and its details can be accessed through the link below.
-
-- https://polarwatch.noaa.gov/erddap/griddap/nsidcG02202v4shmday.html
-
-
-```{python}
-#| echo: false
-#| warning: false
-#| message: false
-#| results: 'hide'
-
 # Generate URL
 #def point_to_dataset(dataset_id, base_url='https://polarwatch.noaa.gov/erddap/griddap'):
 #    base_url = base_url.rstrip('/')
@@ -62,18 +159,11 @@ Data and its details can be accessed through the link below.
 # Data
 #da = point_to_dataset(south_month_url)
 
-```
-
-```{python}
-#| echo: false
-#| warning: false
-#| message: false
-#| results: 'hide'
-
 # The data is replaced with the downloaded version to ensure safety during publishing
 da = nc.Dataset('data/nsidcG02202v4shmday_47c8_d8c6_99d8_U1728973265301.nc')
 
 ```
+
 
 ```{python}
 #| echo: false
@@ -94,18 +184,6 @@ sample_sea_ice = seaice_concen[time_ind, :, :][0]
 
 ```
 
-### South Polar Projections
-
-There are methods to represent the spherical Earth on a flat surface. Using the two projection methods below, the South Polar region of the data used here can be displayed on a flat map.
-
-**I. Polar Stereographic Projection**
-
-The Polar Stereographic Projection is a projection method centered on the polar regions.<br>
-In this case, it is centered on the South Pole.
-
-Details about the Polar Stereographic Projection can be found from the link below.
-
-- https://nsidc.org/data/user-resources/help-center/guide-nsidcs-polar-stereographic-projection
 
 ```{python}
 #| echo: false
@@ -137,9 +215,9 @@ plt.show()
 
 ```
 
+<div class="lang-content en">
+
 The blue areas in the map above represent Sea Ice Concentration, and the concentration levels can be referenced using the color bar.
-
-
 
 **II. EPSG Code 3412**
 
@@ -148,6 +226,23 @@ Another projection method is to use a location-specific EPSG code. The EPSG code
 Other EPSG Codes can be found from the link below.
 
 - https://epsg.io/
+
+</div>
+
+<div class="lang-content ko" style="display:none">
+
+위 지도에서 파란색 영역은 해빙 농도(Sea Ice Concentration)를 나타내며 지도 아래에 표시된 컬러바는 해빙 농도을 보여줍니다.
+
+**II. EPSG Code 3412**
+
+또 다른 투영법은 위치별 EPSG 코드를 사용하는 것입니다. 남극의 EPSG 코드는 3412이며 아래 지도는 이 코드를 사용하여 투영한 결과를 보여줍니다.
+
+다른 지역의 EPSG 코드를 알고 싶다면 아래 링크를 참고하세요.
+
+- https://epsg.io/
+
+</div>
+
 
 
 ```{python}
@@ -172,11 +267,31 @@ plt.show()
 
 ```
 
+
+
+<div class="lang-content en">
+
 # Adelie Penguin Telemetry Data
+
+The Adelie Penguin Telemetry dataset tracks the movement paths of Adelie Penguins, allowing their behavior to be visualized on a map. 
+It can also be compared with the Sea Ice Concentration map to examine the correlation between the two datasets.
 
 Adelie Penguin Telemetry Data was obtained from NOAA NCEI and can be accessed through the link below.
 
 - https://www.ncei.noaa.gov/node/6696
+
+</div>
+
+<div class="lang-content ko" style="display:none">
+
+Adelie Penguin Telemetry 데이터는 Adelie 펭귄의 이동 경로를 추적한 데이터로 이를 지도에 시각화하여 그들의 행동을 파악할 수 있습니다. 
+또한 해빙 농도 지도와 비교하여 두 데이터 간의 상관관계를 분석할 수도 있습니다.
+
+Adelie Penguin Telemetry 데이터는 NOAA NCEI에서 얻었으며, 아래 링크에서 확인할 수 있습니다.
+
+- https://www.ncei.noaa.gov/node/6696
+
+</div>
 
 
 ```{python}
@@ -188,7 +303,18 @@ penguin.head()
 
 ```
 
+<div class="lang-content en">
+
 The table above shows a sample of the Telemetry Data.
+
+
+</div>
+
+<div class="lang-content ko" style="display:none">
+
+위 테이블은 Telemetry 데이터의 샘플을 보여줍니다.
+
+</div>
 
 
 ```{python}
@@ -202,7 +328,18 @@ unique_year_month = penguin['Year_Month'].unique()
 
 ```
 
+<div class="lang-content en">
+
 ### The Distribution of Penguins
+
+</div>
+
+<div class="lang-content ko" style="display:none">
+
+### 펭귄 데이터 분포
+
+</div>
+
 
 ```{python}
 #| echo: false
@@ -236,12 +373,26 @@ plt.show()
 
 ```
 
-The distributions are shown above to better understand the data, allowing for further analysis based on different categories.
+<div class="lang-content en">
 
+The distributions are shown above to better understand the data, allowing for further analysis based on different categories.
 
 # Penguin Locations on the Projected Map
 
 The locations of penguins on Earth are shown as follows.
+
+</div>
+
+<div class="lang-content ko" style="display:none">
+
+데이터를 보다 잘 이해할 수 있도록 위에 분포를 나타내었으며 이를 통해 카테고리별 추가 분석이 가능합니다.
+
+# 투영 지도 상의 펭귄 위치
+
+지도에서 펭귄 위치는 다음과 같이 표시됩니다.
+
+</div>
+
 
 ```{python}
 #| echo: false
@@ -299,7 +450,24 @@ plt.show()
 
 ```
 
+<div class="lang-content en">
+
+The penguins' movement paths can be seen on the map, showing the areas where they are most active. 
+Analyzing various factors can help examine the correlations between them.
+
 ### Penguin Tracking Considering Various Factors
+
+</div>
+
+<div class="lang-content ko" style="display:none">
+
+지도에서 펭귄들의 이동 경로를 확인할 수 있으며 이들이 주로 활동하는 지역을 파악할 수 있습니다. 
+또한 다양한 요인을 분석하여 이들 간의 상관관계도 살펴볼 수 있습니다.
+
+### 여러 요인을 고려한 펭귄 추적
+
+</div>
+
 
 
 ```{python}
@@ -344,7 +512,21 @@ plt.show()
 
 ```
 
+
+<div class="lang-content en">
+
 The plot above shows the daily movement paths of penguins by sex, illustrating the differences in movement patterns between sex groups.
+Category Sex was considered because activities such as breeding and foraging may differ between male and female groups.
+
+</div>
+
+<div class="lang-content ko" style="display:none">
+
+위의 그래프는 성별에 따른 펭귄의 일일 이동 경로를 보여주며 성별 그룹 간 이동 패턴의 차이를 나타냅니다.
+성별을 고려한 이유는 번식 활동이나 먹이 활동 등에서 성별 그룹 간 차이가 나타날 수 있다고 판단했기 때문입니다.
+
+</div>
+
 
 
 ```{python}
@@ -392,7 +574,10 @@ plt.show()
 
 ```
 
-The plot above shows the daily movement paths, including direction, filtered only to include data with Argos Quality of 3 and 2, which indicate data accuracy.
+
+<div class="lang-content en">
+
+The plot above shows the daily movement paths with directions, filtered only to include data with Argos Quality of 3 and 2, which indicate data accuracy.
 
 Note:
 
@@ -402,6 +587,21 @@ Note:
 
 # Monthly Tracking with Sea Ice Concentration
 
+</div>
+
+<div class="lang-content ko" style="display:none">
+
+위의 그래프는 방향 정보를 포함한 일일 이동 경로를 보여주며, 데이터 정확도를 나타내는 Argos Quality 3와 2의 데이터만 필터링하여 포함했습니다.
+
+참고:
+
+Argos Quality 3 – 오차 150미터 미만 (메시지 4개 이상)
+
+Argos Quality 2 – 오차 150~350미터 (메시지 4개 이상)
+
+# 해빙 농도와 월별 추적
+
+</div>
 
 
 ```{python}
@@ -418,9 +618,24 @@ adpe17 = penguin[penguin['BirdId']=='ADPE17']
 
 ```
 
+<div class="lang-content en">
+
 **Bird ID ADPE24 (Female)**
 
-The individual with the most data is used as a representative example below, and its paths over time are shown with the corresponding sea ice concentration below. This can show the relationship between Sea Ice Concentration and penguin movement patterns.
+The individual with the most data is used as a representative example below, and its paths over time are shown with the corresponding sea ice concentration below. 
+This can show the relationship between Sea Ice Concentration and penguin movement patterns.
+
+</div>
+
+<div class="lang-content ko" style="display:none">
+
+**Bird ID ADPE24 (암컷)**
+
+가장 많은 데이터를 가진 개체를 대표 사례로 사용하였으며 아래에 시간에 따른 이동 경로와 해당 시점의 해빙 농도를 함께 표시했습니다. 
+이를 통해 해빙 농도와 펭귄 이동 패턴 간의 관계를 살펴볼 수 있습니다.
+
+</div>
+
 
 ```{python}
 #| echo: false
@@ -536,7 +751,26 @@ plt.tight_layout()
 plt.show()
 
 ```
-As shown above, ADPE24 has data from January to March 2003, and it traveled from the island towards areas with higher sea ice concentrations. The sea ice concentration varies by month, and it is clear that ADPE24 follows these changes. Although this is just one sample, it suggests that there is a relationship between sea ice and penguin movement patterns.
 
+<div class="lang-content en">
 
-Modified: Oct 10, 2024.
+As shown above, ADPE24 has data from January to March 2003, and it traveled from the island towards areas with higher sea ice concentrations. 
+The sea ice concentration varies by month, and it is clear that ADPE24 follows these changes. 
+Although this is just one sample, it suggests that there is a relationship between sea ice and penguin movement patterns.
+
+This project demonstrates the visualization of Remote Sensing data using projection techniques, allowing integration with other datasets for comparative analysis.
+There are multiple projection methods available, which can be used to effectively represent various geospatial data.
+
+</div>
+
+<div class="lang-content ko" style="display:none">
+
+위에서 보듯 ADPE24는 2003년 1월부터 3월까지의 데이터가 있으며 섬에서 출발하여 해빙 농도가 높은 지역으로 이동한 것을 볼 수 있습니다.
+해빙 농도는 월별로 변하며 ADPE24가 이러한 변화를 따라가는 것이 나타납니다.
+비록 한 개체의 사례이지만 해빙과 펭귄 이동 패턴 사이에 관계가 있을 수 있음을 시사합니다.
+
+이 프로젝트는 지도 투영법을 사용하여 Remote Sensing 데이터를 시각화하고 이를 다른 데이터와 통합하여 비교 분석할 수 있음을 보여줍니다.
+여러 가지 투영법이 존재하며 이를 활용하면 다양한 지리공간 데이터를 효과적으로 표현할 수 있습니다.
+
+</div>
+

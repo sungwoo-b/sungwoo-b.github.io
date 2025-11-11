@@ -15,6 +15,52 @@ keywords: ["machine learning", "AI", "data science"]
 ---
 
 
+<script>
+function switchLang(lang) {
+  document.querySelectorAll('.lang-content').forEach(el => {
+    el.style.display = el.classList.contains(lang) ? 'block' : 'none';
+  });
+  document.querySelectorAll('.lang-button').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.lang === lang);
+  });
+}
+</script>
+
+<style>
+.lang-button {
+  padding: 6px 12px;
+  margin-right: 8px;
+  background-color: #f3f3f3;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.lang-button.active {
+  background-color: #808080;
+  color: white;
+  font-weight: bold;
+}
+.lang-switch {
+  margin-bottom: 1em;
+}
+</style>
+
+<div class="lang-switch">
+  <button class="lang-button active" data-lang="en" onclick="switchLang('en')">English</button>
+  <button class="lang-button" data-lang="ko" onclick="switchLang('ko')">한국어</button>
+</div>
+
+
+
+<div class="lang-content en">
+
+</div>
+
+<div class="lang-content ko" style="display:none">
+
+</div>
+
+
 ```{python}
 #| echo: false
 #| warning: false
