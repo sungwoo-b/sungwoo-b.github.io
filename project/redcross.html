@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.8.25">
+<meta name="generator" content="quarto-1.8.26">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -41,7 +41,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../site_libs/bootstrap/bootstrap-355c415dd6b9922ddaf04a2341011fe1.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
@@ -84,8 +84,6 @@ ul.task-list li input[type="checkbox"] {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a href="../index.html" class="navbar-brand navbar-brand-logo">
-    </a>
     <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">Sungwoo</span>
     </a>
@@ -404,7 +402,7 @@ function switchLang(lang) {
 <section id="객체-탐지-object-detection" class="level2">
 <h2 class="anchored" data-anchor-id="객체-탐지-object-detection">객체 탐지 Object Detection</h2>
 <p>많은 객체 탐지 모델들이 소개되었고 이 프로젝트에서는 Faster R-CNN, RetinaNet, YOLOv8, 그리고 YOLOv11와 같은 아키텍쳐들을 시험했습니다. 효율성과 정확성을 고려하여 Detectron2의 프레임워크를 사용한 <strong>Faster R-CNN</strong>을 선정했고 이를 사용하여 초기 모델을 구상했습니다. Detectron2의 Model Zoo에서 사전 학습된 모델을 fine-tune 하였고 mAP(mean Average Precision) 지표로 성능을 평가했습니다.</p>
-<p>이 모델은 모델은 mAP 0.76을 보여주며 높은 탐지 성능을 보여주었습니다.</p>
+<p>여기서 훈련된 초기 모델은 mAP 0.76을 보여주며 높은 탐지 성능을 보여주었고 다음 예시에서 결과의 일부를 볼 수 있습니다.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../project/img/det_sample.png" class="img-fluid figure-img"></p>

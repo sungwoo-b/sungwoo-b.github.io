@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.8.25">
+<meta name="generator" content="quarto-1.8.26">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -40,7 +40,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../site_libs/bootstrap/bootstrap-355c415dd6b9922ddaf04a2341011fe1.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
@@ -108,15 +108,13 @@ window.Quarto = {
 <link rel="stylesheet" href="../styles.css">
 </head>
 
-<body class="nav-fixed quarto-light">
+<body class="nav-fixed fullcontent quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a href="../index.html" class="navbar-brand navbar-brand-logo">
-    </a>
     <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">Sungwoo</span>
     </a>
@@ -158,18 +156,7 @@ window.Quarto = {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#data" id="toc-data" class="nav-link active" data-scroll-target="#data">Data</a></li>
-  <li><a href="#distributions-of-pitch-related-variables" id="toc-distributions-of-pitch-related-variables" class="nav-link" data-scroll-target="#distributions-of-pitch-related-variables">Distributions of Pitch-Related Variables</a></li>
-  <li><a href="#method" id="toc-method" class="nav-link" data-scroll-target="#method">Method</a></li>
-  <li><a href="#stuff" id="toc-stuff" class="nav-link" data-scroll-target="#stuff">Stuff+</a></li>
-  </ul>
-</nav>
-    </div>
+    
 <!-- main -->
 <main class="content page-columns page-full" id="quarto-document-content">
 
@@ -213,16 +200,63 @@ window.Quarto = {
 </header>
 
 
+<script>
+function switchLang(lang) {
+  document.querySelectorAll('.lang-content').forEach(el => {
+    el.style.display = el.classList.contains(lang) ? 'block' : 'none';
+  });
+  document.querySelectorAll('.lang-button').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.lang === lang);
+  });
+}
+</script>
+<style>
+.lang-button {
+  padding: 6px 12px;
+  margin-right: 8px;
+  background-color: #f3f3f3;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.lang-button.active {
+  background-color: #808080;
+  color: white;
+  font-weight: bold;
+}
+.lang-switch {
+  margin-bottom: 1em;
+}
+</style>
+<div class="lang-switch">
+<p><button class="lang-button active" data-lang="en" onclick="switchLang('en')">English</button> <button class="lang-button" data-lang="ko" onclick="switchLang('ko')">한국어</button></p>
+</div>
+<div class="lang-content en">
 <p>In evaluating a pitcher’s performance, various metrics such as ERA, WHIP, FIP, and SIERA are commonly used. However, these metrics can introduce noise and become less reliable, especially when the sample size is small. This project aims to define a stabilized metric that offers a more consistent and reliable method of assessing a pitcher’s performance.</p>
 <p><strong>Stuff+</strong> is a metric that focuses on evaluating each pitch by considering its physical characteristics such as pitch location, speed, spin rate, and more. Unlike other metrics, which provide an overall performance, Stuff+ offers insights into the effectiveness of each individual pitch. This metric was conceptualized by Max Bay and Eno Sarris, and many people have created and tested their own Stuff+ models.</p>
 <p>For more details about Stuff+, refer to the link provided below.</p>
 <ul>
 <li>https://library.fangraphs.com/pitching/stuff-location-and-pitching-primer/</li>
 </ul>
-<section id="data" class="level3">
+</div>
+<div class="lang-content ko" style="display:none">
+<p>야구에서 투수의 기량을 평가할 때 일반적으로 ERA(평균자책점), WHIP(이닝당 출루 허용률), FIP(수비무관 평균자책점), SIERA(기술적으로 독립적인 평균자책점) 등의 다양한 지표가 사용됩니다. 하지만 이러한 지표들은 표본 크기가 작을 경우 신뢰도가 떨어지는 문제가 발생할 수 있습니다. 이 프로젝트에서는 투수의 기량을 보다 일관되고 신뢰성 있게 평가할 수 있는 안정화된 지표를 정의하고 구현하는 것입니다.</p>
+<p><strong>Stuff+</strong>는 각 구종의 물리적 특성인 투구 위치, 구속, 회전수 등을 고려하여 각 투구 자체를 평가하는 지표입니다. 다른 지표들이 전체적인 성과를 요약해서 보여주는 반면 Stuff+는 각 투구가 얼마나 효과적인지를 개별적으로 분석을 가능하게 합니다. Max Bay와 Eno Sarris가 이 개념을 정립하였으며 이후 많은 사람들이 자신만의 Stuff+ 모델을 만들어 테스트했습니다.</p>
+<p>Stuff+에 대한 자세한 내용은 아래 링크를 참고하세요.</p>
+<ul>
+<li>https://library.fangraphs.com/pitching/stuff-location-and-pitching-primer/</li>
+</ul>
+</div>
+<section id="data" class="level3 lang-content en">
 <h3 class="anchored" data-anchor-id="data">Data</h3>
 <p>The data used in this project is from <strong>Statcast</strong>, accessed via pybaseball, and includes every pitch from the 2023 MLB season.</p>
-<div id="8a5379bc" class="cell" data-message="false" data-results="hide" data-execution_count="2">
+<p>A limited dataset was used to minimize resource usage in this post, therefore some pitches may have relatively smaller sample sizes.</p>
+</section>
+<div class="lang-content ko" style="display:none">
+<p>이 프로젝트에서는 Statcast에서 제공된 2023 MLB시즌 데이터를 Pybaseball 라이브러리를 통해 수집하였고 모든 투구 정보를 포함하고 있습니다.</p>
+<p>이 포스트에서는 처리 속도를 고려하여 한정된 데이터만 사용되어 일부 투구들은 상대적으로 샘플 수가 적게 나타날 수 있습니다.</p>
+</div>
+<div id="773985af" class="cell" data-message="false" data-results="hide" data-execution_count="2">
 <div class="cell-output cell-output-display" data-execution_count="2">
 <div>
 
@@ -382,27 +416,41 @@ window.Quarto = {
 </div>
 </div>
 </div>
+<div class="lang-content en">
 <p>Details about the variables can be found at the link below.</p>
 <ul>
 <li>https://baseballsavant.mlb.com/csv-docs</li>
 </ul>
-</section>
-<section id="distributions-of-pitch-related-variables" class="level3 page-columns page-full">
+<section id="distributions-of-pitch-related-variables" class="level3">
 <h3 class="anchored" data-anchor-id="distributions-of-pitch-related-variables">Distributions of Pitch-Related Variables</h3>
-<div id="99935aee" class="cell page-columns page-full" data-message="false" data-execution_count="3">
-<div class="cell-output cell-output-display page-columns page-full">
-<div class="page-columns page-full">
-<figure class="figure page-columns page-full">
-<p class="page-columns page-full"><img src="stuffplus_files/figure-html/cell-4-output-1.png" width="854" height="854" class="figure-img column-body-outset"></p>
+</section>
+</div>
+<div class="lang-content ko" style="display:none">
+<p>데이터에 관한 자세한 정보는 아래의 링크에서 확인하실 수 있습니다.</p>
+<ul>
+<li>https://baseballsavant.mlb.com/csv-docs</li>
+</ul>
+<section id="투구-관련-변수-분포" class="level3">
+<h3 class="anchored" data-anchor-id="투구-관련-변수-분포">투구 관련 변수 분포</h3>
+</section>
+</div>
+<div id="5cb69e66" class="cell" data-message="false" data-execution_count="3">
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="stuffplus_files/figure-html/cell-4-output-1.png" width="689" height="704" class="figure-img"></p>
 </figure>
 </div>
 </div>
+<div class="cell-output cell-output-display">
+<pre><code>&lt;Figure size 960x960 with 0 Axes&gt;</code></pre>
 </div>
+</div>
+<div class="lang-content en">
 <p>The plots above provide an overview of the data. It allows a better understanding of the data’s structure and distribution.</p>
-</section>
-<section id="method" class="level3 page-columns page-full">
+<section id="method" class="level3">
 <h3 class="anchored" data-anchor-id="method">Method</h3>
-<p>To define Stuff+, the metrics, such as spin rate, horizontal and vertical break, and other pitch characteristics were considered as covariates and CS% (Called Strike Percentage), CSW% (Called Strike + Whiff Percentage), strikeout percentage (K%), and changes in run expectancy as the corresponding response indicators that represent the performance of the pitches. However, after evaluating the consistency of these metrics, Whiff% was chosen as the primary indicator.</p>
+<p>To define Stuff+, the pitch-related metrics, such as spin rate, horizontal and vertical break, and others were considered as covariates and CS% (Called Strike Percentage), CSW% (Called Strike + Whiff Percentage), strikeout percentage (K%), and changes in run expectancy as the corresponding response indicators that represent the performance of the pitches. However, after evaluating the consistency of these metrics, Whiff% was chosen as the primary indicator.</p>
 <p>In this project, Stuff+ was defined using the following formula.</p>
 <p><span class="math display">\[
 \text{Stuff+} = \frac{\text{Predicted Whiff\%}}{\text{mean League predicted Whiff\%}} \cdot 100
@@ -413,9 +461,32 @@ window.Quarto = {
 \]</span></p>
 <p>This Predicted Whiff% is used to ensure stable outputs because it relies on probability. This approach is based on the methodologies referenced from A. Jon (2023), Cameron Grove (2021), and RG Pitching (2023).</p>
 <p>To find the Predicted Whiff%, Logistic Regression, XGBoost, and Random Forest were considered. Although algorithms like XGBoost were more robust compared to Random Forest, Logistic Regression provided the most consistent and reliable results. Therefore, Logistic Regression was used to predict Whiff% in this project.</p>
-<section id="correlation-matrix" class="level4 page-columns page-full">
+<section id="correlation-matrix" class="level4">
 <h4 class="anchored" data-anchor-id="correlation-matrix">Correlation Matrix</h4>
-<div id="eacdf928" class="cell page-columns page-full" data-message="false" data-execution_count="4">
+</section>
+</section>
+</div>
+<div class="lang-content ko" style="display:none">
+<p>위 그래프들은 데이터의 전반적인 구조와 분포를 보여주며 통해 데이터의 특성을 파악할 수 있게 도와줍니다.</p>
+<section id="방법" class="level3">
+<h3 class="anchored" data-anchor-id="방법">방법</h3>
+<p><strong>Stuff+</strong>를 정의하기 위해 회전수, 수평 및 수직 무브먼트등과 같은 여러 투구 관련 지표들을 공변량(covariate)으로 설정하였고 이에 대응하는 반응 지표로 CS% (Called Strike Percentage), CSW% (Called Strike + Whiff Percentage), 삼진율(K%), 그리고 득점 기대값 변화(run expectancy change) 등을 고려하였습니다. 그러나 이러한 지표들의 일관성을 평가한 결과 투구의 성능을 보여주는 지표로 Whiff%가 가장 안정적이고 신뢰할 수 있다고 판단 하였습니다.</p>
+<p>이 프로젝트에서는 <strong>Stuff+</strong>를 다음과 같이 정의합니다.</p>
+<p><span class="math display">\[
+\text{Stuff+} = \frac{\text{Predicted Whiff\%}}{\text{mean League predicted Whiff\%}} \cdot 100
+\]</span></p>
+<p>그리고 Whiff% 다음과 같습니다.</p>
+<p><span class="math display">\[
+\text{Whiff\%} = \frac{\text{Missed Swings (swinging strike, swinging strike blocked, missed bunt)}}{\text{Total Swing Attempts}}
+\]</span></p>
+<p>여기서 Predicted Whiff%는 확률을 기반으로 하는 예측값이며 더 안정적이고 일관된 결과를 도출하기 위하여 사용되었습니다. 이 접근 방식은 A. Jon (2023), Cameron Grove (2021), RG Pitching (2023)의 방법을 참고하였습니다.</p>
+<p>Predicted Whiff%를 추정하기 위해 로지스틱 회귀(Logistic Regression), XGBoost, 랜덤 포레스트(Random Forest) 등의 알고리즘들을 고려하였습니다. 그 중 XGBoost를 사용한 예측값이 대체로 안정적인 수치를 보여줬으나 로지스틱 회귀를 사용한 예측값이 가장 일관되고 신뢰할 만한 결과를 가져다 주어 이프로젝트에서는 Whiff% 예측에 로지스틱 회귀(Logistic Regression)를 최종적으로 사용하였습니다.</p>
+<section id="상관관계-행렬" class="level4">
+<h4 class="anchored" data-anchor-id="상관관계-행렬">상관관계 행렬</h4>
+</section>
+</section>
+</div>
+<div id="7cb5376c" class="cell page-columns page-full" data-message="false" data-execution_count="4">
 <div class="cell-output cell-output-display page-columns page-full">
 <div class="page-columns page-full">
 <figure class="figure page-columns page-full">
@@ -424,11 +495,19 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<p>The plot above shows the correlation matrix, with the last row and column representing Whiff%.</p>
-</section>
-<section id="pitch-location-vs-cs-and-whiff" class="level4 page-columns page-full">
+<div class="lang-content en">
+<p>The plot above shows the correlation matrix, with the last row and column representing Whiff%. The correlation matrix allows to examine the relationships among the pitch-related variables, as they are used to predict Whiff%.</p>
+<section id="pitch-location-vs-cs-and-whiff" class="level4">
 <h4 class="anchored" data-anchor-id="pitch-location-vs-cs-and-whiff">Pitch Location vs CS% and Whiff%</h4>
-<div id="5cc6e535" class="cell page-columns page-full" data-message="false" data-execution_count="5">
+</section>
+</div>
+<div class="lang-content ko" style="display:none">
+<p>위 표는 변수들간 상관관계를 보여주고 있으며 마지막 행과 열을 Whiff%를 나타냅니다. 이를 제공하는 이유는 투구 관련 지표들을 사용하여 Whiff%를 예측하기 때문에 이들의 관계를 알아보기 위함입니다.</p>
+<section id="투구-위치-vs-cs-whiff" class="level4">
+<h4 class="anchored" data-anchor-id="투구-위치-vs-cs-whiff">투구 위치 vs CS% &amp; Whiff%</h4>
+</section>
+</div>
+<div id="b353c8bb" class="cell page-columns page-full" data-message="false" data-execution_count="5">
 <div class="cell-output cell-output-display page-columns page-full">
 <div class="page-columns page-full">
 <figure class="figure page-columns page-full">
@@ -437,12 +516,19 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<p>The plots above show CS% (Called Strike Percentage) and Whiff% based on different pitch locations.</p>
-</section>
-</section>
-<section id="stuff" class="level3 page-columns page-full">
+<div class="lang-content en">
+<p>The plots above show CS% (Called Strike Percentage) and Whiff% based on different pitch locations. Both indicators show distinct patterns depending on the pitch location, illustrating the relationship between them.</p>
+<section id="stuff" class="level3">
 <h3 class="anchored" data-anchor-id="stuff">Stuff+</h3>
-<div id="99326023" class="cell page-columns page-full" data-message="false" data-execution_count="8">
+</section>
+</div>
+<div class="lang-content ko" style="display:none">
+<p>위 플롯들은 투구 위치에 따른 CS% (Called Strike Percentage)와 Whiff%를 나타낸 것입니다. 두 지표 모두 투구 위치에 따라 뚜렷한 패턴을 보이며 이들의 관계를 시각적으로 보여주고 있습니다.</p>
+<section id="stuff-1" class="level3">
+<h3 class="anchored" data-anchor-id="stuff-1">Stuff+</h3>
+</section>
+</div>
+<div id="79e6bd02" class="cell page-columns page-full" data-message="false" data-execution_count="8">
 <div class="cell-output cell-output-display page-columns page-full">
 <div class="page-columns page-full">
 <figure class="figure page-columns page-full">
@@ -451,8 +537,15 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<p>The plot above displays the standardized Stuff+ for each pitch type. Each Stuff+ is centered around 100.</p>
-<div id="8dcb149b" class="cell" data-message="false" data-execution_count="9">
+<div class="lang-content en">
+<p>The plots above show the Stuff+ for each pitch implemented in this project. Stuff+ is normalized with a center at 100, allowing for performance comparison across different pitches.</p>
+<p>Based on these results, the table below presents the Stuff+ of selected MLB pitchers. Using this table, a comparative analysis can be conducted how each pitcher’s pitch types perform according to their Stuff+ ratings.</p>
+</div>
+<div class="lang-content ko" style="display:none">
+<p>위 플롯들은 이 프로젝트에서 구현한 각 투구별 Stuff+ 값을 보여주고 있습니다. Stuff+에는 100을 기준으로 정규화 되어 있으며 이를 통해 각 투구의 Stuff+ 값을 비교하여 성능을 분석할 수 있습니다.</p>
+<p>이 결과를 바탕으로 MLB의 일부 투수들의 Stuff+를 정리한 테이블을 아래에 나타내었습니다. 이 테이블을 활용하여 각 투수 그리고 투구 별 Stuff+ 값을 활용하여 비교 분석이 가능합니다.</p>
+</div>
+<div id="8dde2153" class="cell" data-message="false" data-execution_count="9">
 <div class="cell-output cell-output-display" data-execution_count="9">
 <div>
 
@@ -547,10 +640,8 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<p>The table above shows the Stuff+ for each pitch type by the selected pitchers. This provides a comparative analysis of how each pitcher’s pitch types perform according to their Stuff+ ratings.</p>
 
 
-</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
