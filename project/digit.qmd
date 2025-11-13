@@ -1,9 +1,9 @@
 ---
 title: "Handwritten Digit Classification"
-subtitle: "via Rank-k Approximation"
-description: "Exploration and implementation of Rank-k Approximation in handwritten digit classification"
+subtitle: "Exploration of Feature Extraction"
+description: "Introducing a feature extraction method and evaluating its efficiency and effectiveness"
 date: 2023-12-11
-categories: ["Machine Learning", "Linear Algebra"]
+categories: ["Computer Vision"]
 author: "Sung Woo Bak"
 draft: false
 image: "../img/digit.png"
@@ -11,6 +11,83 @@ layout: "article"
 toc: true
 keywords: ["Image Classification", "Singular Value Decomposition", "Rank-k Approximation"]
 ---
+
+<script>
+function switchLang(lang) {
+  document.querySelectorAll('.lang-content').forEach(el => {
+    el.style.display = el.classList.contains(lang) ? 'block' : 'none';
+  });
+  document.querySelectorAll('.lang-button').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.lang === lang);
+  });
+}
+</script>
+
+<style>
+.lang-button {
+  padding: 6px 12px;
+  margin-right: 8px;
+  background-color: #f3f3f3;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.lang-button.active {
+  background-color: #808080;
+  color: white;
+  font-weight: bold;
+}
+.lang-switch {
+  margin-bottom: 1em;
+}
+</style>
+
+<div class="lang-switch">
+  <button class="lang-button active" data-lang="en" onclick="switchLang('en')">English</button>
+  <button class="lang-button" data-lang="ko" onclick="switchLang('ko')">한국어</button>
+</div>
+
+
+
+<div class="lang-content en">
+
+There are limitations when handling large-scale datasets. 
+Image data is particularly challenging because a single image contains a large amount of information.
+The objective of this project is to process such data, classfy images, and evaluate its performance.
+
+One way to handle data efficiently is to extract features and reduce dimensionality. 
+This project uses **Singular Value Decomposition (SVD)** to extract features and **Rank-k Approximation** to classify images, while examining its efficiency and accuracy.
+
+
+# MNIST Handwritten Digit Data
+
+The data used in this project is the MNIST handwritten digit image dataset, which is widely used for image classification tasks. 
+For more details about the data, refer to the link provided below.
+
+- https://www.tensorflow.org/datasets/catalog/mnist
+
+</div>
+
+<div class="lang-content ko" style="display:none">
+
+대규모 데이터셋을 다루는 데에는 한계가 있습니다.
+특히 이미지 데이터는 하나의 이미지가 많은 정보를 포함하고 있어 처리하기가 더욱 까다롭습니다.
+이 프로젝트의 목표는 이러한 데이터를 효율적으로 처리하고 이미지를 분류하며 그 성능과 효율성을 평가하는 것입니다.
+
+데이터를 효율적으로 처리하는 한 가지 방법은 특징을 추출하여 차원을 축소하는 것입니다.
+이 프로젝트에서는 Singular Value Decomposition(SVD)을 이용하여 특징을 추출하고 Rank-k Approximation 기법을 사용하여 이미지들을 분류하고 그 효율성과 정확성을 평가했습니다.
+
+
+# MNIST 손글씨 숫자 데이터
+
+이 프로젝트에서 사용된 데이터는 이미지 분류 프로젝트에서 널리 사용되는 MNIST 손글씨 숫자 이미지 데이터입니다.
+데이터에 대한 자세한 내용은 아래 링크를 참고하시기 바랍니다.
+
+- https://www.tensorflow.org/datasets/catalog/mnist
+
+</div>
+
+
 
 ```{python}
 #| echo: false
@@ -23,23 +100,6 @@ import pandas as pd
 from scipy.sparse.linalg import svds
 import matplotlib.pyplot as plt
 from tensorflow.keras.datasets import mnist
-```
-
-This project covers image classification using **Rank-k Approximation** via **Singular Value Decomposition (SVD)**. It demonstrates how extracting features from handwritten digit images can lead to effective and accurate classification, by reducing the dimensionality and focusing on important features.
-
-
-# MNIST Handwritten Digit Data
-
-The data used in this project is the MNIST handwritten digit image dataset, which is widely used for image classification tasks. For more detailed information, refer to the link provided below.
-
-- https://www.tensorflow.org/datasets/catalog/mnist
-
-
-```{python}
-#| echo: false
-#| warning: false
-#| message: false
-#| results: 'hide'
 
 def label_modification(label):
   '''
@@ -92,35 +152,83 @@ plt.show()
 
 ```
 
-Above are 16 sample images from the dataset. This dataset contains a total of **70,000** images, with **60,000** images used for the training set and **10,000** images for the test set.
+<div class="lang-content en">
 
+Above are 16 sample images from the dataset. 
+This dataset contains a total of **70,000** images, with **60,000** images used for the training set and **10,000** images for the test set.
 
+# Feature Extraction and Classification
 
-# Rank-k Approximation using SVD
-
-In this project, Rank-k Approximation via Singular Value Decomposition (SVD) is used for classification method. This method extracts essential features and reduces dimensionality, improving efficiency. The SVD decomposition is as follows
+In this project, Rank-k Approximation via Singular Value Decomposition (SVD) is used for classification method. 
+This method extracts essential features and reduces dimensionality, improving efficiency. 
+The Singular Value Decomposition is as follows.
 
 $$
 \text{Image Data} = U_k \Sigma_k V_k^T
 $$
 
-This approach extracts essential information from the data, allowing each digit image to be represented in a reduced form. The focus is on the first **k** left singular vectors U, which capture the important features of the images. The k-th approximation is a linear combination of the vectors $u_1, u_2, \dots, u_k$, representing one element in their span.
+This approach extracts essential information from the data, allowing each digit image to be represented in a reduced form. 
+The focus is on the first **k** left singular vectors U, which capture the important features of the images. 
+The k-th approximation is a linear combination of the vectors $u_1, u_2, \dots, u_k$, representing one element in their span.
 
 $$
 A_k = \sum_{i=1}^{k} \alpha_i u_i
 $$
 
-The error between test images and the k-approximation is calculated using the Euclidean Norm, which measures the difference or distance between two data. The error is computed as
+The error between test images and the k-approximation is calculated using the Euclidean Norm, which measures the difference or distance between two data. 
+The error is computed as
 
 $$ 
 \text{Error} = \| \text{Test Data Set} - \text{k-Approximation} \|_2
 $$
 
-The classification model predicts the digit by finding the smallest error, indicating the closest match between the test image and the k-approximation.
+The classification method predicts the digit by finding the smallest error, indicating the closest match between the test image and the k-approximation.
 
 The goal is to find the **optimal k** that captures most of the data while keeping k as small as possible.
 
 # Result
+
+</div>
+
+<div class="lang-content ko" style="display:none">
+
+위는 이 프로젝트에서 사용하는 데이터셋의 16개의 샘플 이미지입니다.
+이 데이터셋은 총 70,000개의 이미지를 포함하고 있으며 그중 60,000개는 학습용 그리고 10,000개는 검증용으로 활용 하였습니다.
+
+# 특성 추출과 분류 (Feature Extraction and Classification)
+
+이 프로젝트에서는 Singular Value Decomposition (SVD)을 사용하여 특성을 추출하였고 Rank-k Approximation을 사용하여 이미지를 분류했습니다.
+아 방법은 중요한 특성을 추출하여 데이터의 차원을 축소하고 효율성을 향상시킵니다.
+
+Singular Value Decomposition은 다음과 같습니다.
+
+$$
+\text{Image Data} = U_k \Sigma_k V_k^T
+$$
+
+이 접근방식은 데이터의 핵심 정보를 추출하여 각 숫자 이미지를 저차원 형태로 표현할 수 있도록 합니다.
+특히 이미지의 많은 특성을 포함하고 있는 첫번째 k개의 Singular 벡터인 u를 중점에 두고 이를 활용하여 분류를 진행했습니다.
+Rank-k Approximation은 $u_1, u_2, \dots, u_k$들의 선형 결합이고 이들의 부분 공간 (Span) 중 하나입니다.
+
+$$
+A_k = \sum_{i=1}^{k} \alpha_i u_i
+$$
+
+훈련용 이미지들을 사용하여 위와 같은 방법으로 k-Approximation을 구하고 검증용 이미지와의 오차 혹은 거리를 Euclidean Norm을 이용하여 계산합니다.
+오차는 다음과 같습니다.
+
+$$ 
+\text{Error} = \| \text{Test Data Set} - \text{k-Approximation} \|_2
+$$
+
+분류 방법은 오차가 가장 작은 값을 찾아 숫자를 분류하며 이는 테스트 이미지와 k-Approximation 사이에서 가장 근접한 매칭을 의미합니다.
+
+마지막으로는 데이터의 대부분을 포함하면서 가능한 가장 작은 최적의 k를 찾는 것입니다.
+
+# 결과
+
+</div>
+
 
 ```{python}
 #| echo: false
@@ -217,9 +325,24 @@ best_k, best_rate = plot_rate(train_img, test_img, train_label, test_label, 15)
 
 ```
 
-The above plot shows the classification rate for each value of **k**. For most cases, the classification rate is over 90% with k within 15, which demonstrates that dimension reduction was successful while capturing most of the data.
+<div class="lang-content en">
+
+The above plot shows the classification rate for each value of **k**. 
+For most cases, the classification rate is over 90% with k within 15, which demonstrates that dimension reduction was successful while capturing most of the data.
 
 # Confusion Matrix
+
+</div>
+
+<div class="lang-content ko" style="display:none">
+
+위 플롯은 k 별 정확도를 보여줍니다.
+k가 15 이하일 때에도 90% 이상의 정확도를 보여주고 있고 이는 데이터의 대부분의 특성을 포함하면서 차원 축소가 성공적으로 이루어졌음을 보여줍니다.
+
+# 혼동 행렬 (Confusion Matrix)
+
+</div>
+
 
 ```{python}
 #| echo: false
@@ -242,8 +365,16 @@ pd.DataFrame(confusion)
 
 ```
 
-The figure above shows the **confusion matrix** when **k = 6**, comparing the actual labels with the predicted labels. The distribution of results indicates that most predictions were correct.
+<div class="lang-content en">
 
+The figure above shows the **confusion matrix** when **k = 6**, comparing the actual labels with the predicted labels. 
+The distribution of results indicates that most predictions were correct.
 
+</div>
 
-Modified: Oct 18, 2024.
+<div class="lang-content ko" style="display:none">
+
+위 표는 k = 6일 때 혼동 행렬을 나타내며 실제 값과 예측 값을 비교한 것입니다.
+결과 분포를 보면 대부분의 분류가 정확했을을 알 수 있습니다.
+
+</div>

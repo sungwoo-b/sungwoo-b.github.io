@@ -104,7 +104,7 @@ from sklearn.preprocessing import StandardScaler
 
 <div class="lang-content en">
 
-### Data
+# Statcast Data
 
 The data used in this project is from **Statcast**, accessed via pybaseball, and includes every pitch from the 2023 MLB season.
 
@@ -113,6 +113,8 @@ A limited dataset was used to minimize resource usage in this post, therefore so
 </div>
 
 <div class="lang-content ko" style="display:none">
+
+# Statcast 데이터
 
 이 프로젝트에서는 Statcast에서 제공된 2023 MLB시즌 데이터를 Pybaseball 라이브러리를 통해 수집하였고 모든 투구 정보를 포함하고 있습니다. 
 
@@ -198,7 +200,7 @@ Details about the variables can be found at the link below.
 - https://baseballsavant.mlb.com/csv-docs
 
 
-### Distributions of Pitch-Related Variables
+## Distributions of Pitch-Related Variables
 
 </div>
 
@@ -208,7 +210,7 @@ Details about the variables can be found at the link below.
 
 - https://baseballsavant.mlb.com/csv-docs
 
-### 투구 관련 변수 분포
+## 투구 관련 변수 분포
 
 </div>
 
@@ -249,9 +251,7 @@ plt.show()
 
 The plots above provide an overview of the data. It allows a better understanding of the data's structure and distribution. 
 
-
-### Method
-
+# Stuff+ Method
 
 To define Stuff+, the pitch-related metrics, such as spin rate, horizontal and vertical break, and others were considered as covariates and CS% (Called Strike Percentage), CSW% (Called Strike + Whiff Percentage), strikeout percentage (K%), and changes in run expectancy as the corresponding response indicators that represent the performance of the pitches. 
 However, after evaluating the consistency of these metrics, Whiff% was chosen as the primary indicator.
@@ -273,7 +273,7 @@ This Predicted Whiff% is used to ensure stable outputs because it relies on prob
 To find the Predicted Whiff%, Logistic Regression, XGBoost, and Random Forest were considered. Although algorithms like XGBoost were more robust compared to Random Forest, Logistic Regression provided the most consistent and reliable results. Therefore, Logistic Regression was used to predict Whiff% in this project.
 
 
-#### Correlation Matrix
+## Correlation Matrix
 
 
 </div>
@@ -282,7 +282,7 @@ To find the Predicted Whiff%, Logistic Regression, XGBoost, and Random Forest we
 
 위 그래프들은 데이터의 전반적인 구조와 분포를 보여주며 통해 데이터의 특성을 파악할 수 있게 도와줍니다.
 
-### 방법
+# Stuff+ 방법
 
 **Stuff+**를 정의하기 위해 회전수, 수평 및 수직 무브먼트등과 같은 여러 투구 관련 지표들을 공변량(covariate)으로 설정하였고 이에 대응하는 반응 지표로 CS% (Called Strike Percentage), CSW% (Called Strike + Whiff Percentage), 삼진율(K%), 그리고 득점 기대값 변화(run expectancy change) 등을 고려하였습니다.
 그러나 이러한 지표들의 일관성을 평가한 결과 투구의 성능을 보여주는 지표로 Whiff%가 가장 안정적이고 신뢰할 수 있다고 판단 하였습니다.
@@ -306,7 +306,7 @@ Predicted Whiff%를 추정하기 위해 로지스틱 회귀(Logistic Regression)
 그 중 XGBoost를 사용한 예측값이 대체로 안정적인 수치를 보여줬으나 로지스틱 회귀를 사용한 예측값이 가장 일관되고 신뢰할 만한 결과를 가져다 주어 이프로젝트에서는 Whiff% 예측에 로지스틱 회귀(Logistic Regression)를 최종적으로 사용하였습니다.
 
 
-#### 상관관계 행렬
+## 상관관계 행렬
 
 </div>
 
@@ -337,7 +337,7 @@ plt.show()
 The plot above shows the correlation matrix, with the last row and column representing Whiff%.
 The correlation matrix allows to examine the relationships among the pitch-related variables, as they are used to predict Whiff%.
 
-#### Pitch Location vs CS% and Whiff%
+## Pitch Location vs CS% and Whiff%
 
 </div>
 
@@ -346,7 +346,7 @@ The correlation matrix allows to examine the relationships among the pitch-relat
 위 표는 변수들간 상관관계를 보여주고 있으며 마지막 행과 열을 Whiff%를 나타냅니다. 
 이를 제공하는 이유는 투구 관련 지표들을 사용하여 Whiff%를 예측하기 때문에 이들의 관계를 알아보기 위함입니다.
 
-#### 투구 위치 vs CS% & Whiff%
+## 투구 위치 별 CS% & Whiff%
 
 </div>
 
@@ -398,7 +398,7 @@ plt.show()
 The plots above show CS% (Called Strike Percentage) and Whiff% based on different pitch locations.
 Both indicators show distinct patterns depending on the pitch location, illustrating the relationship between them.
 
-### Stuff+
+# Stuff+
 
 </div>
 
@@ -407,7 +407,7 @@ Both indicators show distinct patterns depending on the pitch location, illustra
 위 플롯들은 투구 위치에 따른 CS% (Called Strike Percentage)와 Whiff%를 나타낸 것입니다.
 두 지표 모두 투구 위치에 따라 뚜렷한 패턴을 보이며 이들의 관계를 시각적으로 보여주고 있습니다.
 
-### Stuff+
+# Stuff+
 </div>
 
 
