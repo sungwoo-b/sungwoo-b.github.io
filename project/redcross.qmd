@@ -162,7 +162,7 @@ Building an automated tool for urban risk assessment combining deep learning, cr
 # References
 
 - American Red Cross International Services
-- Development Seed — Housing Passport
+- Development Seed
 - PMI (Indonesian Red Cross Society)
 
 
@@ -203,9 +203,9 @@ Building an automated tool for urban risk assessment combining deep learning, cr
 CVAT (Computer Vision Annotation Tool)을 사용하여 직접 바운딩박스와 속성 입력 작업을 수행하였으며 주석 데이터는 COCO 형식을 활용하였습니다.
 초기 주석 작업을 하기 위해 사전에 재난에 관련된 속성들을 논의하고 정의 했으며 이는 다음과 같습니다.
 
-- Class: Building
+- 클래스: Building
 
-- Attributes
+- 속성
     - Building Quality: High, Medium, Informal
     - Building Type: Residential, Commercial, Mixed, Industrial
     - Presence of Soft Story: No, Yes
