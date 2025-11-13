@@ -230,7 +230,7 @@ CVAT (Computer Vision Annotation Tool)을 사용하여 직접 바운딩박스와
 효율성과 정확성을 고려하여 Detectron2의 프레임워크를 사용한 **Faster R-CNN**을 선정했고 이를 사용하여 초기 모델을 구상했습니다.
 Detectron2의 Model Zoo에서 사전 학습된 모델을 fine-tune 하였고 mAP(mean Average Precision) 지표로 성능을 평가했습니다.
 
-이 모델은 모델은 mAP 0.76을 보여주며 높은 탐지 성능을 보여주었습니다.
+여기서 훈련된 초기 모델은 mAP 0.76을 보여주며 높은 탐지 성능을 보여주었고 다음 예시에서 결과의 일부를 볼 수 있습니다.
 
 ![탐지 예시](../project/img/det_sample.png)
 
