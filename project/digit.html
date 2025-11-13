@@ -9,7 +9,7 @@
 <meta name="author" content="Sung Woo Bak">
 <meta name="dcterms.date" content="2023-12-11">
 <meta name="keywords" content="Image Classification, Singular Value Decomposition, Rank-k Approximation">
-<meta name="description" content="Exploration and implementation of Rank-k Approximation in handwritten digit classification">
+<meta name="description" content="Introducing a feature extraction method and evaluating its efficiency and effectiveness">
 
 <title>Handwritten Digit Classification – Sungwoo</title>
 <style>
@@ -157,17 +157,8 @@ window.Quarto = {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#mnist-handwritten-digit-data" id="toc-mnist-handwritten-digit-data" class="nav-link active" data-scroll-target="#mnist-handwritten-digit-data">MNIST Handwritten Digit Data</a></li>
-  <li><a href="#rank-k-approximation-using-svd" id="toc-rank-k-approximation-using-svd" class="nav-link" data-scroll-target="#rank-k-approximation-using-svd">Rank-k Approximation using SVD</a></li>
-  <li><a href="#result" id="toc-result" class="nav-link" data-scroll-target="#result">Result</a></li>
-  <li><a href="#confusion-matrix" id="toc-confusion-matrix" class="nav-link" data-scroll-target="#confusion-matrix">Confusion Matrix</a></li>
-  </ul>
-</nav>
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+        
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -175,16 +166,15 @@ window.Quarto = {
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title">Handwritten Digit Classification</h1>
-<p class="subtitle lead">via Rank-k Approximation</p>
+<p class="subtitle lead">Exploration of Feature Extraction</p>
   <div class="quarto-categories">
-    <div class="quarto-category">Machine Learning</div>
-    <div class="quarto-category">Linear Algebra</div>
+    <div class="quarto-category">Computer Vision</div>
   </div>
   </div>
 
 <div>
   <div class="description">
-    Exploration and implementation of Rank-k Approximation in handwritten digit classification
+    Introducing a feature extraction method and evaluating its efficiency and effectiveness
   </div>
 </div>
 
@@ -219,14 +209,60 @@ window.Quarto = {
 </header>
 
 
-<p>This project covers image classification using <strong>Rank-k Approximation</strong> via <strong>Singular Value Decomposition (SVD)</strong>. It demonstrates how extracting features from handwritten digit images can lead to effective and accurate classification, by reducing the dimensionality and focusing on important features.</p>
+<script>
+function switchLang(lang) {
+  document.querySelectorAll('.lang-content').forEach(el => {
+    el.style.display = el.classList.contains(lang) ? 'block' : 'none';
+  });
+  document.querySelectorAll('.lang-button').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.lang === lang);
+  });
+}
+</script>
+<style>
+.lang-button {
+  padding: 6px 12px;
+  margin-right: 8px;
+  background-color: #f3f3f3;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.lang-button.active {
+  background-color: #808080;
+  color: white;
+  font-weight: bold;
+}
+.lang-switch {
+  margin-bottom: 1em;
+}
+</style>
+<div class="lang-switch">
+<p><button class="lang-button active" data-lang="en" onclick="switchLang('en')">English</button> <button class="lang-button" data-lang="ko" onclick="switchLang('ko')">한국어</button></p>
+</div>
+<div class="lang-content en">
+<p>There are limitations when handling large-scale datasets. Image data is particularly challenging because a single image contains a large amount of information. The objective of this project is to process such data, classfy images, and evaluate its performance.</p>
+<p>One way to handle data efficiently is to extract features and reduce dimensionality. This project uses <strong>Singular Value Decomposition (SVD)</strong> to extract features and <strong>Rank-k Approximation</strong> to classify images, while examining its efficiency and accuracy.</p>
 <section id="mnist-handwritten-digit-data" class="level1">
 <h1>MNIST Handwritten Digit Data</h1>
-<p>The data used in this project is the MNIST handwritten digit image dataset, which is widely used for image classification tasks. For more detailed information, refer to the link provided below.</p>
+<p>The data used in this project is the MNIST handwritten digit image dataset, which is widely used for image classification tasks. For more details about the data, refer to the link provided below.</p>
 <ul>
 <li>https://www.tensorflow.org/datasets/catalog/mnist</li>
 </ul>
-<div id="e4e62db4" class="cell" data-message="false" data-results="hide" data-execution_count="3">
+</section>
+</div>
+<div class="lang-content ko" style="display:none">
+<p>대규모 데이터셋을 다루는 데에는 한계가 있습니다. 특히 이미지 데이터는 하나의 이미지가 많은 정보를 포함하고 있어 처리하기가 더욱 까다롭습니다. 이 프로젝트의 목표는 이러한 데이터를 효율적으로 처리하고 이미지를 분류하며 그 성능과 효율성을 평가하는 것입니다.</p>
+<p>데이터를 효율적으로 처리하는 한 가지 방법은 특징을 추출하여 차원을 축소하는 것입니다. 이 프로젝트에서는 Singular Value Decomposition(SVD)을 이용하여 특징을 추출하고 Rank-k Approximation 기법을 사용하여 이미지들을 분류하고 그 효율성과 정확성을 평가했습니다.</p>
+<section id="mnist-손글씨-숫자-데이터" class="level1">
+<h1>MNIST 손글씨 숫자 데이터</h1>
+<p>이 프로젝트에서 사용된 데이터는 이미지 분류 프로젝트에서 널리 사용되는 MNIST 손글씨 숫자 이미지 데이터입니다. 데이터에 대한 자세한 내용은 아래 링크를 참고하시기 바랍니다.</p>
+<ul>
+<li>https://www.tensorflow.org/datasets/catalog/mnist</li>
+</ul>
+</section>
+</div>
+<div id="5f4d6f20" class="cell" data-message="false" data-results="hide" data-execution_count="2">
 <div class="cell-output cell-output-stdout">
 <div class="ansi-escaped-output">
 <pre>Downloading data from https://storage.googleapis.com/tensorflow/tf-keras-datasets/mnist.npz
@@ -234,13 +270,13 @@ window.Quarto = {
 
 <span class="ansi-bold">       0/11490434</span> <span class="ansi-white-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">0s</span> 0s/step
 
-<span class="ansi-bold">  925696/11490434</span> <span class="ansi-green-fg">━</span><span class="ansi-white-fg">━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">0s</span> 0us/step
+<span class="ansi-bold">  966656/11490434</span> <span class="ansi-green-fg">━</span><span class="ansi-white-fg">━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">0s</span> 0us/step
 
-<span class="ansi-bold"> 3948544/11490434</span> <span class="ansi-green-fg">━━━━━━</span><span class="ansi-white-fg">━━━━━━━━━━━━━━</span> <span class="ansi-bold">0s</span> 0us/step
+<span class="ansi-bold"> 3784704/11490434</span> <span class="ansi-green-fg">━━━━━━</span><span class="ansi-white-fg">━━━━━━━━━━━━━━</span> <span class="ansi-bold">0s</span> 0us/step
 
-<span class="ansi-bold"> 6963200/11490434</span> <span class="ansi-green-fg">━━━━━━━━━━━━</span><span class="ansi-white-fg">━━━━━━━━</span> <span class="ansi-bold">0s</span> 0us/step
+<span class="ansi-bold"> 6422528/11490434</span> <span class="ansi-green-fg">━━━━━━━━━━━</span><span class="ansi-white-fg">━━━━━━━━━</span> <span class="ansi-bold">0s</span> 0us/step
 
-<span class="ansi-bold">10199040/11490434</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━</span><span class="ansi-white-fg">━━━</span> <span class="ansi-bold">0s</span> 0us/step
+<span class="ansi-bold"> 9134080/11490434</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━</span><span class="ansi-white-fg">━━━━━</span> <span class="ansi-bold">0s</span> 0us/step
 
 <span class="ansi-bold">11490434/11490434</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">0s</span> 0us/step
 </pre>
@@ -249,16 +285,16 @@ window.Quarto = {
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="digit_files/figure-html/cell-4-output-2.png" width="762" height="778" class="figure-img"></p>
+<p><img src="digit_files/figure-html/cell-3-output-2.png" width="762" height="778" class="figure-img"></p>
 </figure>
 </div>
 </div>
 </div>
+<div class="lang-content en">
 <p>Above are 16 sample images from the dataset. This dataset contains a total of <strong>70,000</strong> images, with <strong>60,000</strong> images used for the training set and <strong>10,000</strong> images for the test set.</p>
-</section>
-<section id="rank-k-approximation-using-svd" class="level1">
-<h1>Rank-k Approximation using SVD</h1>
-<p>In this project, Rank-k Approximation via Singular Value Decomposition (SVD) is used for classification method. This method extracts essential features and reduces dimensionality, improving efficiency. The SVD decomposition is as follows</p>
+<section id="feature-extraction-and-classification" class="level1">
+<h1>Feature Extraction and Classification</h1>
+<p>In this project, Rank-k Approximation via Singular Value Decomposition (SVD) is used for classification method. This method extracts essential features and reduces dimensionality, improving efficiency. The Singular Value Decomposition is as follows.</p>
 <p><span class="math display">\[
 \text{Image Data} = U_k \Sigma_k V_k^T
 \]</span></p>
@@ -270,26 +306,60 @@ A_k = \sum_{i=1}^{k} \alpha_i u_i
 <p><span class="math display">\[
 \text{Error} = \| \text{Test Data Set} - \text{k-Approximation} \|_2
 \]</span></p>
-<p>The classification model predicts the digit by finding the smallest error, indicating the closest match between the test image and the k-approximation.</p>
+<p>The classification method predicts the digit by finding the smallest error, indicating the closest match between the test image and the k-approximation.</p>
 <p>The goal is to find the <strong>optimal k</strong> that captures most of the data while keeping k as small as possible.</p>
 </section>
 <section id="result" class="level1">
 <h1>Result</h1>
-<div id="99f84252" class="cell" data-message="false" data-execution_count="5">
+</section>
+</div>
+<div class="lang-content ko" style="display:none">
+<p>위는 이 프로젝트에서 사용하는 데이터셋의 16개의 샘플 이미지입니다. 이 데이터셋은 총 70,000개의 이미지를 포함하고 있으며 그중 60,000개는 학습용 그리고 10,000개는 검증용으로 활용 하였습니다.</p>
+<section id="특성-추출과-분류-feature-extraction-and-classification" class="level1">
+<h1>특성 추출과 분류 (Feature Extraction and Classification)</h1>
+<p>이 프로젝트에서는 Singular Value Decomposition (SVD)을 사용하여 특성을 추출하였고 Rank-k Approximation을 사용하여 이미지를 분류했습니다. 아 방법은 중요한 특성을 추출하여 데이터의 차원을 축소하고 효율성을 향상시킵니다.</p>
+<p>Singular Value Decomposition은 다음과 같습니다.</p>
+<p><span class="math display">\[
+\text{Image Data} = U_k \Sigma_k V_k^T
+\]</span></p>
+<p>이 접근방식은 데이터의 핵심 정보를 추출하여 각 숫자 이미지를 저차원 형태로 표현할 수 있도록 합니다. 특히 이미지의 많은 특성을 포함하고 있는 첫번째 k개의 Singular 벡터인 u를 중점에 두고 이를 활용하여 분류를 진행했습니다. Rank-k Approximation은 <span class="math inline">\(u_1, u_2, \dots, u_k\)</span>들의 선형 결합이고 이들의 부분 공간 (Span) 중 하나입니다.</p>
+<p><span class="math display">\[
+A_k = \sum_{i=1}^{k} \alpha_i u_i
+\]</span></p>
+<p>훈련용 이미지들을 사용하여 위와 같은 방법으로 k-Approximation을 구하고 검증용 이미지와의 오차 혹은 거리를 Euclidean Norm을 이용하여 계산합니다. 오차는 다음과 같습니다.</p>
+<p><span class="math display">\[
+\text{Error} = \| \text{Test Data Set} - \text{k-Approximation} \|_2
+\]</span></p>
+<p>분류 방법은 오차가 가장 작은 값을 찾아 숫자를 분류하며 이는 테스트 이미지와 k-Approximation 사이에서 가장 근접한 매칭을 의미합니다.</p>
+<p>마지막으로는 데이터의 대부분을 포함하면서 가능한 가장 작은 최적의 k를 찾는 것입니다.</p>
+</section>
+<section id="결과" class="level1">
+<h1>결과</h1>
+</section>
+</div>
+<div id="f2a507e4" class="cell" data-message="false" data-execution_count="4">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="digit_files/figure-html/cell-6-output-1.png" width="597" height="449" class="figure-img"></p>
+<p><img src="digit_files/figure-html/cell-5-output-1.png" width="597" height="449" class="figure-img"></p>
 </figure>
 </div>
 </div>
 </div>
+<div class="lang-content en">
 <p>The above plot shows the classification rate for each value of <strong>k</strong>. For most cases, the classification rate is over 90% with k within 15, which demonstrates that dimension reduction was successful while capturing most of the data.</p>
-</section>
 <section id="confusion-matrix" class="level1">
 <h1>Confusion Matrix</h1>
-<div id="8553cea7" class="cell" data-message="false" data-execution_count="6">
-<div class="cell-output cell-output-display" data-execution_count="6">
+</section>
+</div>
+<div class="lang-content ko" style="display:none">
+<p>위 플롯은 k 별 정확도를 보여줍니다. k가 15 이하일 때에도 90% 이상의 정확도를 보여주고 있고 이는 데이터의 대부분의 특성을 포함하면서 차원 축소가 성공적으로 이루어졌음을 보여줍니다.</p>
+<section id="혼동-행렬-confusion-matrix" class="level1">
+<h1>혼동 행렬 (Confusion Matrix)</h1>
+</section>
+</div>
+<div id="b55a541e" class="cell" data-message="false" data-execution_count="5">
+<div class="cell-output cell-output-display" data-execution_count="5">
 <div>
 
 
@@ -446,11 +516,14 @@ A_k = \sum_{i=1}^{k} \alpha_i u_i
 </div>
 </div>
 </div>
+<div class="lang-content en">
 <p>The figure above shows the <strong>confusion matrix</strong> when <strong>k = 6</strong>, comparing the actual labels with the predicted labels. The distribution of results indicates that most predictions were correct.</p>
-<p>Modified: Oct 18, 2024.</p>
+</div>
+<div class="lang-content ko" style="display:none">
+<p>위 표는 k = 6일 때 혼동 행렬을 나타내며 실제 값과 예측 값을 비교한 것입니다. 결과 분포를 보면 대부분의 분류가 정확했을을 알 수 있습니다.</p>
+</div>
 
 
-</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

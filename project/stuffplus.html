@@ -247,16 +247,17 @@ function switchLang(lang) {
 <li>https://library.fangraphs.com/pitching/stuff-location-and-pitching-primer/</li>
 </ul>
 </div>
-<section id="data" class="level3 lang-content en">
-<h3 class="anchored" data-anchor-id="data">Data</h3>
+<section id="statcast-data" class="level1 lang-content en">
+<h1>Statcast Data</h1>
 <p>The data used in this project is from <strong>Statcast</strong>, accessed via pybaseball, and includes every pitch from the 2023 MLB season.</p>
 <p>A limited dataset was used to minimize resource usage in this post, therefore some pitches may have relatively smaller sample sizes.</p>
 </section>
-<div class="lang-content ko" style="display:none">
+<section id="statcast-데이터" class="level1 lang-content ko" style="display:none">
+<h1>Statcast 데이터</h1>
 <p>이 프로젝트에서는 Statcast에서 제공된 2023 MLB시즌 데이터를 Pybaseball 라이브러리를 통해 수집하였고 모든 투구 정보를 포함하고 있습니다.</p>
 <p>이 포스트에서는 처리 속도를 고려하여 한정된 데이터만 사용되어 일부 투구들은 상대적으로 샘플 수가 적게 나타날 수 있습니다.</p>
-</div>
-<div id="773985af" class="cell" data-message="false" data-results="hide" data-execution_count="2">
+</section>
+<div id="2881a808" class="cell" data-message="false" data-results="hide" data-execution_count="2">
 <div class="cell-output cell-output-display" data-execution_count="2">
 <div>
 
@@ -421,8 +422,8 @@ function switchLang(lang) {
 <ul>
 <li>https://baseballsavant.mlb.com/csv-docs</li>
 </ul>
-<section id="distributions-of-pitch-related-variables" class="level3">
-<h3 class="anchored" data-anchor-id="distributions-of-pitch-related-variables">Distributions of Pitch-Related Variables</h3>
+<section id="distributions-of-pitch-related-variables" class="level2">
+<h2 class="anchored" data-anchor-id="distributions-of-pitch-related-variables">Distributions of Pitch-Related Variables</h2>
 </section>
 </div>
 <div class="lang-content ko" style="display:none">
@@ -430,11 +431,11 @@ function switchLang(lang) {
 <ul>
 <li>https://baseballsavant.mlb.com/csv-docs</li>
 </ul>
-<section id="투구-관련-변수-분포" class="level3">
-<h3 class="anchored" data-anchor-id="투구-관련-변수-분포">투구 관련 변수 분포</h3>
+<section id="투구-관련-변수-분포" class="level2">
+<h2 class="anchored" data-anchor-id="투구-관련-변수-분포">투구 관련 변수 분포</h2>
 </section>
 </div>
-<div id="5cb69e66" class="cell" data-message="false" data-execution_count="3">
+<div id="fbfb272a" class="cell" data-message="false" data-execution_count="3">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -448,8 +449,8 @@ function switchLang(lang) {
 </div>
 <div class="lang-content en">
 <p>The plots above provide an overview of the data. It allows a better understanding of the data’s structure and distribution.</p>
-<section id="method" class="level3">
-<h3 class="anchored" data-anchor-id="method">Method</h3>
+<section id="stuff-method" class="level1">
+<h1>Stuff+ Method</h1>
 <p>To define Stuff+, the pitch-related metrics, such as spin rate, horizontal and vertical break, and others were considered as covariates and CS% (Called Strike Percentage), CSW% (Called Strike + Whiff Percentage), strikeout percentage (K%), and changes in run expectancy as the corresponding response indicators that represent the performance of the pitches. However, after evaluating the consistency of these metrics, Whiff% was chosen as the primary indicator.</p>
 <p>In this project, Stuff+ was defined using the following formula.</p>
 <p><span class="math display">\[
@@ -461,15 +462,15 @@ function switchLang(lang) {
 \]</span></p>
 <p>This Predicted Whiff% is used to ensure stable outputs because it relies on probability. This approach is based on the methodologies referenced from A. Jon (2023), Cameron Grove (2021), and RG Pitching (2023).</p>
 <p>To find the Predicted Whiff%, Logistic Regression, XGBoost, and Random Forest were considered. Although algorithms like XGBoost were more robust compared to Random Forest, Logistic Regression provided the most consistent and reliable results. Therefore, Logistic Regression was used to predict Whiff% in this project.</p>
-<section id="correlation-matrix" class="level4">
-<h4 class="anchored" data-anchor-id="correlation-matrix">Correlation Matrix</h4>
+<section id="correlation-matrix" class="level2">
+<h2 class="anchored" data-anchor-id="correlation-matrix">Correlation Matrix</h2>
 </section>
 </section>
 </div>
 <div class="lang-content ko" style="display:none">
 <p>위 그래프들은 데이터의 전반적인 구조와 분포를 보여주며 통해 데이터의 특성을 파악할 수 있게 도와줍니다.</p>
-<section id="방법" class="level3">
-<h3 class="anchored" data-anchor-id="방법">방법</h3>
+<section id="stuff-방법" class="level1">
+<h1>Stuff+ 방법</h1>
 <p><strong>Stuff+</strong>를 정의하기 위해 회전수, 수평 및 수직 무브먼트등과 같은 여러 투구 관련 지표들을 공변량(covariate)으로 설정하였고 이에 대응하는 반응 지표로 CS% (Called Strike Percentage), CSW% (Called Strike + Whiff Percentage), 삼진율(K%), 그리고 득점 기대값 변화(run expectancy change) 등을 고려하였습니다. 그러나 이러한 지표들의 일관성을 평가한 결과 투구의 성능을 보여주는 지표로 Whiff%가 가장 안정적이고 신뢰할 수 있다고 판단 하였습니다.</p>
 <p>이 프로젝트에서는 <strong>Stuff+</strong>를 다음과 같이 정의합니다.</p>
 <p><span class="math display">\[
@@ -481,12 +482,12 @@ function switchLang(lang) {
 \]</span></p>
 <p>여기서 Predicted Whiff%는 확률을 기반으로 하는 예측값이며 더 안정적이고 일관된 결과를 도출하기 위하여 사용되었습니다. 이 접근 방식은 A. Jon (2023), Cameron Grove (2021), RG Pitching (2023)의 방법을 참고하였습니다.</p>
 <p>Predicted Whiff%를 추정하기 위해 로지스틱 회귀(Logistic Regression), XGBoost, 랜덤 포레스트(Random Forest) 등의 알고리즘들을 고려하였습니다. 그 중 XGBoost를 사용한 예측값이 대체로 안정적인 수치를 보여줬으나 로지스틱 회귀를 사용한 예측값이 가장 일관되고 신뢰할 만한 결과를 가져다 주어 이프로젝트에서는 Whiff% 예측에 로지스틱 회귀(Logistic Regression)를 최종적으로 사용하였습니다.</p>
-<section id="상관관계-행렬" class="level4">
-<h4 class="anchored" data-anchor-id="상관관계-행렬">상관관계 행렬</h4>
+<section id="상관관계-행렬" class="level2">
+<h2 class="anchored" data-anchor-id="상관관계-행렬">상관관계 행렬</h2>
 </section>
 </section>
 </div>
-<div id="7cb5376c" class="cell page-columns page-full" data-message="false" data-execution_count="4">
+<div id="137b5fdf" class="cell page-columns page-full" data-message="false" data-execution_count="4">
 <div class="cell-output cell-output-display page-columns page-full">
 <div class="page-columns page-full">
 <figure class="figure page-columns page-full">
@@ -497,17 +498,17 @@ function switchLang(lang) {
 </div>
 <div class="lang-content en">
 <p>The plot above shows the correlation matrix, with the last row and column representing Whiff%. The correlation matrix allows to examine the relationships among the pitch-related variables, as they are used to predict Whiff%.</p>
-<section id="pitch-location-vs-cs-and-whiff" class="level4">
-<h4 class="anchored" data-anchor-id="pitch-location-vs-cs-and-whiff">Pitch Location vs CS% and Whiff%</h4>
+<section id="pitch-location-vs-cs-and-whiff" class="level2">
+<h2 class="anchored" data-anchor-id="pitch-location-vs-cs-and-whiff">Pitch Location vs CS% and Whiff%</h2>
 </section>
 </div>
 <div class="lang-content ko" style="display:none">
 <p>위 표는 변수들간 상관관계를 보여주고 있으며 마지막 행과 열을 Whiff%를 나타냅니다. 이를 제공하는 이유는 투구 관련 지표들을 사용하여 Whiff%를 예측하기 때문에 이들의 관계를 알아보기 위함입니다.</p>
-<section id="투구-위치-vs-cs-whiff" class="level4">
-<h4 class="anchored" data-anchor-id="투구-위치-vs-cs-whiff">투구 위치 vs CS% &amp; Whiff%</h4>
+<section id="투구-위치-별-cs-whiff" class="level2">
+<h2 class="anchored" data-anchor-id="투구-위치-별-cs-whiff">투구 위치 별 CS% &amp; Whiff%</h2>
 </section>
 </div>
-<div id="b353c8bb" class="cell page-columns page-full" data-message="false" data-execution_count="5">
+<div id="55ff04dc" class="cell page-columns page-full" data-message="false" data-execution_count="5">
 <div class="cell-output cell-output-display page-columns page-full">
 <div class="page-columns page-full">
 <figure class="figure page-columns page-full">
@@ -518,17 +519,17 @@ function switchLang(lang) {
 </div>
 <div class="lang-content en">
 <p>The plots above show CS% (Called Strike Percentage) and Whiff% based on different pitch locations. Both indicators show distinct patterns depending on the pitch location, illustrating the relationship between them.</p>
-<section id="stuff" class="level3">
-<h3 class="anchored" data-anchor-id="stuff">Stuff+</h3>
+<section id="stuff" class="level1">
+<h1>Stuff+</h1>
 </section>
 </div>
 <div class="lang-content ko" style="display:none">
 <p>위 플롯들은 투구 위치에 따른 CS% (Called Strike Percentage)와 Whiff%를 나타낸 것입니다. 두 지표 모두 투구 위치에 따라 뚜렷한 패턴을 보이며 이들의 관계를 시각적으로 보여주고 있습니다.</p>
-<section id="stuff-1" class="level3">
-<h3 class="anchored" data-anchor-id="stuff-1">Stuff+</h3>
+<section id="stuff-1" class="level1">
+<h1>Stuff+</h1>
 </section>
 </div>
-<div id="79e6bd02" class="cell page-columns page-full" data-message="false" data-execution_count="8">
+<div id="c8729af5" class="cell page-columns page-full" data-message="false" data-execution_count="8">
 <div class="cell-output cell-output-display page-columns page-full">
 <div class="page-columns page-full">
 <figure class="figure page-columns page-full">
@@ -545,7 +546,7 @@ function switchLang(lang) {
 <p>위 플롯들은 이 프로젝트에서 구현한 각 투구별 Stuff+ 값을 보여주고 있습니다. Stuff+에는 100을 기준으로 정규화 되어 있으며 이를 통해 각 투구의 Stuff+ 값을 비교하여 성능을 분석할 수 있습니다.</p>
 <p>이 결과를 바탕으로 MLB의 일부 투수들의 Stuff+를 정리한 테이블을 아래에 나타내었습니다. 이 테이블을 활용하여 각 투수 그리고 투구 별 Stuff+ 값을 활용하여 비교 분석이 가능합니다.</p>
 </div>
-<div id="8dde2153" class="cell" data-message="false" data-execution_count="9">
+<div id="6d093d9a" class="cell" data-message="false" data-execution_count="9">
 <div class="cell-output cell-output-display" data-execution_count="9">
 <div>
 
