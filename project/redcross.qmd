@@ -1,9 +1,9 @@
 ---
 title: "Street Level Imagery for Humanitarian Analysis"
-subtitle: "In Progress"
-description: "Developing automated tools for street level imagery analysis"
+subtitle: "Developing automated tools for street level imagery analysis"
+description: "This project is currently in progress."
 date: 2025-08-01
-categories: ["Machine Learning", "Compution Vision"]
+categories: ["Machine Learning", "Computer Vision"]
 author: "Sung Woo Bak"
 draft: false
 image: "../img/rc.png"
