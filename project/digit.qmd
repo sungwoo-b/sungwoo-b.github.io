@@ -207,8 +207,8 @@ $$
 $$
 
 이 접근방식은 데이터의 핵심 정보를 추출하여 각 숫자 이미지를 저차원 형태로 표현할 수 있도록 합니다.
-특히 이미지의 많은 특성을 포함하고 있는 첫번째 k개의 Singular 벡터인 u를 중점에 두고 이를 활용하여 분류를 진행했습니다.
-Rank-k Approximation은 $u_1, u_2, \dots, u_k$들의 선형 결합이고 이들의 부분 공간 (Span) 중 하나입니다.
+특히 이미지의 많은 특성을 포함하고 있는 첫번째 k개의 Singular 벡터인 $u$를 중점에 두고 이를 활용하여 분류를 진행했습니다.
+분류 기법으로 사용한 Rank-k Approximation은 $u_1, u_2, \dots, u_k$들의 선형 결합이고 이들의 부분공간 (Span) 중 하나입니다.
 
 $$
 A_k = \sum_{i=1}^{k} \alpha_i u_i
@@ -218,7 +218,7 @@ $$
 오차는 다음과 같습니다.
 
 $$ 
-\text{Error} = \| \text{Test Data Set} - \text{k-Approximation} \|_2
+\text{Error} = \| \text{Image} - \text{k-Approximation} \|_2
 $$
 
 분류 방법은 오차가 가장 작은 값을 찾아 숫자를 분류하며 이는 테스트 이미지와 k-Approximation 사이에서 가장 근접한 매칭을 의미합니다.
