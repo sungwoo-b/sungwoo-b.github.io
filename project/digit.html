@@ -262,7 +262,7 @@ function switchLang(lang) {
 </ul>
 </section>
 </div>
-<div id="b4074727" class="cell" data-message="false" data-results="hide" data-execution_count="2">
+<div id="c893a0d2" class="cell" data-message="false" data-results="hide" data-execution_count="2">
 <div class="cell-output cell-output-stdout">
 <div class="ansi-escaped-output">
 <pre>Downloading data from https://storage.googleapis.com/tensorflow/tf-keras-datasets/mnist.npz
@@ -270,7 +270,9 @@ function switchLang(lang) {
 
 <span class="ansi-bold">       0/11490434</span> <span class="ansi-white-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">0s</span> 0s/step
 
-<span class="ansi-bold"> 4202496/11490434</span> <span class="ansi-green-fg">━━━━━━━</span><span class="ansi-white-fg">━━━━━━━━━━━━━</span> <span class="ansi-bold">0s</span> 0us/step
+<span class="ansi-bold"> 2154496/11490434</span> <span class="ansi-green-fg">━━━</span><span class="ansi-white-fg">━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">0s</span> 0us/step
+
+<span class="ansi-bold">10354688/11490434</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━</span><span class="ansi-white-fg">━━</span> <span class="ansi-bold">0s</span> 0us/step
 
 <span class="ansi-bold">11490434/11490434</span> <span class="ansi-green-fg">━━━━━━━━━━━━━━━━━━━━</span> <span class="ansi-bold">0s</span> 0us/step
 </pre>
@@ -316,13 +318,13 @@ A_k = \sum_{i=1}^{k} \alpha_i u_i
 <p><span class="math display">\[
 \text{Image Data} = U_k \Sigma_k V_k^T
 \]</span></p>
-<p>이 접근방식은 데이터의 핵심 정보를 추출하여 각 숫자 이미지를 저차원 형태로 표현할 수 있도록 합니다. 특히 이미지의 많은 특성을 포함하고 있는 첫번째 k개의 Singular 벡터인 u를 중점에 두고 이를 활용하여 분류를 진행했습니다. Rank-k Approximation은 <span class="math inline">\(u_1, u_2, \dots, u_k\)</span>들의 선형 결합이고 이들의 부분 공간 (Span) 중 하나입니다.</p>
+<p>이 접근방식은 데이터의 핵심 정보를 추출하여 각 숫자 이미지를 저차원 형태로 표현할 수 있도록 합니다. 특히 이미지의 많은 특성을 포함하고 있는 첫번째 k개의 Singular 벡터인 <span class="math inline">\(u\)</span>를 중점에 두고 이를 활용하여 분류를 진행했습니다. 분류 기법으로 사용한 Rank-k Approximation은 <span class="math inline">\(u_1, u_2, \dots, u_k\)</span>들의 선형 결합이고 이들의 부분공간 (Span) 중 하나입니다.</p>
 <p><span class="math display">\[
 A_k = \sum_{i=1}^{k} \alpha_i u_i
 \]</span></p>
 <p>훈련용 이미지들을 사용하여 위와 같은 방법으로 k-Approximation을 구하고 검증용 이미지와의 오차 혹은 거리를 Euclidean Norm을 이용하여 계산합니다. 오차는 다음과 같습니다.</p>
 <p><span class="math display">\[
-\text{Error} = \| \text{Test Data Set} - \text{k-Approximation} \|_2
+\text{Error} = \| \text{Image} - \text{k-Approximation} \|_2
 \]</span></p>
 <p>분류 방법은 오차가 가장 작은 값을 찾아 숫자를 분류하며 이는 테스트 이미지와 k-Approximation 사이에서 가장 근접한 매칭을 의미합니다.</p>
 <p>마지막으로는 데이터의 대부분을 포함하면서 가능한 가장 작은 최적의 k를 찾는 것입니다.</p>
@@ -331,7 +333,7 @@ A_k = \sum_{i=1}^{k} \alpha_i u_i
 <h1>결과</h1>
 </section>
 </div>
-<div id="389abb22" class="cell" data-message="false" data-execution_count="4">
+<div id="ae3774b1" class="cell" data-message="false" data-execution_count="4">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -352,7 +354,7 @@ A_k = \sum_{i=1}^{k} \alpha_i u_i
 <h1>혼동 행렬 (Confusion Matrix)</h1>
 </section>
 </div>
-<div id="3f7d9cdb" class="cell" data-message="false" data-execution_count="5">
+<div id="49a44a5b" class="cell" data-message="false" data-execution_count="5">
 <div class="cell-output cell-output-display" data-execution_count="5">
 <div>
 
