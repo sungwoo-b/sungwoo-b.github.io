@@ -70,7 +70,7 @@ For more details about Stuff+, refer to the link provided below.
 
 **Stuff+**는 각 구종의 물리적 특성인 투구 위치, 구속, 회전수 등을 고려하여 각 투구 자체를 평가하는 지표입니다.
 다른 지표들이 전체적인 성과를 요약해서 보여주는 반면 Stuff+는 각 투구가 얼마나 효과적인지를 개별적으로 분석을 가능하게 합니다.
-Max Bay와 Eno Sarris가 이 개념을 정립하였으며 이후 많은 사람들이 자신만의 Stuff+ 모델을 만들어 테스트했습니다.
+Max Bay와 Eno Sarris가 이 개념을 정립하였으며 이후 많은 사람들이 자신만의 Stuff+ 모델을 만들어 시험하였습니다.
 
 Stuff+에 대한 자세한 내용은 아래 링크를 참고하세요.
 
@@ -227,7 +227,7 @@ Details about the variables can be found at the link below.
 dist_df = pitch[['pitch_name', 'p_throws', 'release_speed', 'release_pos_x', 'release_pos_z', 'pfx_x', 'pfx_z', 'plate_x',
                  'plate_z', 'vx0', 'vy0', 'vz0', 'ax', 'ay', 'az', 'effective_speed', 'release_spin_rate', 'release_extension', 'release_pos_y', 'spin_axis']]
 
-fig, axes = plt.subplots(nrows=5, ncols=4, figsize=(9, 9))
+fig, axes = plt.subplots(nrows=5, ncols=4, figsize=(10, 10), dpi=80)
 axes = axes.flatten()
 
 for ax, column in zip(axes, dist_df.columns):
@@ -241,7 +241,6 @@ for ax, column in zip(axes, dist_df.columns):
     ax.set_xticks([])
     ax.set_yticks([]) 
 
-plt.figure(figsize=(10, 10))
 plt.tight_layout()
 plt.show()
 
