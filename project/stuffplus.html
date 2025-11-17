@@ -241,7 +241,7 @@ function switchLang(lang) {
 </div>
 <div class="lang-content ko" style="display:none">
 <p>야구에서 투수의 기량을 평가할 때 일반적으로 ERA(평균자책점), WHIP(이닝당 출루 허용률), FIP(수비무관 평균자책점), SIERA(기술적으로 독립적인 평균자책점) 등의 다양한 지표가 사용됩니다. 하지만 이러한 지표들은 표본 크기가 작을 경우 신뢰도가 떨어지는 문제가 발생할 수 있습니다. 이 프로젝트에서는 투수의 기량을 보다 일관되고 신뢰성 있게 평가할 수 있는 안정화된 지표를 정의하고 구현하는 것입니다.</p>
-<p><strong>Stuff+</strong>는 각 구종의 물리적 특성인 투구 위치, 구속, 회전수 등을 고려하여 각 투구 자체를 평가하는 지표입니다. 다른 지표들이 전체적인 성과를 요약해서 보여주는 반면 Stuff+는 각 투구가 얼마나 효과적인지를 개별적으로 분석을 가능하게 합니다. Max Bay와 Eno Sarris가 이 개념을 정립하였으며 이후 많은 사람들이 자신만의 Stuff+ 모델을 만들어 테스트했습니다.</p>
+<p><strong>Stuff+</strong>는 각 구종의 물리적 특성인 투구 위치, 구속, 회전수 등을 고려하여 각 투구 자체를 평가하는 지표입니다. 다른 지표들이 전체적인 성과를 요약해서 보여주는 반면 Stuff+는 각 투구가 얼마나 효과적인지를 개별적으로 분석을 가능하게 합니다. Max Bay와 Eno Sarris가 이 개념을 정립하였으며 이후 많은 사람들이 자신만의 Stuff+ 모델을 만들어 시험하였습니다.</p>
 <p>Stuff+에 대한 자세한 내용은 아래 링크를 참고하세요.</p>
 <ul>
 <li>https://library.fangraphs.com/pitching/stuff-location-and-pitching-primer/</li>
@@ -257,7 +257,7 @@ function switchLang(lang) {
 <p>이 프로젝트에서는 Statcast에서 제공된 2023 MLB시즌 데이터를 Pybaseball 라이브러리를 통해 수집하였고 모든 투구 정보를 포함하고 있습니다.</p>
 <p>이 포스트에서는 처리 속도를 고려하여 한정된 데이터만 사용되어 일부 투구들은 상대적으로 샘플 수가 적게 나타날 수 있습니다.</p>
 </section>
-<div id="7965090b" class="cell" data-message="false" data-results="hide" data-execution_count="2">
+<div id="b698f031" class="cell" data-message="false" data-results="hide" data-execution_count="2">
 <div class="cell-output cell-output-display" data-execution_count="2">
 <div>
 
@@ -435,16 +435,13 @@ function switchLang(lang) {
 <h2 class="anchored" data-anchor-id="투구-관련-변수-분포">투구 관련 변수 분포</h2>
 </section>
 </div>
-<div id="75f44884" class="cell" data-message="false" data-execution_count="3">
+<div id="3c35a9ad" class="cell" data-message="false" data-execution_count="3">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="stuffplus_files/figure-html/cell-4-output-1.png" width="689" height="704" class="figure-img"></p>
+<p><img src="stuffplus_files/figure-html/cell-4-output-1.png" width="792" height="792" class="figure-img"></p>
 </figure>
 </div>
-</div>
-<div class="cell-output cell-output-display">
-<pre><code>&lt;Figure size 960x960 with 0 Axes&gt;</code></pre>
 </div>
 </div>
 <div class="lang-content en">
@@ -487,7 +484,7 @@ function switchLang(lang) {
 </section>
 </section>
 </div>
-<div id="9cdd79fc" class="cell page-columns page-full" data-message="false" data-execution_count="4">
+<div id="37dd2bee" class="cell page-columns page-full" data-message="false" data-execution_count="4">
 <div class="cell-output cell-output-display page-columns page-full">
 <div class="page-columns page-full">
 <figure class="figure page-columns page-full">
@@ -508,7 +505,7 @@ function switchLang(lang) {
 <h2 class="anchored" data-anchor-id="투구-위치-별-cs-whiff">투구 위치 별 CS% &amp; Whiff%</h2>
 </section>
 </div>
-<div id="f13d4cfd" class="cell page-columns page-full" data-message="false" data-execution_count="5">
+<div id="27c03950" class="cell page-columns page-full" data-message="false" data-execution_count="5">
 <div class="cell-output cell-output-display page-columns page-full">
 <div class="page-columns page-full">
 <figure class="figure page-columns page-full">
@@ -529,7 +526,7 @@ function switchLang(lang) {
 <h1>Stuff+</h1>
 </section>
 </div>
-<div id="c6d61cc3" class="cell page-columns page-full" data-message="false" data-execution_count="8">
+<div id="9ae2988e" class="cell page-columns page-full" data-message="false" data-execution_count="8">
 <div class="cell-output cell-output-display page-columns page-full">
 <div class="page-columns page-full">
 <figure class="figure page-columns page-full">
@@ -546,7 +543,7 @@ function switchLang(lang) {
 <p>위 플롯들은 이 프로젝트에서 구현한 각 투구별 Stuff+ 값을 보여주고 있습니다. Stuff+에는 100을 기준으로 정규화 되어 있으며 이를 통해 각 투구의 Stuff+ 값을 비교하여 성능을 분석할 수 있습니다.</p>
 <p>이 결과를 바탕으로 MLB의 일부 투수들의 Stuff+를 정리한 테이블을 아래에 나타내었습니다. 이 테이블을 활용하여 각 투수 그리고 투구 별 Stuff+ 값을 활용하여 비교 분석이 가능합니다.</p>
 </div>
-<div id="5b7283c9" class="cell" data-message="false" data-execution_count="9">
+<div id="08fdb023" class="cell" data-message="false" data-execution_count="9">
 <div class="cell-output cell-output-display" data-execution_count="9">
 <div>
 
