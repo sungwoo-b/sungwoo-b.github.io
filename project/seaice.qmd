@@ -98,11 +98,10 @@ Details about the Polar Stereographic Projection can be found from the link belo
 <div class="lang-content ko" style="display:none">
 
 이 프로젝트는 NOAA Polar Watch의 원격 감지(Remote Sensing) 데이터를 활용하여 평면지도에 적용할 수 있는 투영법(projection)과 동물 위치 추적(Animal Telemetry) 데이터를 통합한 분석을 소개합니다.
+원격 감지 데이터 중에는 널리 알려진 해빙에 관한 데이터도 포함되어 있습니다. 이 프로젝트에서는 남극의 해빙 농도 데이터를 가지고 평면 지도에 투영법에 시각화 하였으며 여기에 Adelie 펭귄 추적 데이터를 추가하여 어떠한 분석이 가능한지를 보여주었습니다.
+
 
 # 해빙 농도 테이터 (Sea Ice Concentration)
-
-원격 감지 데이터 중에는 널리 알려진 해빙에 관한 데이터도 포함되어 있습니다.
-이 프로젝트에서는 남극의 해빙 농도 데이터를 가지고 평면 지도에 시각화할 수 있는 투영법을 소개하고 투영된 지도에 Adelie 펭귄 추적 데이터를 추가하여 어떠한 분석이 가능한지를 보여줍니다.
 
 해빙 농도 데이터는 NOAA Polar Watch ERDDAP 데이터 서버에서 얻었으며 이 프로젝트에서는 NetCDF 형식을 사용했습니다. 
 이 데이터는 대표적으로 시간, 좌표, 해빙 농도 등 여러 정보를 포함하고 있습니다.
@@ -114,7 +113,7 @@ Details about the Polar Stereographic Projection can be found from the link belo
 ### 남극 투영법 (South Polar Projections)
 
 지구는 구형이기 때문에 평면 지도에 나타낼 경우 왜곡이 발생합니다. 
-그러나 아래에서 소개하는 두 가지 방법을 사용하면 해빙 데이터 뿐 아니라 다른 지리 공간 데이터도 평면 지도에 시각화할 수 있습니다.
+그러나 아래에서 소개하는 두 가지 방법을 사용하면 해빙 데이터 뿐 아니라 다른 지리공간 데이터도 평면 지도에 시각화할 수 있습니다.
 
 **I. Polar Stereographic Projection**
 
@@ -765,12 +764,12 @@ There are multiple projection methods available, which can be used to effectivel
 
 <div class="lang-content ko" style="display:none">
 
-위에서 보듯 ADPE24는 2003년 1월부터 3월까지의 데이터가 있으며 섬에서 출발하여 해빙 농도가 높은 지역으로 이동한 것을 볼 수 있습니다.
+ADPE24는 2003년 1월부터 3월까지의 데이터가 존재하며 위에서 보이듯 섬에서 출발하여 해빙 농도가 높은 지역으로 이동한 것을 볼 수 있습니다.
 해빙 농도는 월별로 변하며 ADPE24가 이러한 변화를 따라가는 것이 나타납니다.
 비록 한 개체의 사례이지만 해빙과 펭귄 이동 패턴 사이에 관계가 있을 수 있음을 시사합니다.
 
-이 프로젝트는 지도 투영법을 사용하여 Remote Sensing 데이터를 시각화하고 이를 다른 데이터와 통합하여 비교 분석할 수 있음을 보여줍니다.
-여러 가지 투영법이 존재하며 이를 활용하면 다양한 지리공간 데이터를 효과적으로 표현할 수 있습니다.
+이 프로젝트는 지도 투영법을 사용하여 원격 탐지(Remote Sensing) 데이터를 시각화하고 이를 다른 데이터와 통합하여 비교 분석할 수 있음을 보여줍니다.
+또한 여러 가지 투영법이 존재하며 이를 활용하면 다양한 지리공간 데이터를 효과적으로 표현할 수 있습니다.
 
 </div>
 
