@@ -6,11 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Sung Woo Bak &amp; Adam Hetherwick">
-<meta name="dcterms.date" content="2024-06-10">
-<meta name="description" content="Implementation of a metric for evaluating pitch performance, focusing on analyzing Whiff%">
+<meta name="description" content="Key Concepts from Probability Theory">
 
-<title>Stuff+ – Sungwoo</title>
+<title>Probability Theory – Sungwoo</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -26,7 +24,7 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../site_libs/quarto-nav/headroom.min.js"></script>
 <script src="../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
@@ -71,9 +69,6 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
-
-<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -108,7 +103,7 @@ window.Quarto = {
 <link rel="stylesheet" href="../styles.css">
 </head>
 
-<body class="nav-fixed fullcontent quarto-light">
+<body class="nav-fixed quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -156,14 +151,44 @@ window.Quarto = {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#discrete-distributions" id="toc-discrete-distributions" class="nav-link active" data-scroll-target="#discrete-distributions">Discrete Distributions</a>
+  <ul class="collapse">
+  <li><a href="#bernoulli-distribution" id="toc-bernoulli-distribution" class="nav-link" data-scroll-target="#bernoulli-distribution">Bernoulli Distribution</a></li>
+  <li><a href="#binomial-distribution" id="toc-binomial-distribution" class="nav-link" data-scroll-target="#binomial-distribution">Binomial Distribution</a>
+  <ul class="collapse">
+  <li><a href="#python-code" id="toc-python-code" class="nav-link" data-scroll-target="#python-code">Python Code</a></li>
+  </ul></li>
+  <li><a href="#poisson-distribution" id="toc-poisson-distribution" class="nav-link" data-scroll-target="#poisson-distribution">Poisson Distribution</a></li>
+  <li><a href="#geometric-distribution" id="toc-geometric-distribution" class="nav-link" data-scroll-target="#geometric-distribution">Geometric Distribution</a></li>
+  <li><a href="#negative-binomial-distribution" id="toc-negative-binomial-distribution" class="nav-link" data-scroll-target="#negative-binomial-distribution">Negative Binomial Distribution</a></li>
+  </ul></li>
+  <li><a href="#continuous-distributions" id="toc-continuous-distributions" class="nav-link" data-scroll-target="#continuous-distributions">Continuous Distributions</a>
+  <ul class="collapse">
+  <li><a href="#normal-distribution" id="toc-normal-distribution" class="nav-link" data-scroll-target="#normal-distribution">Normal Distribution</a></li>
+  <li><a href="#exponential-distribution" id="toc-exponential-distribution" class="nav-link" data-scroll-target="#exponential-distribution">Exponential Distribution</a></li>
+  <li><a href="#gamma-distribution" id="toc-gamma-distribution" class="nav-link" data-scroll-target="#gamma-distribution">Gamma Distribution</a></li>
+  <li><a href="#chi-square-distribution" id="toc-chi-square-distribution" class="nav-link" data-scroll-target="#chi-square-distribution">Chi-Square Distribution</a></li>
+  <li><a href="#students-t-distribution" id="toc-students-t-distribution" class="nav-link" data-scroll-target="#students-t-distribution">Student’s t-distribution</a></li>
+  <li><a href="#f-distribution" id="toc-f-distribution" class="nav-link" data-scroll-target="#f-distribution">F-distribution</a></li>
+  <li><a href="#beta-distribution" id="toc-beta-distribution" class="nav-link" data-scroll-target="#beta-distribution">Beta Distribution</a></li>
+  <li><a href="#relationships-between-distributions" id="toc-relationships-between-distributions" class="nav-link" data-scroll-target="#relationships-between-distributions">Relationships Between Distributions</a></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary">Summary</a></li>
+  <li><a href="#key-points" id="toc-key-points" class="nav-link" data-scroll-target="#key-points">Key Points</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
 <!-- main -->
-<main class="content page-columns page-full" id="quarto-document-content">
+<main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Stuff+</h1>
-<p class="subtitle lead">MLB Pitcher Evaluation by Stabilized Metric</p>
+<h1 class="title">Probability Theory</h1>
   <div class="quarto-categories">
     <div class="quarto-category">Statistics</div>
   </div>
@@ -171,26 +196,14 @@ window.Quarto = {
 
 <div>
   <div class="description">
-    Implementation of a metric for evaluating pitch performance, focusing on analyzing Whiff%
+    Key Concepts from Probability Theory
   </div>
 </div>
 
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>Sung Woo Bak &amp; Adam Hetherwick </p>
-          </div>
-  </div>
     
-    <div>
-    <div class="quarto-title-meta-heading">Published</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">June 10, 2024</p>
-    </div>
-  </div>
   
     
   </div>
@@ -200,446 +213,396 @@ window.Quarto = {
 </header>
 
 
-<script>
-function switchLang(lang) {
-  document.querySelectorAll('.lang-content').forEach(el => {
-    el.style.display = el.classList.contains(lang) ? 'block' : 'none';
-  });
-  document.querySelectorAll('.lang-button').forEach(btn => {
-    btn.classList.toggle('active', btn.dataset.lang === lang);
-  });
-}
-</script>
-<style>
-.lang-button {
-  padding: 6px 12px;
-  margin-right: 8px;
-  background-color: #f3f3f3;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  cursor: pointer;
-}
-.lang-button.active {
-  background-color: #808080;
-  color: white;
-  font-weight: bold;
-}
-.lang-switch {
-  margin-bottom: 1em;
-}
-</style>
-<div class="lang-switch">
-<p><button class="lang-button active" data-lang="en" onclick="switchLang('en')">English</button> <button class="lang-button" data-lang="ko" onclick="switchLang('ko')">한국어</button></p>
-</div>
-<div class="lang-content en">
-<p>In evaluating a pitcher’s performance, various metrics such as ERA, WHIP, FIP, and SIERA are commonly used. However, these metrics can introduce noise and become less reliable, especially when the sample size is small. This project aims to define a stabilized metric that offers a more consistent and reliable method of assessing a pitcher’s performance.</p>
-<p><strong>Stuff+</strong> is a metric that focuses on evaluating each pitch by considering its physical characteristics such as pitch location, speed, spin rate, and more. Unlike other metrics, which provide an overall performance, Stuff+ offers insights into the effectiveness of each individual pitch. This metric was conceptualized by Max Bay and Eno Sarris, and many people have created and tested their own Stuff+ models.</p>
-<p>For more details about Stuff+, refer to the link provided below.</p>
-<ul>
-<li>https://library.fangraphs.com/pitching/stuff-location-and-pitching-primer/</li>
-</ul>
-</div>
-<div class="lang-content ko" style="display:none">
-<p>야구에서 투수의 기량을 평가할 때 일반적으로 ERA(평균자책점), WHIP(이닝당 출루 허용률), FIP(수비무관 평균자책점), SIERA(기술적으로 독립적인 평균자책점) 등의 다양한 지표가 사용됩니다. 하지만 이러한 지표들은 표본 크기가 작을 경우 신뢰도가 떨어지는 문제가 발생할 수 있습니다. 이 프로젝트에서는 투수의 기량을 보다 일관되고 신뢰성 있게 평가할 수 있는 안정화된 지표를 정의하고 구현하는 것입니다.</p>
-<p><strong>Stuff+</strong>는 각 구종의 물리적 특성인 투구 위치, 구속, 회전수 등을 고려하여 각 투구 자체를 평가하는 지표입니다. 다른 지표들이 전체적인 성과를 요약해서 보여주는 반면 Stuff+는 각 투구가 얼마나 효과적인지를 개별적으로 분석을 가능하게 합니다. Max Bay와 Eno Sarris가 이 개념을 정립하였으며 이후 많은 사람들이 자신만의 Stuff+ 모델을 만들어 시험하였습니다.</p>
-<p>Stuff+에 대한 자세한 내용은 아래 링크를 참고하세요.</p>
-<ul>
-<li>https://library.fangraphs.com/pitching/stuff-location-and-pitching-primer/</li>
-</ul>
-</div>
-<section id="statcast-data" class="level1 lang-content en">
-<h1>Statcast Data</h1>
-<p>The data used in this project is from <strong>Statcast</strong>, accessed via pybaseball, and includes every pitch from the 2023 MLB season.</p>
-<p>A limited dataset was used to minimize resource usage in this post, therefore some pitches may have relatively smaller sample sizes.</p>
-</section>
-<section id="statcast-데이터" class="level1 lang-content ko" style="display:none">
-<h1>Statcast 데이터</h1>
-<p>이 프로젝트에서는 Statcast에서 제공된 2023 MLB시즌 데이터를 Pybaseball 라이브러리를 통해 수집하였고 모든 투구 정보를 포함하고 있습니다.</p>
-<p>이 포스트에서는 처리 속도를 고려하여 한정된 데이터만 사용되어 일부 투구들은 상대적으로 샘플 수가 적게 나타날 수 있습니다.</p>
-</section>
-<div id="47afadff" class="cell" data-message="false" data-results="hide" data-execution_count="2">
-<div class="cell-output cell-output-display" data-execution_count="2">
-<div>
-
-
-<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
-<thead>
-<tr class="header">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">player_name</th>
-<th data-quarto-table-cell-role="th">pitch_name</th>
-<th data-quarto-table-cell-role="th">description</th>
-<th data-quarto-table-cell-role="th">release_speed</th>
-<th data-quarto-table-cell-role="th">release_pos_x</th>
-<th data-quarto-table-cell-role="th">release_pos_z</th>
-<th data-quarto-table-cell-role="th">p_throws</th>
-<th data-quarto-table-cell-role="th">pfx_x</th>
-<th data-quarto-table-cell-role="th">pfx_z</th>
-<th data-quarto-table-cell-role="th">plate_x</th>
-<th data-quarto-table-cell-role="th">...</th>
-<th data-quarto-table-cell-role="th">az</th>
-<th data-quarto-table-cell-role="th">effective_speed</th>
-<th data-quarto-table-cell-role="th">release_spin_rate</th>
-<th data-quarto-table-cell-role="th">release_extension</th>
-<th data-quarto-table-cell-role="th">release_pos_y</th>
-<th data-quarto-table-cell-role="th">spin_axis</th>
-<th data-quarto-table-cell-role="th">delta_run_exp</th>
-<th data-quarto-table-cell-role="th">pitch_name_label</th>
-<th data-quarto-table-cell-role="th">description_label</th>
-<th data-quarto-table-cell-role="th">cs</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<th data-quarto-table-cell-role="th">0</th>
-<td>Martinez, Nick</td>
-<td>CU</td>
-<td>F</td>
-<td>79.5</td>
-<td>-1.79</td>
-<td>6.29</td>
-<td>1</td>
-<td>0.23</td>
-<td>-1.31</td>
-<td>0.14</td>
-<td>...</td>
-<td>-44.94</td>
-<td>78.8</td>
-<td>2583</td>
-<td>6.0</td>
-<td>54.49</td>
-<td>18</td>
-<td>0.000</td>
-<td>1</td>
-<td>4</td>
-<td>0</td>
-</tr>
-<tr class="even">
-<th data-quarto-table-cell-role="th">1</th>
-<td>Helsley, Ryan</td>
-<td>FF</td>
-<td>CS</td>
-<td>100.2</td>
-<td>-0.35</td>
-<td>5.99</td>
-<td>1</td>
-<td>-0.08</td>
-<td>1.42</td>
-<td>-0.28</td>
-<td>...</td>
-<td>-10.08</td>
-<td>100.9</td>
-<td>2658</td>
-<td>6.5</td>
-<td>53.98</td>
-<td>200</td>
-<td>-0.054</td>
-<td>3</td>
-<td>3</td>
-<td>1</td>
-</tr>
-<tr class="odd">
-<th data-quarto-table-cell-role="th">2</th>
-<td>Alvarado, José</td>
-<td>FS</td>
-<td>CS</td>
-<td>98.6</td>
-<td>1.38</td>
-<td>6.64</td>
-<td>0</td>
-<td>0.97</td>
-<td>1.31</td>
-<td>-0.07</td>
-<td>...</td>
-<td>-11.74</td>
-<td>99.6</td>
-<td>2127</td>
-<td>6.8</td>
-<td>53.67</td>
-<td>154</td>
-<td>-0.052</td>
-<td>4</td>
-<td>3</td>
-<td>1</td>
-</tr>
-<tr class="even">
-<th data-quarto-table-cell-role="th">3</th>
-<td>May, Trevor</td>
-<td>FF</td>
-<td>F</td>
-<td>95.6</td>
-<td>-1.15</td>
-<td>5.81</td>
-<td>1</td>
-<td>-0.37</td>
-<td>1.28</td>
-<td>0.72</td>
-<td>...</td>
-<td>-14.57</td>
-<td>96.8</td>
-<td>2146</td>
-<td>7.1</td>
-<td>53.44</td>
-<td>211</td>
-<td>-0.047</td>
-<td>3</td>
-<td>4</td>
-<td>0</td>
-</tr>
-<tr class="odd">
-<th data-quarto-table-cell-role="th">4</th>
-<td>Strider, Spencer</td>
-<td>FF</td>
-<td>FT</td>
-<td>98.0</td>
-<td>-2.07</td>
-<td>5.93</td>
-<td>1</td>
-<td>-0.38</td>
-<td>1.39</td>
-<td>-0.33</td>
-<td>...</td>
-<td>-12.59</td>
-<td>99.2</td>
-<td>2293</td>
-<td>6.9</td>
-<td>53.60</td>
-<td>210</td>
-<td>-0.042</td>
-<td>3</td>
-<td>6</td>
-<td>0</td>
-</tr>
-</tbody>
-</table>
-
-<p>5 rows × 26 columns</p>
-</div>
-</div>
-</div>
-<div class="lang-content en">
-<p>Details about the variables can be found at the link below.</p>
-<ul>
-<li>https://baseballsavant.mlb.com/csv-docs</li>
-</ul>
-<section id="distributions-of-pitch-related-variables" class="level2">
-<h2 class="anchored" data-anchor-id="distributions-of-pitch-related-variables">Distributions of Pitch-Related Variables</h2>
-</section>
-</div>
-<div class="lang-content ko" style="display:none">
-<p>데이터에 관한 자세한 정보는 아래의 링크에서 확인하실 수 있습니다.</p>
-<ul>
-<li>https://baseballsavant.mlb.com/csv-docs</li>
-</ul>
-<section id="투구-관련-변수-분포" class="level2">
-<h2 class="anchored" data-anchor-id="투구-관련-변수-분포">투구 관련 변수 분포</h2>
-</section>
-</div>
-<div id="00a957e1" class="cell" data-message="false" data-execution_count="3">
+<section id="discrete-distributions" class="level1">
+<h1>Discrete Distributions</h1>
+<section id="bernoulli-distribution" class="level2">
+<h2 class="anchored" data-anchor-id="bernoulli-distribution">Bernoulli Distribution</h2>
+<p>A single trial where the outcome is success (1) or failure (0).</p>
+<p>Parameter - <strong>p</strong>: probability of success</p>
+<p><span class="math display">\[
+P(X = x) =
+\begin{cases}
+p &amp; (x = 1) \\
+1-p &amp; (x = 0)
+\end{cases}
+\]</span></p>
+<p><span class="math display">\[
+E[X] = p, \quad Var[X] = p(1-p)
+\]</span></p>
+<div id="a1a5e7f0" class="cell" data-execution_count="1">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="stuffplus_files/figure-html/cell-4-output-1.png" width="792" height="792" class="figure-img"></p>
+<p><img src="probability_files/figure-html/cell-2-output-1.png" width="589" height="449" class="figure-img"></p>
 </figure>
 </div>
 </div>
 </div>
-<div class="lang-content en">
-<p>The plots above provide an overview of the data. It allows a better understanding of the data’s structure and distribution.</p>
-<section id="stuff-method" class="level1">
-<h1>Stuff+ Method</h1>
-<p>To define Stuff+, the pitch-related metrics, such as spin rate, horizontal and vertical break, and others were considered as covariates and CS% (Called Strike Percentage), CSW% (Called Strike + Whiff Percentage), strikeout percentage (K%), and changes in run expectancy as the corresponding response indicators that represent the performance of the pitches. However, after evaluating the consistency of these metrics, Whiff% was chosen as the primary indicator.</p>
-<p>In this project, Stuff+ was defined using the following formula.</p>
+<p>Examples</p>
+<ul>
+<li>Coin toss (heads vs tails)</li>
+<li>Customer clicks an advertisement</li>
+<li>Product purchase (yes/no)</li>
+</ul>
+</section>
+<section id="binomial-distribution" class="level2">
+<h2 class="anchored" data-anchor-id="binomial-distribution">Binomial Distribution</h2>
+<p>Counts the number of successes in n independent Bernoulli trials.</p>
+<p>Parameters - <strong>n</strong>: number of trials - <strong>p</strong>: probability of success in each trial</p>
 <p><span class="math display">\[
-\text{Stuff+} = \frac{\text{Predicted Whiff\%}}{\text{mean League predicted Whiff\%}} \cdot 100
+P(X = k) = \binom{n}{k} p^k (1-p)^{n-k}
 \]</span></p>
-<p>and Whiff% is computed as follows</p>
 <p><span class="math display">\[
-\text{Whiff\%} = \frac{\text{Missed Swings (swinging strike, swinging strike blocked, missed bunt)}}{\text{Total Swing Attempts}}
+E[X] = np, \quad Var[X] = np(1-p)
 \]</span></p>
-<p>This Predicted Whiff% is used to ensure stable outputs because it relies on probability. This approach is based on the methodologies referenced from A. Jon (2023), Cameron Grove (2021), and RG Pitching (2023).</p>
-<p>To find the Predicted Whiff%, Logistic Regression, XGBoost, and Random Forest were considered. Although algorithms like XGBoost were more robust compared to Random Forest, Logistic Regression provided the most consistent and reliable results. Therefore, Logistic Regression was used to predict Whiff% in this project.</p>
-<section id="correlation-matrix" class="level2">
-<h2 class="anchored" data-anchor-id="correlation-matrix">Correlation Matrix</h2>
-</section>
-</section>
-</div>
-<div class="lang-content ko" style="display:none">
-<p>위 그래프들은 데이터의 전반적인 구조와 분포를 보여주며 통해 데이터의 특성을 파악할 수 있게 도와줍니다.</p>
-<section id="stuff-방법" class="level1">
-<h1>Stuff+ 방법</h1>
-<p><strong>Stuff+</strong>를 정의하기 위해 회전수, 수평 및 수직 무브먼트등과 같은 여러 투구 관련 지표들을 공변량(covariate)으로 설정하였고 이에 대응하는 반응 지표로 CS% (Called Strike Percentage), CSW% (Called Strike + Whiff Percentage), 삼진율(K%), 그리고 득점 기대값 변화(run expectancy change) 등을 고려하였습니다. 그러나 이러한 지표들의 일관성을 평가한 결과 투구의 성능을 보여주는 지표로 Whiff%가 가장 안정적이고 신뢰할 수 있다고 판단 하였습니다.</p>
-<p>이 프로젝트에서는 <strong>Stuff+</strong>를 다음과 같이 정의합니다.</p>
-<p><span class="math display">\[
-\text{Stuff+} = \frac{\text{Predicted Whiff\%}}{\text{mean League predicted Whiff\%}} \cdot 100
-\]</span></p>
-<p>그리고 Whiff% 다음과 같습니다.</p>
-<p><span class="math display">\[
-\text{Whiff\%} = \frac{\text{Missed Swings (swinging strike, swinging strike blocked, missed bunt)}}{\text{Total Swing Attempts}}
-\]</span></p>
-<p>여기서 Predicted Whiff%는 확률을 기반으로 하는 예측값이며 더 안정적이고 일관된 결과를 도출하기 위하여 사용되었습니다. 이 접근 방식은 A. Jon (2023), Cameron Grove (2021), RG Pitching (2023)의 방법을 참고하였습니다.</p>
-<p>Predicted Whiff%를 추정하기 위해 로지스틱 회귀(Logistic Regression), XGBoost, 랜덤 포레스트(Random Forest) 등의 알고리즘들을 고려하였습니다. 그 중 XGBoost를 사용한 예측값이 대체로 안정적인 수치를 보여줬으나 로지스틱 회귀를 사용한 예측값이 가장 일관되고 신뢰할 만한 결과를 가져다 주어 이프로젝트에서는 Whiff% 예측에 로지스틱 회귀(Logistic Regression)를 최종적으로 사용하였습니다.</p>
-<section id="상관관계-행렬" class="level2">
-<h2 class="anchored" data-anchor-id="상관관계-행렬">상관관계 행렬</h2>
-</section>
-</section>
-</div>
-<div id="860c184c" class="cell page-columns page-full" data-message="false" data-execution_count="4">
-<div class="cell-output cell-output-display page-columns page-full">
-<div class="page-columns page-full">
-<figure class="figure page-columns page-full">
-<p class="page-columns page-full"><img src="stuffplus_files/figure-html/cell-5-output-1.png" width="801" height="834" class="figure-img column-body-outset"></p>
-</figure>
-</div>
-</div>
-</div>
-<div class="lang-content en">
-<p>The plot above shows the correlation matrix, with the last row and column representing Whiff%. The correlation matrix allows to examine the relationships among the pitch-related variables, as they are used to predict Whiff%.</p>
-<section id="pitch-location-vs-cs-and-whiff" class="level2">
-<h2 class="anchored" data-anchor-id="pitch-location-vs-cs-and-whiff">Pitch Location vs CS% and Whiff%</h2>
-</section>
-</div>
-<div class="lang-content ko" style="display:none">
-<p>위 표는 변수들간 상관관계를 보여주고 있으며 마지막 행과 열을 Whiff%를 나타냅니다. 이를 제공하는 이유는 투구 관련 지표들을 사용하여 Whiff%를 예측하기 때문에 이들의 관계를 알아보기 위함입니다.</p>
-<section id="투구-위치-별-cs-whiff" class="level2">
-<h2 class="anchored" data-anchor-id="투구-위치-별-cs-whiff">투구 위치 별 CS% &amp; Whiff%</h2>
-</section>
-</div>
-<div id="d660c6a0" class="cell page-columns page-full" data-message="false" data-execution_count="5">
-<div class="cell-output cell-output-display page-columns page-full">
-<div class="page-columns page-full">
-<figure class="figure page-columns page-full">
-<p class="page-columns page-full"><img src="stuffplus_files/figure-html/cell-6-output-1.png" width="810" height="417" class="figure-img column-body-outset"></p>
-</figure>
-</div>
-</div>
-</div>
-<div class="lang-content en">
-<p>The plots above show CS% (Called Strike Percentage) and Whiff% based on different pitch locations. Both indicators show distinct patterns depending on the pitch location, illustrating the relationship between them.</p>
-<section id="stuff" class="level1">
-<h1>Stuff+</h1>
-</section>
-</div>
-<div class="lang-content ko" style="display:none">
-<p>위 플롯들은 투구 위치에 따른 CS% (Called Strike Percentage)와 Whiff%를 나타낸 것입니다. 두 지표 모두 투구 위치에 따라 뚜렷한 패턴을 보이며 이들의 관계를 시각적으로 보여주고 있습니다.</p>
-<section id="stuff-1" class="level1">
-<h1>Stuff+</h1>
-</section>
-</div>
-<div id="1717c87f" class="cell page-columns page-full" data-message="false" data-execution_count="8">
-<div class="cell-output cell-output-display page-columns page-full">
-<div class="page-columns page-full">
-<figure class="figure page-columns page-full">
-<p class="page-columns page-full"><img src="stuffplus_files/figure-html/cell-9-output-1.png" width="862" height="758" class="figure-img column-body-outset"></p>
-</figure>
-</div>
-</div>
-</div>
-<div class="lang-content en">
-<p>The plots above show the Stuff+ for each pitch implemented in this project. Stuff+ is normalized with a center at 100, allowing for performance comparison across different pitches.</p>
-<p>Based on these results, the table below presents the Stuff+ of selected MLB pitchers. Using this table, a comparative analysis can be conducted how each pitcher’s pitch types perform according to their Stuff+ ratings.</p>
-</div>
-<div class="lang-content ko" style="display:none">
-<p>위 플롯들은 이 프로젝트에서 구현한 각 투구별 Stuff+ 값을 보여주고 있습니다. Stuff+에는 100을 기준으로 정규화 되어 있으며 이를 통해 각 투구의 Stuff+ 값을 비교하여 성능을 분석할 수 있습니다.</p>
-<p>이 결과를 바탕으로 MLB의 일부 투수들의 Stuff+를 정리한 테이블을 아래에 나타내었습니다. 이 테이블을 활용하여 각 투수 그리고 투구 별 Stuff+ 값을 활용하여 비교 분석이 가능합니다.</p>
-</div>
-<div id="adf5b2f2" class="cell" data-message="false" data-execution_count="9">
-<div class="cell-output cell-output-display" data-execution_count="9">
+<section id="python-code" class="level3">
+<h3 class="anchored" data-anchor-id="python-code">Python Code</h3>
+<div id="b9ae2818" class="cell" data-execution_count="2">
+<div class="cell-output cell-output-display">
 <div>
-
-
-<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<figure class="figure">
+<p><img src="probability_files/figure-html/cell-3-output-1.png" width="597" height="449" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Examples</p>
+<ul>
+<li>Number of customers who purchase out of 10</li>
+<li>Number of defective products in a batch</li>
+<li>Basketball free-throw successes</li>
+</ul>
+</section>
+</section>
+<section id="poisson-distribution" class="level2">
+<h2 class="anchored" data-anchor-id="poisson-distribution">Poisson Distribution</h2>
+<p>Counts the number of events in a fixed time or space interval.</p>
+<p>Parameter - <strong>λ</strong>: average event rate per interval</p>
+<p><span class="math display">\[
+P(X = k) = \frac{\lambda^k e^{-\lambda}}{k!}
+\]</span></p>
+<p><span class="math display">\[
+E[X] = \lambda, \quad Var[X] = \lambda
+\]</span></p>
+<div id="993cc838" class="cell" data-execution_count="3">
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="probability_files/figure-html/cell-4-output-1.png" width="597" height="449" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Examples</p>
+<ul>
+<li>Calls received by a call center in 1 hour</li>
+<li>Number of earthquakes per year</li>
+<li>Number of emails per minute</li>
+</ul>
+</section>
+<section id="geometric-distribution" class="level2">
+<h2 class="anchored" data-anchor-id="geometric-distribution">Geometric Distribution</h2>
+<p>Number of trials needed until the first success.</p>
+<p>Parameter - <strong>p</strong>: probability of success per trial</p>
+<p><span class="math display">\[
+P(X = k) = (1-p)^{k-1} p
+\]</span></p>
+<p><span class="math display">\[
+E[X] = \frac{1}{p}
+\]</span></p>
+<div id="7f4bc73f" class="cell" data-execution_count="4">
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="probability_files/figure-html/cell-5-output-1.png" width="597" height="449" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Examples</p>
+<ul>
+<li>Number of coin tosses until first heads</li>
+<li>Attempts until first customer purchases</li>
+<li>Inspections until first defective product</li>
+</ul>
+</section>
+<section id="negative-binomial-distribution" class="level2">
+<h2 class="anchored" data-anchor-id="negative-binomial-distribution">Negative Binomial Distribution</h2>
+<p>Number of trials needed until r successes occur.</p>
+<p>Parameters - <strong>r</strong>: required number of successes - <strong>p</strong>: probability of success</p>
+<p><span class="math display">\[
+P(X = k) = \binom{k-1}{r-1} (1-p)^{k-r} p^r
+\]</span></p>
+<p><span class="math display">\[
+E[X] = \frac{r}{p}
+\]</span></p>
+<div id="2cef2d45" class="cell" data-execution_count="5">
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="probability_files/figure-html/cell-6-output-1.png" width="597" height="449" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Examples</p>
+<ul>
+<li>Customers until 5 purchases occur</li>
+<li>Number of shots until scoring 3 goals</li>
+<li>Failures until a product breaks multiple times</li>
+</ul>
+</section>
+</section>
+<section id="continuous-distributions" class="level1">
+<h1>Continuous Distributions</h1>
+<section id="normal-distribution" class="level2">
+<h2 class="anchored" data-anchor-id="normal-distribution">Normal Distribution</h2>
+<p>A common continuous distribution for natural variations.</p>
+<p>Parameters - <strong>μ</strong>: mean - <strong>σ²</strong>: variance</p>
+<p><span class="math display">\[
+f(x)=\frac{1}{\sqrt{2\pi\sigma^{2}}}
+\exp\left( -\frac{(x-\mu)^2}{2\sigma^2} \right)
+\]</span></p>
+<div id="25852c93" class="cell" data-execution_count="6">
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="probability_files/figure-html/cell-7-output-1.png" width="579" height="431" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Examples</p>
+<ul>
+<li>Height, weight, IQ</li>
+<li>Exam scores</li>
+<li>Measurement errors</li>
+</ul>
+</section>
+<section id="exponential-distribution" class="level2">
+<h2 class="anchored" data-anchor-id="exponential-distribution">Exponential Distribution</h2>
+<p>Waiting time between Poisson events.</p>
+<p>Parameter - <strong>λ</strong>: rate parameter (events per unit time)</p>
+<p><span class="math display">\[
+f(x) = \lambda e^{-\lambda x}
+\]</span></p>
+<p><span class="math display">\[
+E[X] = \frac{1}{\lambda}
+\]</span></p>
+<div id="808b746f" class="cell" data-execution_count="7">
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="probability_files/figure-html/cell-8-output-1.png" width="571" height="431" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Examples</p>
+<ul>
+<li>Time until next customer arrives</li>
+<li>Time until next machine failure</li>
+<li>Time until radioactive decay</li>
+</ul>
+</section>
+<section id="gamma-distribution" class="level2">
+<h2 class="anchored" data-anchor-id="gamma-distribution">Gamma Distribution</h2>
+<p>Time until the k-th event occurs.</p>
+<p>Parameters - <strong>k</strong>: shape parameter - <strong>λ</strong>: rate parameter</p>
+<p><span class="math display">\[
+f(x)=\frac{\lambda^{k} x^{k-1} e^{-\lambda x}}{\Gamma(k)}
+\]</span></p>
+<div id="83fa2087" class="cell" data-execution_count="8">
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="probability_files/figure-html/cell-9-output-1.png" width="579" height="431" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Examples</p>
+<ul>
+<li>Total wait time for multiple arrivals</li>
+<li>Insurance claim modeling</li>
+<li>Bayesian prior for rates</li>
+</ul>
+</section>
+<section id="chi-square-distribution" class="level2">
+<h2 class="anchored" data-anchor-id="chi-square-distribution">Chi-Square Distribution</h2>
+<p>Sum of squared standard normal random variables.</p>
+<p>Parameter - <strong>k</strong>: degrees of freedom</p>
+<p><span class="math display">\[
+X = Z_1^2 + Z_2^2 + \cdots + Z_k^2
+\]</span></p>
+<div id="e079016e" class="cell" data-execution_count="9">
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="probability_files/figure-html/cell-10-output-1.png" width="579" height="431" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Examples</p>
+<ul>
+<li>Variance tests</li>
+<li>Goodness-of-fit test</li>
+<li>Independence test in contingency tables</li>
+</ul>
+</section>
+<section id="students-t-distribution" class="level2">
+<h2 class="anchored" data-anchor-id="students-t-distribution">Student’s t-distribution</h2>
+<p>Used when population variance is unknown (small samples).</p>
+<p>Parameter - <strong>df</strong>: degrees of freedom</p>
+<p><span class="math display">\[
+T = \frac{\overline{X} - \mu}{S / \sqrt{n}}
+\]</span></p>
+<div id="3c4d4ee1" class="cell" data-execution_count="10">
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="probability_files/figure-html/cell-11-output-1.png" width="579" height="431" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Examples</p>
+<ul>
+<li>One-sample t-test</li>
+<li>Two-sample t-test</li>
+<li>Confidence intervals</li>
+</ul>
+</section>
+<section id="f-distribution" class="level2">
+<h2 class="anchored" data-anchor-id="f-distribution">F-distribution</h2>
+<p>Ratio of two variances.</p>
+<p>Parameters - <strong>df1</strong>: numerator df - <strong>df2</strong>: denominator df</p>
+<p><span class="math display">\[
+F = \frac{S_1^2 / df_1}{S_2^2 / df_2}
+\]</span></p>
+<div id="1563d904" class="cell" data-execution_count="11">
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="probability_files/figure-html/cell-12-output-1.png" width="571" height="431" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Examples</p>
+<ul>
+<li>ANOVA</li>
+<li>Comparing two variances</li>
+<li>Regression significance test</li>
+</ul>
+</section>
+<section id="beta-distribution" class="level2">
+<h2 class="anchored" data-anchor-id="beta-distribution">Beta Distribution</h2>
+<p>A flexible distribution for modeling probabilities.</p>
+<p>Parameters - <strong>α</strong>: left-tail shape - <strong>β</strong>: right-tail shape</p>
+<p><span class="math display">\[
+f(p) = \frac{1}{B(\alpha,\beta)} p^{\alpha - 1} (1 - p)^{\beta - 1}
+\]</span></p>
+<div id="4033bc6f" class="cell" data-execution_count="12">
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="probability_files/figure-html/cell-13-output-1.png" width="571" height="431" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Examples</p>
+<ul>
+<li>Bayesian inference</li>
+<li>A/B testing</li>
+<li>Modeling click-through rates</li>
+</ul>
+</section>
+<section id="relationships-between-distributions" class="level2">
+<h2 class="anchored" data-anchor-id="relationships-between-distributions">Relationships Between Distributions</h2>
+<pre><code>Bernoulli → Binomial → Poisson → Normal
+    ↑          ↑
+  Beta       Gamma</code></pre>
+<pre><code>Normal → Chi-square → t → F</code></pre>
+</section>
+<section id="summary" class="level2">
+<h2 class="anchored" data-anchor-id="summary">Summary</h2>
+<table class="caption-top table">
 <thead>
 <tr class="header">
-<th data-quarto-table-cell-role="th">Pitcher</th>
-<th data-quarto-table-cell-role="th">Abbott, Andrew</th>
-<th data-quarto-table-cell-role="th">Corbin, Patrick</th>
-<th data-quarto-table-cell-role="th">Scherzer, Max</th>
-<th data-quarto-table-cell-role="th">Darvish, Yu</th>
-<th data-quarto-table-cell-role="th">Sears, JP</th>
+<th>Distribution</th>
+<th>Type</th>
+<th>When to Use</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<th data-quarto-table-cell-role="th">FF</th>
-<td>106</td>
-<td>66</td>
-<td>108</td>
-<td>120</td>
-<td>110</td>
+<td>Bernoulli</td>
+<td>Discrete</td>
+<td>Single success/failure outcome</td>
 </tr>
 <tr class="even">
-<th data-quarto-table-cell-role="th">CH</th>
-<td>85</td>
-<td>129</td>
-<td>90</td>
-<td>&lt;NA&gt;</td>
-<td>79</td>
+<td>Binomial</td>
+<td>Discrete</td>
+<td>Number of successes in n trials</td>
 </tr>
 <tr class="odd">
-<th data-quarto-table-cell-role="th">CU</th>
-<td>106</td>
-<td>&lt;NA&gt;</td>
-<td>106</td>
-<td>101</td>
-<td>118</td>
+<td>Poisson</td>
+<td>Discrete</td>
+<td>Event count in time/space</td>
 </tr>
 <tr class="even">
-<th data-quarto-table-cell-role="th">FC</th>
-<td>&lt;NA&gt;</td>
-<td>&lt;NA&gt;</td>
-<td>118</td>
-<td>103</td>
-<td>&lt;NA&gt;</td>
+<td>Geometric</td>
+<td>Discrete</td>
+<td>Trials until first success</td>
 </tr>
 <tr class="odd">
-<th data-quarto-table-cell-role="th">KC</th>
-<td>&lt;NA&gt;</td>
-<td>&lt;NA&gt;</td>
-<td>&lt;NA&gt;</td>
-<td>86</td>
-<td>&lt;NA&gt;</td>
+<td>Normal</td>
+<td>Continuous</td>
+<td>Natural variations, measurement</td>
 </tr>
 <tr class="even">
-<th data-quarto-table-cell-role="th">FS</th>
-<td>113</td>
-<td>102</td>
-<td>&lt;NA&gt;</td>
-<td>102</td>
-<td>104</td>
+<td>Exponential</td>
+<td>Continuous</td>
+<td>Time between events</td>
 </tr>
 <tr class="odd">
-<th data-quarto-table-cell-role="th">SL</th>
-<td>&lt;NA&gt;</td>
-<td>131</td>
-<td>113</td>
-<td>91</td>
-<td>85</td>
+<td>Gamma</td>
+<td>Continuous</td>
+<td>Time until k events</td>
 </tr>
 <tr class="even">
-<th data-quarto-table-cell-role="th">SF</th>
-<td>&lt;NA&gt;</td>
-<td>&lt;NA&gt;</td>
-<td>&lt;NA&gt;</td>
-<td>96</td>
-<td>&lt;NA&gt;</td>
+<td>Chi-square</td>
+<td>Continuous</td>
+<td>Variance &amp; independence tests</td>
 </tr>
 <tr class="odd">
-<th data-quarto-table-cell-role="th">SW</th>
-<td>110</td>
-<td>&lt;NA&gt;</td>
-<td>&lt;NA&gt;</td>
-<td>87</td>
-<td>76</td>
+<td>t</td>
+<td>Continuous</td>
+<td>Mean inference (small samples)</td>
+</tr>
+<tr class="even">
+<td>F</td>
+<td>Continuous</td>
+<td>Comparing variances, ANOVA</td>
+</tr>
+<tr class="odd">
+<td>Beta</td>
+<td>Continuous</td>
+<td>Modeling probabilities</td>
 </tr>
 </tbody>
 </table>
+</section>
+<section id="key-points" class="level2">
+<h2 class="anchored" data-anchor-id="key-points">Key Points</h2>
+<p>Normal → basis of CLT Poisson → rare events per unit time Beta → distribution of probability p Binomial → Poisson approximation (np = λ) Exponential → waiting time Chi-square / t / F → hypothesis testing Gamma → sum of exponential waiting times</p>
 
-</div>
-</div>
-</div>
 
-
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
