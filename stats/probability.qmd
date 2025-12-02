@@ -1,0 +1,476 @@
+---
+title: "Probability Theory"
+subtitle: ""
+description: "Key Concepts from Probability Theory"
+categories: ["Statistics"]
+draft: false
+layout: "article"
+toc: true
+---
+
+# Discrete Distributions
+
+## Bernoulli Distribution
+A single trial where the outcome is success (1) or failure (0).
+
+Parameter
+- **p**: probability of success
+
+$$
+P(X = x) =
+\begin{cases}
+p & (x = 1) \\
+1-p & (x = 0)
+\end{cases}
+$$
+
+$$
+E[X] = p, \quad Var[X] = p(1-p)
+$$
+
+
+```{python}
+#| echo: false
+
+from scipy.stats import bernoulli
+import matplotlib.pyplot as plt
+
+p = 0.3
+x = [0, 1]
+pmf = bernoulli.pmf(x, p)
+
+plt.bar(x, pmf, width=0.3)
+plt.title("Bernoulli(p=0.3)")
+plt.xlabel("x")
+plt.ylabel("P(X=x)")
+plt.xticks([0,1])
+plt.show()
+```
+
+Examples
+
+- Coin toss (heads vs tails)
+- Customer clicks an advertisement
+- Product purchase (yes/no)
+
+
+## Binomial Distribution
+Counts the number of successes in n independent Bernoulli trials.
+
+Parameters
+- **n**: number of trials
+- **p**: probability of success in each trial
+
+$$
+P(X = k) = \binom{n}{k} p^k (1-p)^{n-k}
+$$
+
+$$
+E[X] = np, \quad Var[X] = np(1-p)
+$$
+
+### Python Code
+```{python}
+#| echo: false
+
+from scipy.stats import binom
+import numpy as np
+
+n, p = 10, 0.3
+x = np.arange(0, n+1)
+pmf = binom.pmf(x, n, p)
+
+plt.bar(x, pmf, width=0.3)
+plt.title("Binomial Distribution (n=10, p=0.3)")
+plt.xlabel("k")
+plt.ylabel("P(X=k)")
+plt.show()
+```
+
+Examples
+
+- Number of customers who purchase out of 10
+- Number of defective products in a batch
+- Basketball free-throw successes
+
+
+## Poisson Distribution
+Counts the number of events in a fixed time or space interval.
+
+Parameter
+- **λ**: average event rate per interval
+
+$$
+P(X = k) = \frac{\lambda^k e^{-\lambda}}{k!}
+$$
+
+$$
+E[X] = \lambda, \quad Var[X] = \lambda
+$$
+
+```{python}
+#| echo: false
+
+from scipy.stats import poisson
+
+lam = 3
+x = np.arange(0, 15)
+pmf = poisson.pmf(x, lam)
+
+plt.bar(x, pmf, width=0.3)
+plt.title("Poisson Distribution (λ=3)")
+plt.xlabel("k")
+plt.ylabel("P(X=k)")
+plt.show()
+```
+
+Examples
+
+- Calls received by a call center in 1 hour
+- Number of earthquakes per year
+- Number of emails per minute
+
+
+## Geometric Distribution
+Number of trials needed until the first success.
+
+Parameter
+- **p**: probability of success per trial
+
+$$
+P(X = k) = (1-p)^{k-1} p
+$$
+
+$$
+E[X] = \frac{1}{p}
+$$
+
+```{python}
+#| echo: false
+
+from scipy.stats import geom
+
+p = 0.3
+x = np.arange(1, 15)
+pmf = geom.pmf(x, p)
+
+plt.bar(x, pmf, width=0.3)
+plt.title("Geometric Distribution (p=0.3)")
+plt.xlabel("Trials")
+plt.ylabel("P(X=k)")
+plt.show()
+```
+
+Examples
+
+- Number of coin tosses until first heads
+- Attempts until first customer purchases
+- Inspections until first defective product
+
+
+## Negative Binomial Distribution
+
+Number of trials needed until r successes occur.
+
+Parameters
+- **r**: required number of successes
+- **p**: probability of success
+
+$$
+P(X = k) = \binom{k-1}{r-1} (1-p)^{k-r} p^r
+$$
+
+$$
+E[X] = \frac{r}{p}
+$$
+
+```{python}
+#| echo: false
+
+from scipy.stats import nbinom
+
+r, p = 3, 0.3
+x = np.arange(r, r+20)
+pmf = nbinom.pmf(x-r, r, p)
+
+plt.bar(x, pmf, width=0.3)
+plt.title("Negative Binomial Distribution (r=3, p=0.3)")
+plt.xlabel("Trials")
+plt.ylabel("P(X=k)")
+plt.show()
+```
+
+Examples
+
+- Customers until 5 purchases occur
+- Number of shots until scoring 3 goals
+- Failures until a product breaks multiple times
+
+
+# Continuous Distributions
+
+## Normal Distribution
+A common continuous distribution for natural variations.
+
+Parameters
+- **μ**: mean
+- **σ²**: variance
+
+$$
+f(x)=\frac{1}{\sqrt{2\pi\sigma^{2}}}
+\exp\left( -\frac{(x-\mu)^2}{2\sigma^2} \right)
+$$
+
+```{python}
+#| echo: false
+
+from scipy.stats import norm
+
+mu, sigma = 0, 1
+x = np.linspace(-4, 4, 400)
+pdf = norm.pdf(x, mu, sigma)
+
+plt.plot(x, pdf)
+plt.title("Normal Distribution (μ=0, σ=1)")
+plt.show()
+```
+
+Examples
+
+- Height, weight, IQ
+- Exam scores
+- Measurement errors
+
+
+## Exponential Distribution
+Waiting time between Poisson events.
+
+Parameter
+- **λ**: rate parameter (events per unit time)
+
+$$
+f(x) = \lambda e^{-\lambda x}
+$$
+
+$$
+E[X] = \frac{1}{\lambda}
+$$
+
+
+```{python}
+#| echo: false
+
+from scipy.stats import expon
+
+lam = 1
+x = np.linspace(0, 10, 400)
+pdf = expon.pdf(x, scale=1/lam)
+
+plt.plot(x, pdf)
+plt.title("Exponential Distribution (λ=1)")
+plt.show()
+```
+
+Examples
+
+- Time until next customer arrives
+- Time until next machine failure
+- Time until radioactive decay
+
+
+## Gamma Distribution
+Time until the k-th event occurs.
+
+Parameters
+- **k**: shape parameter
+- **λ**: rate parameter
+
+$$
+f(x)=\frac{\lambda^{k} x^{k-1} e^{-\lambda x}}{\Gamma(k)}
+$$
+
+```{python}
+#| echo: false
+
+from scipy.stats import gamma
+
+k, lam = 3, 1
+x = np.linspace(0, 15, 400)
+pdf = gamma.pdf(x, a=k, scale=1/lam)
+
+plt.plot(x, pdf)
+plt.title("Gamma Distribution (k=3, λ=1)")
+plt.show()
+```
+
+Examples
+
+- Total wait time for multiple arrivals
+- Insurance claim modeling
+- Bayesian prior for rates
+
+
+## Chi-Square Distribution
+Sum of squared standard normal random variables.
+
+Parameter
+- **k**: degrees of freedom
+
+$$
+X = Z_1^2 + Z_2^2 + \cdots + Z_k^2
+$$
+
+```{python}
+#| echo: false
+
+from scipy.stats import chi2
+
+df = 5
+x = np.linspace(0, 20, 400)
+pdf = chi2.pdf(x, df)
+
+plt.plot(x, pdf)
+plt.title("Chi-Square Distribution (df=5)")
+plt.show()
+```
+
+Examples
+
+- Variance tests
+- Goodness-of-fit test
+- Independence test in contingency tables
+
+
+## Student's t-distribution
+Used when population variance is unknown (small samples).
+
+Parameter
+- **df**: degrees of freedom
+
+$$
+T = \frac{\overline{X} - \mu}{S / \sqrt{n}}
+$$
+
+```{python}
+#| echo: false
+
+from scipy.stats import t
+
+df = 10
+x = np.linspace(-5, 5, 400)
+pdf = t.pdf(x, df)
+
+plt.plot(x, pdf)
+plt.title("Student's t-Distribution (df=10)")
+plt.show()
+```
+Examples
+
+- One-sample t-test
+- Two-sample t-test
+- Confidence intervals
+
+
+## F-distribution
+Ratio of two variances.
+
+Parameters
+- **df1**: numerator df
+- **df2**: denominator df
+
+$$
+F = \frac{S_1^2 / df_1}{S_2^2 / df_2}
+$$
+
+```{python}
+#| echo: false
+
+from scipy.stats import f
+
+df1, df2 = 5, 10
+x = np.linspace(0, 5, 400)
+pdf = f.pdf(x, df1, df2)
+
+plt.plot(x, pdf)
+plt.title("F-Distribution (df1=5, df2=10)")
+plt.show()
+```
+
+Examples
+
+- ANOVA
+- Comparing two variances
+- Regression significance test
+
+
+## Beta Distribution
+A flexible distribution for modeling probabilities.
+
+Parameters
+- **α**: left-tail shape
+- **β**: right-tail shape
+
+$$
+f(p) = \frac{1}{B(\alpha,\beta)} p^{\alpha - 1} (1 - p)^{\beta - 1}
+$$
+
+```{python}
+#| echo: false
+
+from scipy.stats import beta
+
+a, b = 2, 5
+x = np.linspace(0, 1, 400)
+pdf = beta.pdf(x, a, b)
+
+plt.plot(x, pdf)
+plt.title("Beta Distribution (α=2, β=5)")
+plt.show()
+```
+Examples
+
+- Bayesian inference
+- A/B testing
+- Modeling click-through rates
+
+
+
+## Relationships Between Distributions
+
+```
+Bernoulli → Binomial → Poisson → Normal
+    ↑          ↑
+  Beta       Gamma
+```
+
+```
+Normal → Chi-square → t → F
+```
+
+
+## Summary
+
+| Distribution | Type | When to Use |
+|------|------|-----------|
+| Bernoulli | Discrete | Single success/failure outcome |
+| Binomial | Discrete | Number of successes in n trials |
+| Poisson | Discrete | Event count in time/space |
+| Geometric | Discrete | Trials until first success |
+| Normal | Continuous | Natural variations, measurement |
+| Exponential | Continuous | Time between events |
+| Gamma | Continuous | Time until k events |
+| Chi-square | Continuous | Variance & independence tests |
+| t | Continuous | Mean inference (small samples) |
+| F | Continuous | Comparing variances, ANOVA |
+| Beta | Continuous | Modeling probabilities |
+
+
+## Key Points
+
+Normal → basis of CLT
+Poisson → rare events per unit time
+Beta → distribution of probability p
+Binomial → Poisson approximation (np = λ)
+Exponential → waiting time
+Chi-square / t / F → hypothesis testing
+Gamma → sum of exponential waiting times
