@@ -13,8 +13,10 @@ toc: true
 ## Bernoulli Distribution
 A single trial where the outcome is success (1) or failure (0).
 
-Parameter
+#### Parameter
 - **p**: probability of success
+
+#### Probability Mass Function
 
 $$
 P(X = x) =
@@ -24,6 +26,8 @@ p & (x = 1) \\
 \end{cases}
 $$
 
+#### Mean & Variance
+
 $$
 E[X] = p, \quad Var[X] = p(1-p)
 $$
@@ -31,6 +35,7 @@ $$
 
 ```{python}
 #| echo: false
+#| fig-align: center
 
 from scipy.stats import bernoulli
 import matplotlib.pyplot as plt
@@ -47,8 +52,7 @@ plt.xticks([0,1])
 plt.show()
 ```
 
-Examples
-
+#### Examples
 - Coin toss (heads vs tails)
 - Customer clicks an advertisement
 - Product purchase (yes/no)
@@ -57,21 +61,25 @@ Examples
 ## Binomial Distribution
 Counts the number of successes in n independent Bernoulli trials.
 
-Parameters
+#### Parameters
 - **n**: number of trials
 - **p**: probability of success in each trial
+
+#### Probability Mass Function
 
 $$
 P(X = k) = \binom{n}{k} p^k (1-p)^{n-k}
 $$
 
+#### Mean & Variance
+
 $$
 E[X] = np, \quad Var[X] = np(1-p)
 $$
 
-### Python Code
 ```{python}
 #| echo: false
+#| fig-align: center
 
 from scipy.stats import binom
 import numpy as np
@@ -87,8 +95,7 @@ plt.ylabel("P(X=k)")
 plt.show()
 ```
 
-Examples
-
+#### Examples
 - Number of customers who purchase out of 10
 - Number of defective products in a batch
 - Basketball free-throw successes
@@ -97,12 +104,16 @@ Examples
 ## Poisson Distribution
 Counts the number of events in a fixed time or space interval.
 
-Parameter
+#### Parameter
 - **λ**: average event rate per interval
+
+#### Probability Mass Function
 
 $$
 P(X = k) = \frac{\lambda^k e^{-\lambda}}{k!}
 $$
+
+#### Mean & Variance
 
 $$
 E[X] = \lambda, \quad Var[X] = \lambda
@@ -110,6 +121,7 @@ $$
 
 ```{python}
 #| echo: false
+#| fig-align: center
 
 from scipy.stats import poisson
 
@@ -124,8 +136,7 @@ plt.ylabel("P(X=k)")
 plt.show()
 ```
 
-Examples
-
+#### Examples
 - Calls received by a call center in 1 hour
 - Number of earthquakes per year
 - Number of emails per minute
@@ -134,19 +145,24 @@ Examples
 ## Geometric Distribution
 Number of trials needed until the first success.
 
-Parameter
+#### Parameter
 - **p**: probability of success per trial
+
+#### Probability Mass Function
 
 $$
 P(X = k) = (1-p)^{k-1} p
 $$
 
+Mean & Variance
+
 $$
-E[X] = \frac{1}{p}
+E[X] = \frac{1}{p}, \quad Var[X] = \frac{1-p}{p^2}
 $$
 
 ```{python}
 #| echo: false
+#| fig-align: center
 
 from scipy.stats import geom
 
@@ -161,31 +177,34 @@ plt.ylabel("P(X=k)")
 plt.show()
 ```
 
-Examples
-
+#### Examples
 - Number of coin tosses until first heads
 - Attempts until first customer purchases
 - Inspections until first defective product
 
 
 ## Negative Binomial Distribution
-
 Number of trials needed until r successes occur.
 
-Parameters
+#### Parameters
 - **r**: required number of successes
 - **p**: probability of success
+
+#### Probability Mass Function
 
 $$
 P(X = k) = \binom{k-1}{r-1} (1-p)^{k-r} p^r
 $$
 
+#### Mean & Variance
+
 $$
-E[X] = \frac{r}{p}
+E[X] = \frac{r}{p}, \quad Var[X] = \frac{r(1-p)}{p^2}
 $$
 
 ```{python}
 #| echo: false
+#| fig-align: center
 
 from scipy.stats import nbinom
 
@@ -200,8 +219,7 @@ plt.ylabel("P(X=k)")
 plt.show()
 ```
 
-Examples
-
+#### Examples
 - Customers until 5 purchases occur
 - Number of shots until scoring 3 goals
 - Failures until a product breaks multiple times
@@ -212,17 +230,26 @@ Examples
 ## Normal Distribution
 A common continuous distribution for natural variations.
 
-Parameters
+#### Parameters
 - **μ**: mean
 - **σ²**: variance
+
+#### Probability Density Function
 
 $$
 f(x)=\frac{1}{\sqrt{2\pi\sigma^{2}}}
 \exp\left( -\frac{(x-\mu)^2}{2\sigma^2} \right)
 $$
 
+#### Mean & Variance
+
+$$
+E[X] = \mu, \quad Var[X] = \sigma^2
+$$
+
 ```{python}
 #| echo: false
+#| fig-align: center
 
 from scipy.stats import norm
 
@@ -235,30 +262,32 @@ plt.title("Normal Distribution (μ=0, σ=1)")
 plt.show()
 ```
 
-Examples
+#### Examples
 
 - Height, weight, IQ
 - Exam scores
-- Measurement errors
 
 
 ## Exponential Distribution
 Waiting time between Poisson events.
 
-Parameter
+#### Parameter
 - **λ**: rate parameter (events per unit time)
 
+#### Probability Density Function
 $$
-f(x) = \lambda e^{-\lambda x}
+f(x) = \lambda e^{-\lambda x}, \quad x \ge 0
 $$
 
+#### Mean & Variance
 $$
-E[X] = \frac{1}{\lambda}
+E[X] = \frac{1}{\lambda}, \quad Var[X] = \frac{1}{\lambda^2}
 $$
 
 
 ```{python}
 #| echo: false
+#| fig-align: center
 
 from scipy.stats import expon
 
@@ -281,16 +310,24 @@ Examples
 ## Gamma Distribution
 Time until the k-th event occurs.
 
-Parameters
+#### Parameters
 - **k**: shape parameter
 - **λ**: rate parameter
+
+#### Probability Density Function
 
 $$
 f(x)=\frac{\lambda^{k} x^{k-1} e^{-\lambda x}}{\Gamma(k)}
 $$
 
+#### Mean & Variance
+$$
+E[X] = \frac{\alpha}{\lambda}, \quad Var[X] = \frac{\alpha}{\lambda^2}
+$$
+
 ```{python}
 #| echo: false
+#| fig-align: center
 
 from scipy.stats import gamma
 
@@ -303,8 +340,7 @@ plt.title("Gamma Distribution (k=3, λ=1)")
 plt.show()
 ```
 
-Examples
-
+#### Examples
 - Total wait time for multiple arrivals
 - Insurance claim modeling
 - Bayesian prior for rates
@@ -313,15 +349,27 @@ Examples
 ## Chi-Square Distribution
 Sum of squared standard normal random variables.
 
-Parameter
+#### Parameter
 - **k**: degrees of freedom
+
+#### Definition
 
 $$
 X = Z_1^2 + Z_2^2 + \cdots + Z_k^2
 $$
 
+$$
+f(x)= \frac{1}{2^{k/2}\Gamma(k/2)} x^{k/2 - 1} e^{-x/2}, \quad x \ge 0
+$$
+
+#### Mean & Variance
+$$
+E[X] = k, \quad Var[X] = 2k
+$$
+
 ```{python}
 #| echo: false
+#| fig-align: center
 
 from scipy.stats import chi2
 
@@ -334,8 +382,7 @@ plt.title("Chi-Square Distribution (df=5)")
 plt.show()
 ```
 
-Examples
-
+#### Examples
 - Variance tests
 - Goodness-of-fit test
 - Independence test in contingency tables
@@ -344,8 +391,10 @@ Examples
 ## Student's t-distribution
 Used when population variance is unknown (small samples).
 
-Parameter
+#### Parameter
 - **df**: degrees of freedom
+
+#### Definition
 
 $$
 T = \frac{\overline{X} - \mu}{S / \sqrt{n}}
@@ -353,6 +402,7 @@ $$
 
 ```{python}
 #| echo: false
+#| fig-align: center
 
 from scipy.stats import t
 
@@ -364,8 +414,7 @@ plt.plot(x, pdf)
 plt.title("Student's t-Distribution (df=10)")
 plt.show()
 ```
-Examples
-
+#### Examples
 - One-sample t-test
 - Two-sample t-test
 - Confidence intervals
@@ -374,9 +423,11 @@ Examples
 ## F-distribution
 Ratio of two variances.
 
-Parameters
+#### Parameters
 - **df1**: numerator df
 - **df2**: denominator df
+
+#### Definition
 
 $$
 F = \frac{S_1^2 / df_1}{S_2^2 / df_2}
@@ -384,6 +435,7 @@ $$
 
 ```{python}
 #| echo: false
+#| fig-align: center
 
 from scipy.stats import f
 
@@ -396,8 +448,7 @@ plt.title("F-Distribution (df1=5, df2=10)")
 plt.show()
 ```
 
-Examples
-
+#### Examples
 - ANOVA
 - Comparing two variances
 - Regression significance test
@@ -406,16 +457,25 @@ Examples
 ## Beta Distribution
 A flexible distribution for modeling probabilities.
 
-Parameters
+#### Parameters
 - **α**: left-tail shape
 - **β**: right-tail shape
+
+#### Probability Definition Function
 
 $$
 f(p) = \frac{1}{B(\alpha,\beta)} p^{\alpha - 1} (1 - p)^{\beta - 1}
 $$
 
+#### Mean & Variance
+$$
+E[X] = \frac{\alpha}{\alpha + \beta}, \quad Var[X] = \frac{\alpha\beta}{(\alpha + \beta)^2(\alpha + \beta + 1)}
+$$
+
+
 ```{python}
 #| echo: false
+#| fig-align: center
 
 from scipy.stats import beta
 
@@ -427,8 +487,7 @@ plt.plot(x, pdf)
 plt.title("Beta Distribution (α=2, β=5)")
 plt.show()
 ```
-Examples
-
+#### Examples
 - Bayesian inference
 - A/B testing
 - Modeling click-through rates
@@ -466,11 +525,10 @@ Normal → Chi-square → t → F
 
 
 ## Key Points
-
-Normal → basis of CLT
-Poisson → rare events per unit time
-Beta → distribution of probability p
-Binomial → Poisson approximation (np = λ)
-Exponential → waiting time
-Chi-square / t / F → hypothesis testing
-Gamma → sum of exponential waiting times
+- Normal → basis of CLT
+- Poisson → rare events per unit time
+- Beta → distribution of probability p
+- Binomial → Poisson approximation (np = λ)
+- Exponential → waiting time
+- Chi-square / t / F → hypothesis testing
+- Gamma → sum of exponential waiting times
