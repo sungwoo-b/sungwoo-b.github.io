@@ -159,10 +159,7 @@ window.Quarto = {
   <li><a href="#discrete-distributions" id="toc-discrete-distributions" class="nav-link active" data-scroll-target="#discrete-distributions">Discrete Distributions</a>
   <ul class="collapse">
   <li><a href="#bernoulli-distribution" id="toc-bernoulli-distribution" class="nav-link" data-scroll-target="#bernoulli-distribution">Bernoulli Distribution</a></li>
-  <li><a href="#binomial-distribution" id="toc-binomial-distribution" class="nav-link" data-scroll-target="#binomial-distribution">Binomial Distribution</a>
-  <ul class="collapse">
-  <li><a href="#python-code" id="toc-python-code" class="nav-link" data-scroll-target="#python-code">Python Code</a></li>
-  </ul></li>
+  <li><a href="#binomial-distribution" id="toc-binomial-distribution" class="nav-link" data-scroll-target="#binomial-distribution">Binomial Distribution</a></li>
   <li><a href="#poisson-distribution" id="toc-poisson-distribution" class="nav-link" data-scroll-target="#poisson-distribution">Poisson Distribution</a></li>
   <li><a href="#geometric-distribution" id="toc-geometric-distribution" class="nav-link" data-scroll-target="#geometric-distribution">Geometric Distribution</a></li>
   <li><a href="#negative-binomial-distribution" id="toc-negative-binomial-distribution" class="nav-link" data-scroll-target="#negative-binomial-distribution">Negative Binomial Distribution</a></li>
@@ -218,7 +215,14 @@ window.Quarto = {
 <section id="bernoulli-distribution" class="level2">
 <h2 class="anchored" data-anchor-id="bernoulli-distribution">Bernoulli Distribution</h2>
 <p>A single trial where the outcome is success (1) or failure (0).</p>
-<p>Parameter - <strong>p</strong>: probability of success</p>
+<section id="parameter" class="level4">
+<h4 class="anchored" data-anchor-id="parameter">Parameter</h4>
+<ul>
+<li><strong>p</strong>: probability of success</li>
+</ul>
+</section>
+<section id="probability-mass-function" class="level4">
+<h4 class="anchored" data-anchor-id="probability-mass-function">Probability Mass Function</h4>
 <p><span class="math display">\[
 P(X = x) =
 \begin{cases}
@@ -226,47 +230,64 @@ p &amp; (x = 1) \\
 1-p &amp; (x = 0)
 \end{cases}
 \]</span></p>
+</section>
+<section id="mean-variance" class="level4">
+<h4 class="anchored" data-anchor-id="mean-variance">Mean &amp; Variance</h4>
 <p><span class="math display">\[
 E[X] = p, \quad Var[X] = p(1-p)
 \]</span></p>
-<div id="a1a5e7f0" class="cell" data-execution_count="1">
+<div id="e0f9ce65" class="cell" data-execution_count="1">
 <div class="cell-output cell-output-display">
-<div>
+<div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="probability_files/figure-html/cell-2-output-1.png" width="589" height="449" class="figure-img"></p>
+<p><img src="probability_files/figure-html/cell-2-output-1.png" class="quarto-figure quarto-figure-center figure-img" width="589" height="449"></p>
 </figure>
 </div>
 </div>
 </div>
-<p>Examples</p>
+</section>
+<section id="examples" class="level4">
+<h4 class="anchored" data-anchor-id="examples">Examples</h4>
 <ul>
 <li>Coin toss (heads vs tails)</li>
 <li>Customer clicks an advertisement</li>
 <li>Product purchase (yes/no)</li>
 </ul>
 </section>
+</section>
 <section id="binomial-distribution" class="level2">
 <h2 class="anchored" data-anchor-id="binomial-distribution">Binomial Distribution</h2>
 <p>Counts the number of successes in n independent Bernoulli trials.</p>
-<p>Parameters - <strong>n</strong>: number of trials - <strong>p</strong>: probability of success in each trial</p>
+<section id="parameters" class="level4">
+<h4 class="anchored" data-anchor-id="parameters">Parameters</h4>
+<ul>
+<li><strong>n</strong>: number of trials</li>
+<li><strong>p</strong>: probability of success in each trial</li>
+</ul>
+</section>
+<section id="probability-mass-function-1" class="level4">
+<h4 class="anchored" data-anchor-id="probability-mass-function-1">Probability Mass Function</h4>
 <p><span class="math display">\[
 P(X = k) = \binom{n}{k} p^k (1-p)^{n-k}
 \]</span></p>
+</section>
+<section id="mean-variance-1" class="level4">
+<h4 class="anchored" data-anchor-id="mean-variance-1">Mean &amp; Variance</h4>
 <p><span class="math display">\[
 E[X] = np, \quad Var[X] = np(1-p)
 \]</span></p>
-<section id="python-code" class="level3">
-<h3 class="anchored" data-anchor-id="python-code">Python Code</h3>
-<div id="b9ae2818" class="cell" data-execution_count="2">
+<div id="3768e840" class="cell" data-execution_count="2">
 <div class="cell-output cell-output-display">
-<div>
+<div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="probability_files/figure-html/cell-3-output-1.png" width="597" height="449" class="figure-img"></p>
+<p><img src="probability_files/figure-html/cell-3-output-1.png" class="quarto-figure quarto-figure-center figure-img" width="597" height="449"></p>
 </figure>
 </div>
 </div>
 </div>
-<p>Examples</p>
+</section>
+<section id="examples-1" class="level4">
+<h4 class="anchored" data-anchor-id="examples-1">Examples</h4>
 <ul>
 <li>Number of customers who purchase out of 10</li>
 <li>Number of defective products in a batch</li>
@@ -277,75 +298,112 @@ E[X] = np, \quad Var[X] = np(1-p)
 <section id="poisson-distribution" class="level2">
 <h2 class="anchored" data-anchor-id="poisson-distribution">Poisson Distribution</h2>
 <p>Counts the number of events in a fixed time or space interval.</p>
-<p>Parameter - <strong>λ</strong>: average event rate per interval</p>
+<section id="parameter-1" class="level4">
+<h4 class="anchored" data-anchor-id="parameter-1">Parameter</h4>
+<ul>
+<li><strong>λ</strong>: average event rate per interval</li>
+</ul>
+</section>
+<section id="probability-mass-function-2" class="level4">
+<h4 class="anchored" data-anchor-id="probability-mass-function-2">Probability Mass Function</h4>
 <p><span class="math display">\[
 P(X = k) = \frac{\lambda^k e^{-\lambda}}{k!}
 \]</span></p>
+</section>
+<section id="mean-variance-2" class="level4">
+<h4 class="anchored" data-anchor-id="mean-variance-2">Mean &amp; Variance</h4>
 <p><span class="math display">\[
 E[X] = \lambda, \quad Var[X] = \lambda
 \]</span></p>
-<div id="993cc838" class="cell" data-execution_count="3">
+<div id="43575dfd" class="cell" data-execution_count="3">
 <div class="cell-output cell-output-display">
-<div>
+<div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="probability_files/figure-html/cell-4-output-1.png" width="597" height="449" class="figure-img"></p>
+<p><img src="probability_files/figure-html/cell-4-output-1.png" class="quarto-figure quarto-figure-center figure-img" width="597" height="449"></p>
 </figure>
 </div>
 </div>
 </div>
-<p>Examples</p>
+</section>
+<section id="examples-2" class="level4">
+<h4 class="anchored" data-anchor-id="examples-2">Examples</h4>
 <ul>
 <li>Calls received by a call center in 1 hour</li>
 <li>Number of earthquakes per year</li>
 <li>Number of emails per minute</li>
 </ul>
 </section>
+</section>
 <section id="geometric-distribution" class="level2">
 <h2 class="anchored" data-anchor-id="geometric-distribution">Geometric Distribution</h2>
 <p>Number of trials needed until the first success.</p>
-<p>Parameter - <strong>p</strong>: probability of success per trial</p>
+<section id="parameter-2" class="level4">
+<h4 class="anchored" data-anchor-id="parameter-2">Parameter</h4>
+<ul>
+<li><strong>p</strong>: probability of success per trial</li>
+</ul>
+</section>
+<section id="probability-mass-function-3" class="level4">
+<h4 class="anchored" data-anchor-id="probability-mass-function-3">Probability Mass Function</h4>
 <p><span class="math display">\[
 P(X = k) = (1-p)^{k-1} p
 \]</span></p>
+<p>Mean &amp; Variance</p>
 <p><span class="math display">\[
-E[X] = \frac{1}{p}
+E[X] = \frac{1}{p}, \quad Var[X] = \frac{1-p}{p^2}
 \]</span></p>
-<div id="7f4bc73f" class="cell" data-execution_count="4">
+<div id="54c3b1c4" class="cell" data-execution_count="4">
 <div class="cell-output cell-output-display">
-<div>
+<div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="probability_files/figure-html/cell-5-output-1.png" width="597" height="449" class="figure-img"></p>
+<p><img src="probability_files/figure-html/cell-5-output-1.png" class="quarto-figure quarto-figure-center figure-img" width="597" height="449"></p>
 </figure>
 </div>
 </div>
 </div>
-<p>Examples</p>
+</section>
+<section id="examples-3" class="level4">
+<h4 class="anchored" data-anchor-id="examples-3">Examples</h4>
 <ul>
 <li>Number of coin tosses until first heads</li>
 <li>Attempts until first customer purchases</li>
 <li>Inspections until first defective product</li>
 </ul>
 </section>
+</section>
 <section id="negative-binomial-distribution" class="level2">
 <h2 class="anchored" data-anchor-id="negative-binomial-distribution">Negative Binomial Distribution</h2>
 <p>Number of trials needed until r successes occur.</p>
-<p>Parameters - <strong>r</strong>: required number of successes - <strong>p</strong>: probability of success</p>
+<section id="parameters-1" class="level4">
+<h4 class="anchored" data-anchor-id="parameters-1">Parameters</h4>
+<ul>
+<li><strong>r</strong>: required number of successes</li>
+<li><strong>p</strong>: probability of success</li>
+</ul>
+</section>
+<section id="probability-mass-function-4" class="level4">
+<h4 class="anchored" data-anchor-id="probability-mass-function-4">Probability Mass Function</h4>
 <p><span class="math display">\[
 P(X = k) = \binom{k-1}{r-1} (1-p)^{k-r} p^r
 \]</span></p>
+</section>
+<section id="mean-variance-3" class="level4">
+<h4 class="anchored" data-anchor-id="mean-variance-3">Mean &amp; Variance</h4>
 <p><span class="math display">\[
-E[X] = \frac{r}{p}
+E[X] = \frac{r}{p}, \quad Var[X] = \frac{r(1-p)}{p^2}
 \]</span></p>
-<div id="2cef2d45" class="cell" data-execution_count="5">
+<div id="c012d3a0" class="cell" data-execution_count="5">
 <div class="cell-output cell-output-display">
-<div>
+<div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="probability_files/figure-html/cell-6-output-1.png" width="597" height="449" class="figure-img"></p>
+<p><img src="probability_files/figure-html/cell-6-output-1.png" class="quarto-figure quarto-figure-center figure-img" width="597" height="449"></p>
 </figure>
 </div>
 </div>
 </div>
-<p>Examples</p>
+</section>
+<section id="examples-4" class="level4">
+<h4 class="anchored" data-anchor-id="examples-4">Examples</h4>
 <ul>
 <li>Customers until 5 purchases occur</li>
 <li>Number of shots until scoring 3 goals</li>
@@ -353,47 +411,74 @@ E[X] = \frac{r}{p}
 </ul>
 </section>
 </section>
+</section>
 <section id="continuous-distributions" class="level1">
 <h1>Continuous Distributions</h1>
 <section id="normal-distribution" class="level2">
 <h2 class="anchored" data-anchor-id="normal-distribution">Normal Distribution</h2>
 <p>A common continuous distribution for natural variations.</p>
-<p>Parameters - <strong>μ</strong>: mean - <strong>σ²</strong>: variance</p>
+<section id="parameters-2" class="level4">
+<h4 class="anchored" data-anchor-id="parameters-2">Parameters</h4>
+<ul>
+<li><strong>μ</strong>: mean</li>
+<li><strong>σ²</strong>: variance</li>
+</ul>
+</section>
+<section id="probability-density-function" class="level4">
+<h4 class="anchored" data-anchor-id="probability-density-function">Probability Density Function</h4>
 <p><span class="math display">\[
 f(x)=\frac{1}{\sqrt{2\pi\sigma^{2}}}
 \exp\left( -\frac{(x-\mu)^2}{2\sigma^2} \right)
 \]</span></p>
-<div id="25852c93" class="cell" data-execution_count="6">
+</section>
+<section id="mean-variance-4" class="level4">
+<h4 class="anchored" data-anchor-id="mean-variance-4">Mean &amp; Variance</h4>
+<p><span class="math display">\[
+E[X] = \mu, \quad Var[X] = \sigma^2
+\]</span></p>
+<div id="accdb04a" class="cell" data-execution_count="6">
 <div class="cell-output cell-output-display">
-<div>
+<div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="probability_files/figure-html/cell-7-output-1.png" width="579" height="431" class="figure-img"></p>
+<p><img src="probability_files/figure-html/cell-7-output-1.png" class="quarto-figure quarto-figure-center figure-img" width="579" height="431"></p>
 </figure>
 </div>
 </div>
 </div>
-<p>Examples</p>
+</section>
+<section id="examples-5" class="level4">
+<h4 class="anchored" data-anchor-id="examples-5">Examples</h4>
 <ul>
 <li>Height, weight, IQ</li>
 <li>Exam scores</li>
-<li>Measurement errors</li>
 </ul>
+</section>
 </section>
 <section id="exponential-distribution" class="level2">
 <h2 class="anchored" data-anchor-id="exponential-distribution">Exponential Distribution</h2>
 <p>Waiting time between Poisson events.</p>
-<p>Parameter - <strong>λ</strong>: rate parameter (events per unit time)</p>
+<section id="parameter-3" class="level4">
+<h4 class="anchored" data-anchor-id="parameter-3">Parameter</h4>
+<ul>
+<li><strong>λ</strong>: rate parameter (events per unit time)</li>
+</ul>
+</section>
+<section id="probability-density-function-1" class="level4">
+<h4 class="anchored" data-anchor-id="probability-density-function-1">Probability Density Function</h4>
 <p><span class="math display">\[
-f(x) = \lambda e^{-\lambda x}
+f(x) = \lambda e^{-\lambda x}, \quad x \ge 0
 \]</span></p>
+</section>
+<section id="mean-variance-5" class="level4">
+<h4 class="anchored" data-anchor-id="mean-variance-5">Mean &amp; Variance</h4>
 <p><span class="math display">\[
-E[X] = \frac{1}{\lambda}
+E[X] = \frac{1}{\lambda}, \quad Var[X] = \frac{1}{\lambda^2}
 \]</span></p>
-<div id="808b746f" class="cell" data-execution_count="7">
+<div id="3b9089d2" class="cell" data-execution_count="7">
 <div class="cell-output cell-output-display">
-<div>
+<div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="probability_files/figure-html/cell-8-output-1.png" width="571" height="431" class="figure-img"></p>
+<p><img src="probability_files/figure-html/cell-8-output-1.png" class="quarto-figure quarto-figure-center figure-img" width="571" height="431"></p>
 </figure>
 </div>
 </div>
@@ -405,120 +490,195 @@ E[X] = \frac{1}{\lambda}
 <li>Time until radioactive decay</li>
 </ul>
 </section>
+</section>
 <section id="gamma-distribution" class="level2">
 <h2 class="anchored" data-anchor-id="gamma-distribution">Gamma Distribution</h2>
 <p>Time until the k-th event occurs.</p>
-<p>Parameters - <strong>k</strong>: shape parameter - <strong>λ</strong>: rate parameter</p>
+<section id="parameters-3" class="level4">
+<h4 class="anchored" data-anchor-id="parameters-3">Parameters</h4>
+<ul>
+<li><strong>k</strong>: shape parameter</li>
+<li><strong>λ</strong>: rate parameter</li>
+</ul>
+</section>
+<section id="probability-density-function-2" class="level4">
+<h4 class="anchored" data-anchor-id="probability-density-function-2">Probability Density Function</h4>
 <p><span class="math display">\[
 f(x)=\frac{\lambda^{k} x^{k-1} e^{-\lambda x}}{\Gamma(k)}
 \]</span></p>
-<div id="83fa2087" class="cell" data-execution_count="8">
+</section>
+<section id="mean-variance-6" class="level4">
+<h4 class="anchored" data-anchor-id="mean-variance-6">Mean &amp; Variance</h4>
+<p><span class="math display">\[
+E[X] = \frac{\alpha}{\lambda}, \quad Var[X] = \frac{\alpha}{\lambda^2}
+\]</span></p>
+<div id="50f5c463" class="cell" data-execution_count="8">
 <div class="cell-output cell-output-display">
-<div>
+<div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="probability_files/figure-html/cell-9-output-1.png" width="579" height="431" class="figure-img"></p>
+<p><img src="probability_files/figure-html/cell-9-output-1.png" class="quarto-figure quarto-figure-center figure-img" width="579" height="431"></p>
 </figure>
 </div>
 </div>
 </div>
-<p>Examples</p>
+</section>
+<section id="examples-6" class="level4">
+<h4 class="anchored" data-anchor-id="examples-6">Examples</h4>
 <ul>
 <li>Total wait time for multiple arrivals</li>
 <li>Insurance claim modeling</li>
 <li>Bayesian prior for rates</li>
 </ul>
 </section>
+</section>
 <section id="chi-square-distribution" class="level2">
 <h2 class="anchored" data-anchor-id="chi-square-distribution">Chi-Square Distribution</h2>
 <p>Sum of squared standard normal random variables.</p>
-<p>Parameter - <strong>k</strong>: degrees of freedom</p>
+<section id="parameter-4" class="level4">
+<h4 class="anchored" data-anchor-id="parameter-4">Parameter</h4>
+<ul>
+<li><strong>k</strong>: degrees of freedom</li>
+</ul>
+</section>
+<section id="definition" class="level4">
+<h4 class="anchored" data-anchor-id="definition">Definition</h4>
 <p><span class="math display">\[
 X = Z_1^2 + Z_2^2 + \cdots + Z_k^2
 \]</span></p>
-<div id="e079016e" class="cell" data-execution_count="9">
+<p><span class="math display">\[
+f(x)= \frac{1}{2^{k/2}\Gamma(k/2)} x^{k/2 - 1} e^{-x/2}, \quad x \ge 0
+\]</span></p>
+</section>
+<section id="mean-variance-7" class="level4">
+<h4 class="anchored" data-anchor-id="mean-variance-7">Mean &amp; Variance</h4>
+<p><span class="math display">\[
+E[X] = k, \quad Var[X] = 2k
+\]</span></p>
+<div id="cf0f9b96" class="cell" data-execution_count="9">
 <div class="cell-output cell-output-display">
-<div>
+<div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="probability_files/figure-html/cell-10-output-1.png" width="579" height="431" class="figure-img"></p>
+<p><img src="probability_files/figure-html/cell-10-output-1.png" class="quarto-figure quarto-figure-center figure-img" width="579" height="431"></p>
 </figure>
 </div>
 </div>
 </div>
-<p>Examples</p>
+</section>
+<section id="examples-7" class="level4">
+<h4 class="anchored" data-anchor-id="examples-7">Examples</h4>
 <ul>
 <li>Variance tests</li>
 <li>Goodness-of-fit test</li>
 <li>Independence test in contingency tables</li>
 </ul>
 </section>
+</section>
 <section id="students-t-distribution" class="level2">
 <h2 class="anchored" data-anchor-id="students-t-distribution">Student’s t-distribution</h2>
 <p>Used when population variance is unknown (small samples).</p>
-<p>Parameter - <strong>df</strong>: degrees of freedom</p>
+<section id="parameter-5" class="level4">
+<h4 class="anchored" data-anchor-id="parameter-5">Parameter</h4>
+<ul>
+<li><strong>df</strong>: degrees of freedom</li>
+</ul>
+</section>
+<section id="definition-1" class="level4">
+<h4 class="anchored" data-anchor-id="definition-1">Definition</h4>
 <p><span class="math display">\[
 T = \frac{\overline{X} - \mu}{S / \sqrt{n}}
 \]</span></p>
-<div id="3c4d4ee1" class="cell" data-execution_count="10">
+<div id="b2273134" class="cell" data-execution_count="10">
 <div class="cell-output cell-output-display">
-<div>
+<div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="probability_files/figure-html/cell-11-output-1.png" width="579" height="431" class="figure-img"></p>
+<p><img src="probability_files/figure-html/cell-11-output-1.png" class="quarto-figure quarto-figure-center figure-img" width="579" height="431"></p>
 </figure>
 </div>
 </div>
 </div>
-<p>Examples</p>
+</section>
+<section id="examples-8" class="level4">
+<h4 class="anchored" data-anchor-id="examples-8">Examples</h4>
 <ul>
 <li>One-sample t-test</li>
 <li>Two-sample t-test</li>
 <li>Confidence intervals</li>
 </ul>
 </section>
+</section>
 <section id="f-distribution" class="level2">
 <h2 class="anchored" data-anchor-id="f-distribution">F-distribution</h2>
 <p>Ratio of two variances.</p>
-<p>Parameters - <strong>df1</strong>: numerator df - <strong>df2</strong>: denominator df</p>
+<section id="parameters-4" class="level4">
+<h4 class="anchored" data-anchor-id="parameters-4">Parameters</h4>
+<ul>
+<li><strong>df1</strong>: numerator df</li>
+<li><strong>df2</strong>: denominator df</li>
+</ul>
+</section>
+<section id="definition-2" class="level4">
+<h4 class="anchored" data-anchor-id="definition-2">Definition</h4>
 <p><span class="math display">\[
 F = \frac{S_1^2 / df_1}{S_2^2 / df_2}
 \]</span></p>
-<div id="1563d904" class="cell" data-execution_count="11">
+<div id="2cdb9749" class="cell" data-execution_count="11">
 <div class="cell-output cell-output-display">
-<div>
+<div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="probability_files/figure-html/cell-12-output-1.png" width="571" height="431" class="figure-img"></p>
+<p><img src="probability_files/figure-html/cell-12-output-1.png" class="quarto-figure quarto-figure-center figure-img" width="571" height="431"></p>
 </figure>
 </div>
 </div>
 </div>
-<p>Examples</p>
+</section>
+<section id="examples-9" class="level4">
+<h4 class="anchored" data-anchor-id="examples-9">Examples</h4>
 <ul>
 <li>ANOVA</li>
 <li>Comparing two variances</li>
 <li>Regression significance test</li>
 </ul>
 </section>
+</section>
 <section id="beta-distribution" class="level2">
 <h2 class="anchored" data-anchor-id="beta-distribution">Beta Distribution</h2>
 <p>A flexible distribution for modeling probabilities.</p>
-<p>Parameters - <strong>α</strong>: left-tail shape - <strong>β</strong>: right-tail shape</p>
+<section id="parameters-5" class="level4">
+<h4 class="anchored" data-anchor-id="parameters-5">Parameters</h4>
+<ul>
+<li><strong>α</strong>: left-tail shape</li>
+<li><strong>β</strong>: right-tail shape</li>
+</ul>
+</section>
+<section id="probability-definition-function" class="level4">
+<h4 class="anchored" data-anchor-id="probability-definition-function">Probability Definition Function</h4>
 <p><span class="math display">\[
 f(p) = \frac{1}{B(\alpha,\beta)} p^{\alpha - 1} (1 - p)^{\beta - 1}
 \]</span></p>
-<div id="4033bc6f" class="cell" data-execution_count="12">
+</section>
+<section id="mean-variance-8" class="level4">
+<h4 class="anchored" data-anchor-id="mean-variance-8">Mean &amp; Variance</h4>
+<p><span class="math display">\[
+E[X] = \frac{\alpha}{\alpha + \beta}, \quad Var[X] = \frac{\alpha\beta}{(\alpha + \beta)^2(\alpha + \beta + 1)}
+\]</span></p>
+<div id="72b84c15" class="cell" data-execution_count="12">
 <div class="cell-output cell-output-display">
-<div>
+<div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="probability_files/figure-html/cell-13-output-1.png" width="571" height="431" class="figure-img"></p>
+<p><img src="probability_files/figure-html/cell-13-output-1.png" class="quarto-figure quarto-figure-center figure-img" width="571" height="431"></p>
 </figure>
 </div>
 </div>
 </div>
-<p>Examples</p>
+</section>
+<section id="examples-10" class="level4">
+<h4 class="anchored" data-anchor-id="examples-10">Examples</h4>
 <ul>
 <li>Bayesian inference</li>
 <li>A/B testing</li>
 <li>Modeling click-through rates</li>
 </ul>
+</section>
 </section>
 <section id="relationships-between-distributions" class="level2">
 <h2 class="anchored" data-anchor-id="relationships-between-distributions">Relationships Between Distributions</h2>
@@ -598,7 +758,15 @@ f(p) = \frac{1}{B(\alpha,\beta)} p^{\alpha - 1} (1 - p)^{\beta - 1}
 </section>
 <section id="key-points" class="level2">
 <h2 class="anchored" data-anchor-id="key-points">Key Points</h2>
-<p>Normal → basis of CLT Poisson → rare events per unit time Beta → distribution of probability p Binomial → Poisson approximation (np = λ) Exponential → waiting time Chi-square / t / F → hypothesis testing Gamma → sum of exponential waiting times</p>
+<ul>
+<li>Normal → basis of CLT</li>
+<li>Poisson → rare events per unit time</li>
+<li>Beta → distribution of probability p</li>
+<li>Binomial → Poisson approximation (np = λ)</li>
+<li>Exponential → waiting time</li>
+<li>Chi-square / t / F → hypothesis testing</li>
+<li>Gamma → sum of exponential waiting times</li>
+</ul>
 
 
 </section>
